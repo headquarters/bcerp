@@ -15,4 +15,24 @@ footer {
     background: #eee;
 }
 
-#story-videos {}
+#puzzle {
+    width:100%;
+    padding:125px 10px;
+    background:#ddd;
+    border:1px solid #ccc;
+    text-align:center;
+    color:#fff;
+    font-size:26px;
+    font-weight:bold;
+    letter-spacing:2px;
+}
+
+.piece {
+    background:#666;
+    color:#fff;
+    width:120px;
+    padding:30px 10px;
+    text-align:center;
+    float:left;
+    margin:5px;
+}
