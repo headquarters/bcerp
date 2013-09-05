@@ -15,7 +15,6 @@
 
 </head>
 <body>
-
   <header>
     <div class="row">
       <div class="small-8 columns"><img src="http://placehold.it/200x60&text=Logo" alt="" /></div>
@@ -45,7 +44,10 @@
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vulputate dignissim leo, ac tristique erat placerat ullamcorper. Aenean dolor velit, euismod sed convallis sed, mollis et augue. Integer dictum mauris id viverra congue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Curabitur lacinia justo ante, pulvinar tristique magna mollis non. Donec sagittis massa vitae metus suscipit, quis imperdiet elit lacinia. Curabitur mauris ipsum, lobortis in purus sed, dapibus suscipit quam. Etiam iaculis malesuada vehicula.
         </p>
         <p>
-          <a href="#nogo" class="button primary">Build Your Risk Profile</a>
+          <a href="puzzle-risks.html" class="button primary">Build Your Risk Profile</a>
+        </p>
+        <p>
+          <div class="fb-like" data-href="http://developers.facebook.com/docs/reference/plugins/like" data-width="450" data-show-faces="true" data-send="true"></div>
         </p>
       </div>
     </div>
@@ -93,6 +95,14 @@
       </div>
     </div>
   </footer>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=1405721049645279";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 <!--  <script>
   document.write('<script src=' +
   ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
