@@ -45,13 +45,17 @@ footer {
 
 #tiles {
     text-align:center;
+    font-size:1.4em;
 }
 
-#tiles .row {
-    margin-top:1em;
-    margin-bottom:1em;
+
+.icon {
+    padding:1em;
+    display:block;
 }
 
-#tiles .row img {
-    width:100%;
+.icon img {
+    max-width:none;
+    display: block;
+    margin: 0 auto;
 }
