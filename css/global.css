@@ -1,53 +1,7 @@
-header {
-    margin-top:1em;
-}
-
-header nav ul li,
-footer ul li {
-    display:inline;
-    margin-right:1em;
-}
-
-footer {
-    text-align:center;
-    margin-top:1em;
-    padding-top:0.5em;
-    background: #eee;
-    /*position:fixed;
-    bottom:0;
-    left:0;
-    width:100%;*/
-}
-
-#puzzle {
-    width:100%;
-    padding:0 10px;
-    background:#000;
-    border:1px solid #ccc;
-    text-align:center;
-    color:#fff;
-    font-size:26px;
-    font-weight:bold;
-    letter-spacing:2px;
-}
-
-.piece {
-    background:#666;
-    color:#fff;
-    width:270px;
-    height:190px;
-    padding:30px 10px;
-    text-align:center;
-    float:left;
-    margin:5px;
-    opacity:0.70;
-}
-
 #tiles {
     text-align:center;
     font-size:1.4em;
 }
-
 
 .icon {
     padding:1em;
@@ -58,4 +12,47 @@ footer {
     max-width:none;
     display: block;
     margin: 0 auto;
+}
+
+.block-navigation {
+    max-width:320px;
+    margin:0 auto;
+    padding:0;
+    text-align:center;
+}
+
+.block-navigation li {
+    display:inline-block;
+    text-align:center;
+}
+
+.block-navigation li .icon img {
+    margin:0 auto;
+}
+
+#risks .block-navigation {
+    max-width:340px;
+}
+
+#puzzle {
+    text-align:center;
+}
+
+#pieces {
+    position:relative;
+    max-width:320px;
+    margin:0 auto;
+}
+
+#pieces img {
+    
+}
+
+.piece-holder {
+    position:absolute;
+}
+
+.piece1 {
+    width:119px;
+    height:125px;
 }
