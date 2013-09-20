@@ -3,6 +3,11 @@
     font-size:1.4em;
 }
 
+
+.ui-content {
+    padding:10px 5px;
+}
+
 .icon {
     padding:1em;
     display:block;
@@ -55,4 +60,93 @@
 .piece1 {
     width:119px;
     height:125px;
+}
+
+.piece {
+    position:relative;
+    display:inline-block;
+    margin-right:10px;
+}
+
+.piece span {
+    position:absolute;
+    left:20px;
+    top:30px;
+}
+
+.ten-pieces .age span {
+    left:14px;
+}
+.ten-pieces .race span {
+    top:62px;
+    left:1px;
+}
+.ten-pieces .diet span {
+    top:40px;
+    left:36px;
+}
+.ten-pieces .exercise span {
+    top:10px;
+    left:38px;
+}
+.ten-pieces .environment span {
+    top:48px;
+    left:0px;
+    font-size:14px;
+}
+.ten-pieces .hormones span {
+    top:38px;
+    left:5px;
+}
+.ten-pieces .health-screening span {
+    top:37px;
+    font-size:14px;
+}
+
+
+
+.ten-pieces .obesity span {
+    top:47px;
+    left:40px;
+    color:#fff;
+    text-shadow:0 1px 0 #000;
+}
+
+.ten-pieces .pregnancies span {
+    top:50px;
+    left:1px;
+    color:#fff;
+    text-shadow:0 1px 0 #000;
+}
+.ten-pieces .family-history span {
+    top:27px;
+    left:30px;
+    color:#fff;
+    text-shadow:0 1px 0 #000;
+}
+
+
+.five-pieces .diet span {
+    top:40px;
+    color:#fff;
+    text-shadow:0 1px 0 #000;
+}
+
+.five-pieces .exercise span {
+    top:50px;
+    left:39px;
+    color:#fff;
+    text-shadow:0 1px 0 #000;
+}
+
+.five-pieces .environment span {
+    top:10px;
+    left:34px;
+    font-size:14px;
+}
+
+.five-pieces .health-screening span {
+    top:-1px;
+    left:16px;
+    font-size:14px;
 }
