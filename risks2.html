@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
     <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-    <!--<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>-->
+    <script src="js/vendor/jquery.ui.touch-punch.min.js"></script>
   <link rel="stylesheet" href="css/global.css" />
+
 </head>
 <body>
     <div data-role="page">
@@ -16,9 +18,9 @@
             <h1>Breast Health Awareness: The Puzzle</h1>
         </div><!-- /header -->
  
-        <div id="risks" data-role="content" class="ten-pieces">
+        <div id="risks" data-role="content" class="five-pieces">
             <div id="puzzle">
-                <img src="images/puzzle-bg.jpg" alt="" />
+                <img src="images/five/puzzle-bg.jpg" alt="" />
                 <div class="piece-holder piece1"></div>
                 <div class="piece-holder piece2"></div>
                 <div class="piece-holder piece3"></div>
@@ -27,45 +29,25 @@
             </div>
             
             <div id="pieces">
-                <div class="piece age">
-                    <span>Age</span>
-                    <img src="images/pieces/p1.png" alt="" />
-                </div>
-                <div class="piece race">
-                    <span>Race</span>
-                    <img src="images/pieces/p2.png" alt="" />
-                </div>
-                <div class="piece pregnancies">
-                    <span>Pregnancies</span>
-                    <img src="images/pieces/p3.png" alt="" />
-                </div>
-                <div class="piece family-history">
-                    <span>Family History</span>
-                    <img src="images/pieces/p4.png" alt="" />
-                </div>
-                <div class="piece obesity">
-                    <span>Obesity</span>
-                    <img src="images/pieces/p5.png" alt="" />
+                <div class="piece you">
+                    <span>You</span>
+                    <img src="images/five/pieces/p1.png" alt="" />
                 </div>
                 <div class="piece diet">
                     <span>Diet</span>
-                    <img src="images/pieces/p6.png" alt="" />
+                    <img src="images/five/pieces/p2-blurred.png" alt="" />
                 </div>
                 <div class="piece exercise">
                     <span>Exercise</span>
-                    <img src="images/pieces/p7.png" alt="" />
+                    <img src="images/five/pieces/p3.png" alt="" />
                 </div>
                 <div class="piece environment">
                     <span>Environment</span>
-                    <img src="images/pieces/p8.png" alt="" />
+                    <img src="images/five/pieces/p4.png" alt="" />
                 </div>
                 <div class="piece health-screening">
                     <span>Health Screening</span>
-                    <img src="images/pieces/p9.png" alt="" />
-                </div>
-                <div class="piece hormones">
-                    <span>Hormones</span>
-                    <img src="images/pieces/p10.png" alt="" />
+                    <img src="images/five/pieces/p5.png" alt="" />
                 </div>
                 
             </div>
@@ -97,6 +79,18 @@
         </div><!-- /footer -->
  
     </div><!-- /page -->
-
+  <script>
+    $('.piece').draggable({
+      revert: "invalid",
+      snap: "#puzzle",
+      snapMode: "outer"
+    });
+    
+    $('#puzzle').droppable({
+        drop: function(e, ui){
+            $(ui.draggable.context).find('img').attr('src', 'images/five/pieces/p2.png');
+        }
+    }); 
+  </script>
 </body>
 </html>

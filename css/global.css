@@ -9,7 +9,7 @@
 }
 
 .icon {
-    padding:1em;
+    padding:0.75em;
     display:block;
 }
 
@@ -20,7 +20,7 @@
 }
 
 .block-navigation {
-    max-width:320px;
+    max-width:300px;
     margin:0 auto;
     padding:0;
     text-align:center;
@@ -146,7 +146,7 @@
 }
 
 .five-pieces .health-screening span {
-    top:-1px;
+    top:41px;
     left:16px;
     font-size:14px;
 }
