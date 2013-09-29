@@ -74,79 +74,77 @@
     top:30px;
 }
 
-.ten-pieces .age span {
-    left:14px;
+
+.alt span {
+    color:#fff;
+    text-shadow:0 1px 0 #000;
 }
-.ten-pieces .race span {
+
+.six-pieces .diet span {
     top:62px;
-    left:1px;
-}
-.ten-pieces .diet span {
-    top:40px;
-    left:36px;
-}
-.ten-pieces .exercise span {
-    top:10px;
-    left:38px;
-}
-.ten-pieces .environment span {
-    top:48px;
-    left:0px;
-    font-size:14px;
-}
-.ten-pieces .hormones span {
-    top:38px;
-    left:5px;
-}
-.ten-pieces .health-screening span {
-    top:37px;
-    font-size:14px;
+    left:7px;
 }
 
+.six-pieces .history span {
+    left:14px;
+    width:100px;
+}
 
+.six-pieces .exercise span {
+    top:16px;
+    left:81px;
+}
 
-.ten-pieces .obesity span {
-    top:47px;
+.six-pieces .environment span {
+    top:107px;
     left:40px;
-    color:#fff;
-    text-shadow:0 1px 0 #000;
 }
 
-.ten-pieces .pregnancies span {
-    top:50px;
-    left:1px;
-    color:#fff;
-    text-shadow:0 1px 0 #000;
-}
-.ten-pieces .family-history span {
-    top:27px;
-    left:30px;
-    color:#fff;
-    text-shadow:0 1px 0 #000;
+.six-pieces .screening span {
+    top:56px;
 }
 
-
-.five-pieces .diet span {
-    top:40px;
-    color:#fff;
-    text-shadow:0 1px 0 #000;
+.six-pieces .unknown span {
+    top:58px;
+    left:47px;
 }
 
-.five-pieces .exercise span {
-    top:50px;
-    left:39px;
+.bg-color .piece span,
+.bg-color .alt span {
+    background: #000;
     color:#fff;
-    text-shadow:0 1px 0 #000;
+    text-shadow: 0 1px 0 #999;
+    padding:2px 4px;
 }
 
-.five-pieces .environment span {
-    top:10px;
+.bg-color .history span {
+    width: 49px;
+    left:3px;
+}
+
+.bg-color .diet span {
+    left:3px;
+}
+
+.bg-color .exercise span {
+    top:11px;
+    left:43px;
+}
+
+.bg-color .environment span {
+    top:105px;
     left:34px;
-    font-size:14px;
 }
 
-.five-pieces .health-screening span {
-    top:41px;
-    left:16px;
-    font-size:14px;
+.bg-color .screening span {
+    left:15px;
+}
+
+.bg-color .unknown span {
+    top:58px;
+    left:41px;
+}
+
+#puzzle-bg {
+    background: #ccc;
 }

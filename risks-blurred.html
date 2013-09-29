@@ -18,9 +18,9 @@
             <h1>Breast Health Awareness: The Puzzle</h1>
         </div><!-- /header -->
  
-        <div id="risks" data-role="content" class="five-pieces">
+        <div id="risks" data-role="content" class="six-pieces">
             <div id="puzzle">
-                <img src="images/five/puzzle-bg.jpg" alt="" />
+                <img id="puzzle-bg" src="images/six/puzzle-bg.png" alt="" />
                 <div class="piece-holder piece1"></div>
                 <div class="piece-holder piece2"></div>
                 <div class="piece-holder piece3"></div>
@@ -29,25 +29,29 @@
             </div>
             
             <div id="pieces">
-                <div class="piece you">
-                    <span>You</span>
-                    <img src="images/five/pieces/p1.png" alt="" />
+                <div class="piece history">
+                    <span>Health History</span>
+                    <img src="images/six/pieces/p1-blurred.png" alt="" />
                 </div>
                 <div class="piece diet">
                     <span>Diet</span>
-                    <img src="images/five/pieces/p2-blurred.png" alt="" />
+                    <img src="images/six/pieces/p2-blurred.png" alt="" />
                 </div>
                 <div class="piece exercise">
                     <span>Exercise</span>
-                    <img src="images/five/pieces/p3.png" alt="" />
+                    <img src="images/six/pieces/p3-blurred.png" alt="" />
                 </div>
-                <div class="piece environment">
+                <div class="alt piece environment">
                     <span>Environment</span>
-                    <img src="images/five/pieces/p4.png" alt="" />
+                    <img src="images/six/pieces/p4-blurred.png" alt="" />
                 </div>
-                <div class="piece health-screening">
-                    <span>Health Screening</span>
-                    <img src="images/five/pieces/p5.png" alt="" />
+                <div class="piece screening">
+                    <span>Screening</span>
+                    <img src="images/six/pieces/p5-blurred.png" alt="" />
+                </div>
+                <div class="piece unknown">
+                    <span>Unknown</span>
+                    <img src="images/six/pieces/p6-blurred.png" alt="" />
                 </div>
                 
             </div>
@@ -88,7 +92,11 @@
     
     $('#puzzle').droppable({
         drop: function(e, ui){
-            $(ui.draggable.context).find('img').attr('src', 'images/five/pieces/p2.png');
+            var $img = $(ui.draggable.context).find('img');
+            var src = $img.attr('src');
+            var unblurredSource = src.replace('-blurred', '');
+            
+            $img.attr('src', unblurredSource);
         }
     }); 
   </script>
