@@ -26,6 +26,12 @@
     text-align:center;
 }
 
+#risks .block-navigation {
+    padding-top:10px;
+    margin-top:40px;
+    border-top:2px solid #ccc;
+}
+
 .block-navigation li {
     display:inline-block;
     text-align:center;
@@ -45,8 +51,9 @@
 
 #pieces {
     position:relative;
-    max-width:320px;
+    max-width:900px;
     margin:0 auto;
+    text-align:center;
 }
 
 #pieces img {
@@ -86,7 +93,7 @@
 }
 
 .six-pieces .history span {
-    left:14px;
+    left:-11px;
     width:100px;
 }
 
@@ -143,6 +150,11 @@
 .bg-color .unknown span {
     top:58px;
     left:41px;
+}
+
+.text-shadow .piece span {
+    color:#fff;
+    text-shadow:-1px 0 2px black, 0 1px 2px black, 1px 0 2px black, 0 -1px 2px black;
 }
 
 #puzzle-bg {
