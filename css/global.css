@@ -157,6 +157,64 @@
     text-shadow:-1px 0 2px black, 0 1px 2px black, 1px 0 2px black, 0 -1px 2px black;
 }
 
+#risks {
+    margin-bottom:2em;
+}
+
 #puzzle-bg {
     background: #ccc;
+}
+
+.six-pieces .history {
+    top:-220px;
+    left:80px;
+}
+
+.six-pieces .diet {
+    top:-110px;
+    left:0px;
+}
+
+.six-pieces .screening {
+    top:-70px;
+    right:-30px;
+}
+
+.six-pieces .unknown {
+    top:-220px;
+    right:70px;
+}
+
+.risk-bar-container {
+    display:inline-block;
+    font-size:14px;
+    border:1px solid #ccc;
+    padding:2px 15px;
+    background:lightyellow;
+    position:relative;
+    width: 110px;
+    text-align: center;
+}
+
+.risk-bar {
+    background:#fff508;
+    position:absolute;
+    width:10px;
+    height:20px;
+    display:block;
+    left: 0;
+    top: 0;
+}
+
+.risk-bar-text {
+    position: relative;
+    z-index: 500;
+}
+
+@media only screen and (max-width: 900px) {
+    #pieces .piece {
+        left:0;
+        top:0;
+        right:0;
+    }
 }
