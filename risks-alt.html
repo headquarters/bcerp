@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+    <title>Breast Health Awareness</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css">
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+    <script src="js/vendor/jquery.ui.touch-punch.min.js"></script>
+  <link rel="stylesheet" href="css/global.css" />
+
+</head>
+<body>
+    <div data-role="page">
+ 
+        <div data-role="header">
+            <h1>Breast Health Awareness: The Puzzle</h1>
+        </div><!-- /header -->
+ 
+        <div id="risks" data-role="content" class="bg-color six-pieces">
+            <div id="puzzle">
+                <img id="puzzle-bg" src="images/six/puzzle-bg.png" alt="" />
+                <div class="piece-holder piece1"></div>
+                <div class="piece-holder piece2"></div>
+                <div class="piece-holder piece3"></div>
+                <div class="piece-holder piece4"></div>
+                <div class="piece-holder piece5"></div>
+            </div>
+            
+            <div id="pieces">
+                <div class="piece history">
+                    <span>Health History</span>
+                    <img src="images/six/pieces/p1.png" alt="" />
+                </div>
+                <div class="piece diet">
+                    <span>Diet</span>
+                    <img src="images/six/pieces/p2.png" alt="" />
+                </div>
+                <div class="piece exercise">
+                    <span>Exercise</span>
+                    <img src="images/six/pieces/p3.png" alt="" />
+                </div>
+                <div class="alt piece environment">
+                    <span>Environment</span>
+                    <img src="images/six/pieces/p4.png" alt="" />
+                </div>
+                <div class="piece screening">
+                    <span>Screening</span>
+                    <img src="images/six/pieces/p5.png" alt="" />
+                </div>
+                <div class="piece unknown">
+                    <span>Unknown</span>
+                    <img src="images/six/pieces/p6.png" alt="" />
+                </div>
+                
+            </div>
+            
+            <ul class="block-navigation">
+              <li>
+                <a href="risks.html">
+                  <span class="icon"><img src="images/icons/iPhoneIcon_Medium-5.png" alt="" /></span>
+                  Stories
+                </a>
+              </li>
+            <li>
+              <a href="risks.html">
+                <span class="icon"><img src="images/icons/iPhoneIcon_Medium.png" alt="" /></span>
+                Information
+              </a>
+            </li>
+            <li>
+              <a href="risks.html">
+                <span class="icon"><img src="images/icons/iPhoneIcon_Medium-3.png" alt="" /></span>
+                Health Status
+              </a>
+            </li>
+            </ul>
+        </div>           
+ 
+        <div data-role="footer">
+            <h5></h5>
+        </div><!-- /footer -->
+ 
+    </div><!-- /page -->
+  <script>
+    $('.piece').draggable({
+      revert: "invalid",
+      snap: "#puzzle",
+      snapMode: "outer"
+    });
+    
+    $('#puzzle').droppable(); 
+  </script>
+</body>
+</html>
