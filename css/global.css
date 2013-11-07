@@ -218,3 +218,35 @@
         right:0;
     }
 }
+/*
+@media only screen and (max-width: 768px) {
+    .six-pieces .history {
+        left:286px;
+        top:-281px;
+    }
+    
+    .six-pieces .diet {
+        left: 153px;
+        top: -187px;
+    }
+    
+    .six-pieces .exercise {
+        left: 127px;
+        top: -321px;
+    }
+    
+    .six-pieces .environment {
+        left: -76px;
+        top: -187px;
+    }
+    
+    .six-pieces .screening {
+        left: -116px;
+        top: -274px;
+    }
+    
+    .six-pieces .unknown {
+        left: -276px;
+        top: -183px;
+    }
+}*/
