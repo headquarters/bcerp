@@ -36,6 +36,8 @@
 			<%= yield %>
 		</article>
 
+<% if false #cheap comment for now
+%>
 		<footer>
 			<ul id="secondary-menu">				
 				<li <% if @active == "home" %>class="active"<% end %>><a href="/">Home</a></li>
@@ -47,6 +49,24 @@
 			  &copy; The University of North Carolina at Chapel Hill. All Rights Reserved.
 			</div>
 		</footer>
+<% end %>		
+
+		<nav id="sticky-nav">
+			<ul>
+				<li>
+					<a href="/resources">
+						<img src="/images/resources.png" alt="Play">
+						Resources
+					</a>					
+				</li>
+				<li>
+					<a href="/stories">
+						<img src="/images/videos.png" alt="Play">
+						Stories
+					</a>
+				</li>
+			</ul>			
+		</nav>		
 		<script src="/js/vendor/jquery.js"></script>
 		<script src="/js/foundation/foundation.js"></script>
 		<script src="/js/foundation/foundation.accordion.js"></script>
