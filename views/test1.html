@@ -1,0 +1,235 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Find Out Your Risk</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <script src="js/vendor/modernizr.js"></script>
+	<style>
+	  .accordion a {
+		border:1px solid #ddd;
+	  }
+	  .accordion .content {
+		border:1px solid #ddd;
+	  }
+	  #progress-bar {
+		background: #fff;
+		padding:0.5em 0;
+	  }
+
+	  label,
+	  fieldset legend {
+		color:#333;
+		font-size:1rem;
+	  }
+	  
+	  fieldset legend {
+		font-weight:normal;
+		line-height:1.5;
+		background:transparent;
+	  }
+	  
+	  .high {
+		color:orangered;
+	  }
+	  
+	  .low {
+		color:steelblue;
+	  }
+	  
+	  #age-message {
+		padding:0.5em;
+	  }
+	</style>
+  </head>
+  <body>
+    <header>
+	  <!--<div class="large-12 columns">-->
+		<nav class="top-bar" data-topbar style="background:#AB74A8; color:#000; letter-spacing:0.5px;">
+		  <ul class="title-area">
+			<li class="name">
+			  <h1><a href="#nogo">Breast Health Awareness</a></h1>
+			</li>
+			<li class="toggle-topbar menu-icon"><a href="#nogo"><span>Menu</span></a></li>
+		  </ul>
+		  
+		  <section class="top-bar-section">
+			<ul class="right">
+			  <li><a href="#nogo">Home</a></li>
+			  <li class="active"><a href="#nogo">Find Out Your Risk</a></li>
+			  <li><a href="#nogo">Resources</a></li>
+			  <li><a href="#nogo">About</a></li>
+			</ul>
+		  </section>
+		</nav>
+	  <!--</div>-->
+	</header>
+	<div class="row">
+	  <div class="large-12 columns">
+		<h1><img src="img/clipboard.png" alt="" > Health History</h1>
+	  </div>
+	  <div id="progress-bar">
+		<div class="large-1 column">Progress:</div>
+		<div class="large-11 columns">
+		  <div class="progress round">
+			<span class="meter" style="width:0;"></span>
+		  </div>
+		</div>		
+	  </div>
+	</div>
+    <div class="row">
+	  <div class="large-12 columns">
+		<!--<h1>Find Out Your Risk</h1>-->
+<form>
+		<div class="panel">
+		  <div class="row">
+			<div class="small-8 large-4 columns">
+			  <label class="inline">How old are you?</label>
+			</div>
+			<div class="small-4 large-4 large-pull-4 columns">
+			  <select id="age">
+				<option value="30">30</option>
+				<option value="50">50</option>
+				<option value="70">70</option>
+			  </select>
+			</div>
+		  </div>
+			<div class="row">
+			  <div id="age-message" class="small-12 columns"></div>
+			</div>
+		  
+		  <div class="row">
+			<div class="large-12 columns">
+                <fieldset>
+                    <legend>With which race/ethnicity do you identify?</legend>
+                    <label for="race-1">
+					  <input type="radio" name="race" id="race-1" value="black">
+					  Black/African American
+					</label>
+                    
+                    <label for="race-2">
+					  <input type="radio" name="race" id="race-2" value="white">
+					  White
+					</label>
+                    
+                    <label for="race-3">
+					  <input type="radio" name="race" id="race-3" value="hispanic-latin-american">
+					  Hispanic/Latin American
+					</label>
+                    
+					
+                    <label for="race-4">
+					  <input type="radio" name="race" id="race-4" value="american-indian-pacific-islander">
+					  American Indian/Pacific Islander
+					</label>
+                    
+                    <label for="race-5">
+					  <input type="radio" name="race" id="race-5" value="asian">
+					  Asian
+					</label>
+                    
+					
+                    <label for="race-6">
+					  <input type="radio" name="race" id="race-6" value="other">
+					  Other
+					</label>
+                </fieldset>
+			  </div>
+		  </div>
+		  
+		  
+		  <div class="row">
+			<div class="large-12 columns">
+                <fieldset>
+                    <legend>How old were you when your first child was born?</legend>
+                    <label><input type="radio" name="children" value="nochildren" id="children-1" data-risk="highrisk"> I have no children</label>
+                    <label><input type="radio" name="children" value="youngerthan35" id="children-2" data-risk="lowrisk"> Younger than 35</label>
+                    <label><input type="radio" name="children" value="35orolder" id="children-3" data-risk="highrisk"> 35 or older</label>
+                </fieldset>
+			</div>
+		  </div>
+		  
+		  <div class="row">
+			<div class="large-12 columns">
+			  <fieldset>
+                    <legend>How many months (total) did you breast feed across all your children?</legend>
+                    <label><input type="radio" name="breast-feed-months" id="breast-feed-months-1" value="nochildren" data-risk="highrisk"> I have no children</label>
+                    <label><input type="radio" name="breast-feed-months" id="breast-feed-months-2" value="0-11" data-risk="highrisk"> 0-11 months</label>
+                    <label><input type="radio" name="breast-feed-months" id="breast-feed-months-3" value="12+" data-risk="lowrisk"> 12+ months</label>
+                </fieldset>
+			</div>
+		  </div>
+		  
+		  <div class="row">
+			<div class="large-12 columns">
+                <fieldset>
+                    <legend>Have any of your first-degree relatives (mother, sister, daughter, father, brother, or son) ever had breast or ovarian cancer?</legend>
+                    <label><input type="radio" name="relatives" id="relatives-1" value="no" data-risk="lowrisk"> No</label>
+                    <label><input type="radio" name="relatives" id="relatives-2" value="yes" data-risk="highrisk"> Yes</label>
+                </fieldset>
+			</div>
+		  </div>
+		  
+
+		  
+		  <div class="row">
+			<div class="small-8 large-4 columns">
+			  <label class="inline">How tall are you (in feet and inches)?</label>
+			</div>
+			<div class="small-4 large-4 large-pull-4 columns">
+			  <select>
+				<option>0</option>
+				<option>1</option>
+				<option>2</option>
+			  </select>
+			</div>			
+		  </div>
+		  <div class="row">
+			<div class="small-8 large-4 columns">
+			  <label class="inline">How much do you weigh (in pounds)?</label>
+			</div>
+			<div class="small-4 large-4 large-pull-4 columns">
+			  <select>
+				<option>0</option>
+				<option>1</option>
+				<option>2</option>
+			  </select>
+			</div>	
+		  </div>
+		  
+		  </form>
+		</div>
+	  </div>
+    </div>
+	<div class="row controls">
+	  <!--<div class="small-12 columns">-->
+		<div class="small-6 columns">
+		  <!--<a href="#nogo" class="button small radius">&laquo; Go Back</a>  -->
+		</div>
+		<div class="small-6 columns" style="text-align:right;">
+		  <a href="test2.html" class="button small radius">Next &raquo;</a>  
+		</div>
+	  <!--<a href="#nogo" class="button small">Previous</a>-->
+		
+	  <!--</div>-->
+	</div>
+	<div class="row">
+	  <div class="small-12 columns">
+		<a href="#nogo">View Results So Far</a>
+	  </div>
+	</div>
+
+	
+	<footer style="background:#b1b1b1; padding:1em; margin-top:1em;">
+	  <div class="row">
+		&copy; The University of North Carolina at Chapel Hill. All Rights Reserved.
+	  </div>
+	</footer>
+    
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/jquery.color-2.1.2.min.js"></script>
+    <script src="js/bcerp.js"></script>
+  </body>
+</html>
