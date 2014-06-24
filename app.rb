@@ -26,20 +26,20 @@ class Session
   property :race_ethnicity, String
   property :first_child, String
   property :breast_feeding_months, String
-  property :relatives, Boolean
+  property :relatives, String
   property :height, Integer
   property :weight, Integer
   property :diet_habits, String
   property :fresh_or_frozen, String
   property :charred_meat, String
-  property :alcohol, Boolean
+  property :alcohol, String
   property :days_of_exercise, Integer
-  property :fragrances, Boolean
+  property :fragrances, String
   property :plastic_or_glass, String
-  property :hormones, Boolean
-  property :look_and_feel, Boolean
-  property :talked_to_physician, Boolean
-  property :breast_exams, Boolean
+  property :hormones, String
+  property :look_and_feel, String
+  property :talked_to_physician, String
+  property :breast_exams, String
   property :progress, Float, :default => 0
   property :created_at, DateTime
 end
@@ -76,8 +76,12 @@ get '/assessment' do
   erb :intro
 end
 
+# last question links to /assessment/results
+# all other links point to /results
 ["/results", "/assessment/results"].each do |path|
   get path do
+    @active = "assessment"
+    
     erb :results
   end
 end
@@ -89,7 +93,7 @@ get '/assessment/:question' do
   @active = "assessment"
   
   # render the template corresponding to the question
-  erb params[:question].to_sym
+  erb "questions/#{params[:question]}".to_sym
 end
 
 post '/assessment/:question' do
@@ -101,26 +105,38 @@ post '/assessment/:question' do
   # e.g. input name="age"
   answer = params[question_name]
   
-  # record answer in DB, along with incrementing progress
-  if !answer.nil? && !answer.empty?
+  # TODO: if the first_child is answered as "No Children", skip the breast feeding question, but
+  # put the same high risk answer there???
+  
+  # 3 answers are POSTed for this "screening" question
+  if question_name == "screening"
     progress = @session.progress
     
-    number_complete = 0
+    @session.look_and_feel = params[:look_and_feel]
+    @session.talked_to_physician = params[:talked_to_physician]
+    @session.breast_exams = params[:breast_exams]
 
-    @session[question_name] = answer
-
-    [:age, :race_ethnicity, :first_child, :breast_feeding_months, :relatives, :height, :weight, :diet_habits, :fresh_or_frozen, :charred_meat, :alcohol,
-     :days_of_exercise, :fragrances, :plastic_or_glass, :hormones, :look_and_feel, :talked_to_physician, :breast_exams].each do |col|
-      # str += "Col: #{@session[col].nil?} <br />"
-      
-      if !@session[col].nil?
-        number_complete = number_complete + 1
-      end
-    end
+    number_complete = get_number_complete
     
     progress = number_complete * INCREMENT
     
-    @session[:progress] = progress
+    @session.progress = progress
+    
+    @session.save
+  end
+  
+  
+  # record answer in DB, along with incrementing progress
+  if question_name != "screening" && !answer.nil? && !answer.empty?
+    progress = @session.progress
+    
+    @session[question_name] = answer
+
+    number_complete = get_number_complete
+    
+    progress = number_complete * INCREMENT
+    
+    @session.progress = progress
     
     @session.save
   end
@@ -133,14 +149,7 @@ end
       :progress => progress
     }
     @session.save
-  end
-  
-  # go to next question
-  redirect "/assessment/#{params[:next_question]}"
-end
 =end
-
-
 
 get '/resources' do
   @active = "resources"
@@ -155,4 +164,17 @@ end
 get '/about' do
   @active = "about"
   erb :about
+end
+
+def get_number_complete
+  number_complete = 0
+  
+  [:age, :race_ethnicity, :first_child, :breast_feeding_months, :relatives, :height, :weight, :diet_habits, :fresh_or_frozen, :charred_meat, :alcohol,
+   :days_of_exercise, :fragrances, :plastic_or_glass, :hormones, :look_and_feel, :talked_to_physician, :breast_exams].each do |col|
+    if !@session[col].nil?
+      number_complete = number_complete + 1
+    end
+  end
+  
+  return number_complete
 end

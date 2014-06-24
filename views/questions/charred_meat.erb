@@ -1,0 +1,18 @@
+<form action="" method="post">
+    <div class="question row">
+        <div class="large-12 columns">
+            <div class="panel">
+                <fieldset>
+                    <legend>Do you regularly eat charred meat?</legend>
+                    <label><input type="radio" name="charred_meat" value="Yes" <% if @session.charred_meat == "Yes" %> checked="checked" <% end %>> Yes</label>
+                    <label><input type="radio" name="charred_meat" value="No"<% if @session.charred_meat == "No" %> checked="checked" <% end %>> No</label> 
+                </fieldset>
+                <div class="row">
+                  <div id="risk-message" class="small-12 columns"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="next_question" value="alcohol" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "alcohol", :previous_step => "fresh_or_frozen" } %>
+</form>

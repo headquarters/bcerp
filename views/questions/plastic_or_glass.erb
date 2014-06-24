@@ -1,0 +1,18 @@
+<form action="" method="post">
+    <div class="question row">
+        <div class="large-12 columns">
+            <div class="panel">
+                <fieldset>
+                    <legend>Do you store, serve or microwave food in plastic or glass dishes?</legend>
+                    <label><input type="radio" name="plastic_or_glass" value="Plastic" <% if @session.plastic_or_glass == "Plastic" %> checked="checked" <% end %>> Plastic</label>
+                    <label><input type="radio" name="plastic_or_glass" value="Glass" <% if @session.plastic_or_glass == "Glass" %> checked="checked" <% end %>> Glass</label>
+                </fieldset>
+                <div class="row">
+                  <div id="risk-message" class="small-12 columns"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="next_question" value="hormones" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "hormones", :previous_step => "fragrances" } %>
+</form>
