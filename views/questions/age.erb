@@ -22,11 +22,20 @@
                                 <% end %>
                             </select>                                
                         <% end %>
-                        <!-- TODO: persist the high risk/low risk messaging -->
                     </div>
                 </div>
                 <div class="row">
-                    <div id="risk-message" class="small-12 columns"></div>
+                    <%
+                        high_risk_message = "High risk message"
+                        low_risk_message = "Low risk message"
+                    %>
+                    <div id="risk-message" class="small-12 columns">
+                        <% if @session.age > 45 %>
+                            <%= high_risk_message %>
+                        <% else %>
+                            <%= low_risk_message %>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>
@@ -34,3 +43,9 @@
     <input type="hidden" name="next_question" value="race_ethnicity" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => true, :progress => @progress, :next_step => "race_ethnicity" } %>
 </form>
+<script>
+    var riskMessage = {
+        "high-risk": "<%= high_risk_message %>",
+        "low-risk": "<%= low_risk_message %>"
+    }
+</script>

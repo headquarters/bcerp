@@ -57,8 +57,8 @@ end
 
 SITE_TITLE = "Breast Health Awareness"
 
-# there are 18 questions, so each question is 5.5% of the whole thing
-INCREMENT = 5.5
+# there are 18 questions, so each question is 5.55% of the whole thing (18 * 5.55 = 99.9, so round() when displaying)
+INCREMENT = 5.55
 
 QUESTIONS = [:age, :race_ethnicity, :first_child, :breast_feeding_months, :relatives, :height, :weight, :diet_habits, :fresh_or_frozen, :charred_meat, :alcohol,
    :days_of_exercise, :fragrances, :plastic_or_glass, :hormones, :look_and_feel, :talked_to_physician, :breast_exams]
@@ -100,13 +100,13 @@ end
 end
 
 get '/assessment/:question' do
-  @progress = @session.progress
+  @progress = @session.progress.round()
   
   # keep the same nav item active the whole way through
   @active = "assessment"
   
   # render the template corresponding to the question
-  erb "questions/#{params[:question]}".to_sym
+  erb "questions/#{params[:question]}".to_sym  
 end
 
 post '/assessment/:question' do
