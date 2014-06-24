@@ -9,11 +9,11 @@
                     <label><input type="radio" name="first_child" value="35 or older" id="children-3" <% if @session.first_child == "35 or older" %> checked="checked" <% end %>> 35 or older</label>
                 </fieldset>
                 <div class="row">
-                  <div id="children-message" class="small-12 columns"></div>
+                  <div id="risk-message" class="small-12 columns"></div>
                 </div>
             </div>
         </div>
     </div>
-    <input type="hidden" name="next_question" value="results" />
-    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "results", :previous_step => "race_ethnicity" } %>
+    <input type="hidden" name="next_question" value="breast_feeding_months" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "breast_feeding_months", :previous_step => "race_ethnicity" } %>
 </form>

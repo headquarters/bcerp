@@ -1,0 +1,19 @@
+<form action="" method="post">
+    <div class="question row">
+        <div class="large-12 columns">
+            <div class="panel">
+                <fieldset>
+                    <legend>How would you describe your dietary habits?</legend>
+                    <label><input type="radio" name="diet_habits" value="Well-balanced, low-fat diet" <% if @session.diet_habits == "Well-balanced, low-fat diet" %> checked="checked" <% end %>> You eat a well-balanced, low-fat diet.</label>
+                    <label><input type="radio" name="diet_habits" value="Some high-fat and junk food" <% if @session.diet_habits == "Some high-fat and junk food" %> checked="checked" <% end %>> You eat some high-fat and junk food a few times a week.</label>
+                    <label><input type="radio" name="diet_habits" value="Regularly high-fat and junk food" <% if @session.diet_habits == "Regularly high-fat and junk food" %> checked="checked" <% end %>> You regularly eat high-fat and junk food.</label>
+                </fieldset>   
+                <div class="row">
+                  <div id="risk-message" class="small-12 columns"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="next_question" value="fresh_or_frozen" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "fresh_or_frozen", :previous_step => "weight" } %>
+</form>

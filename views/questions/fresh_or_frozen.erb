@@ -1,0 +1,18 @@
+<form action="" method="post">
+    <div class="question row">
+        <div class="large-12 columns">
+            <div class="panel">
+                <fieldset>
+                    <legend>Do you most often eat fresh/frozen foods or canned?</legend>
+                    <label><input type="radio" name="fresh_or_frozen" value="Fresh/frozen foods" <% if @session.fresh_or_frozen == "Fresh/frozen foods" %> checked="checked" <% end %>> Fresh/frozen foods</label>
+                    <label><input type="radio" name="fresh_or_frozen" value="Canned" <% if @session.fresh_or_frozen == "Canned" %> checked="checked" <% end %>> Canned</label>
+                </fieldset>
+                <div class="row">
+                  <div id="risk-message" class="small-12 columns"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="next_question" value="charred_meat" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "charred_meat", :previous_step => "diet_habits" } %>
+</form>

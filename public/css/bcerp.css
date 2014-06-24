@@ -1,3 +1,4 @@
+
 .top-bar {
     background:#AB74A8;
     color:#000;
@@ -29,6 +30,25 @@ footer {
 .accordion .content {
   border:1px solid #ddd;
 }
+
+#home h1 {
+    font-size:1.1em;
+    font-weight:bold;
+}
+
+#home h1 em {
+    font-family:cursive, serif;
+}
+
+#home p {
+    margin-bottom:0.25em;
+    line-height:1.4;
+}
+
+#home .button {
+    margin-bottom:0.25rem;
+}
+
 #progress-bar {
   background: #fff;
   line-height:1.2;
@@ -43,7 +63,6 @@ footer {
     font-size:0.9em;
     line-height:1.6;
     color:#666;
-    text-indent:-6px;
 }
 
 #logo {
@@ -55,6 +74,10 @@ footer {
     border:1px solid #efefef;
     border-radius:5px;
     padding:0 4px;
+}
+
+.top-bar.expanded .toggle-topbar.menu-icon a {
+    border-color:#888;
 }
 
 button.secondary, 
@@ -152,6 +175,15 @@ fieldset legend {
     color:#ccc;
 }
 
+.question h2 {
+    font-size:1.1em;
+}
+
+.question label {
+    font-size:1.2em;
+    font-weight:bold;
+}
+
 /**
  * Sticky nav footer
  */
@@ -161,12 +193,12 @@ html {
     min-height:100%;
 }
 
-body {
-    margin:0 0 6em;
+article {
+    /* make room for #stick-nav with height:5em */
+    margin-bottom:5em;
 }
 
 #sticky-nav {
-    /* position:fixed should be avoided, so a better solution may have to be found */
     position:fixed;
     left:0;
     bottom:0;
@@ -200,7 +232,9 @@ body {
 #sticky-nav ul li img {
     display:block;
     margin:0.5em auto 0;
-    width:3em;
+    /*width:3em;*/
+    width:44px;
+    height:auto;
 }
 
 /* end sticky nav */

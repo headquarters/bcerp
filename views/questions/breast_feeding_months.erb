@@ -1,0 +1,19 @@
+<form action="" method="post">
+    <div class="question row">
+        <div class="large-12 columns">
+            <div class="panel">
+                <fieldset>
+                    <legend>How many months (total) did you breast feed across all your children?</legend>
+                    <label><input type="radio" name="breast_feeding_months" id="breast-feed-months-1" value="No children" <% if @session.breast_feeding_months == "No children" %> checked="checked" <% end %>> I have no children</label>
+                    <label><input type="radio" name="breast_feeding_months" id="breast-feed-months-2" value="0-11 months" <% if @session.breast_feeding_months == "0-11 months" %> checked="checked" <% end %>> 0-11 months</label>
+                    <label><input type="radio" name="breast_feeding_months" id="breast-feed-months-3" value="12+ months" <% if @session.breast_feeding_months == "12+ months" %> checked="checked" <% end %>> 12+ months</label>
+                </fieldset>                
+                <div class="row">
+                  <div id="risk-message" class="small-12 columns"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="next_question" value="relatives" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "relatives", :previous_step => "first_child" } %>
+</form>

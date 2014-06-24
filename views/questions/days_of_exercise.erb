@@ -1,0 +1,19 @@
+<form action="" method="post">
+    <div class="question row">
+        <div class="large-12 columns">
+            <div class="panel">
+                <fieldset>
+                    <legend>How many days per week do you exercise 30 minutes or more?</legend>
+                    <% for days in 0..7 %>
+                        <label><input type="radio" name="days_of_exercise" value="<%=days%>" <% if @session.days_of_exercise == days %> checked="checked" <% end %>> <%=days%></label>
+                    <% end %>
+                </fieldset>
+                <div class="row">
+                  <div id="risk-message" class="small-12 columns"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="next_question" value="fragrances" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "fragrances", :previous_step => "alcohol" } %>
+</form>
