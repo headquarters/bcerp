@@ -60,6 +60,9 @@ SITE_TITLE = "Breast Health Awareness"
 # there are 18 questions, so each question is 5.5% of the whole thing
 INCREMENT = 5.5
 
+QUESTIONS = [:age, :race_ethnicity, :first_child, :breast_feeding_months, :relatives, :height, :weight, :diet_habits, :fresh_or_frozen, :charred_meat, :alcohol,
+   :days_of_exercise, :fragrances, :plastic_or_glass, :hormones, :look_and_feel, :talked_to_physician, :breast_exams]
+
 get '/' do
   # "Session: #{@session.session_id}"
   @active = "home"
@@ -73,6 +76,16 @@ end
 get '/assessment' do
   @active = "assessment"
   # TODO: if user has started filling out the survey (progress > 0), go to first unanswered question
+  if @session.progress > 0
+    QUESTIONS.each do |q|
+      if @session[q].nil?
+        # redirect to the first unanswered question
+        redirect "/assessment/#{q}"
+      end      
+    end
+  end
+  
+  # TODO: what if user has completed the survey and clicks "Go Back to Survey"?
   erb :intro
 end
 
@@ -169,8 +182,7 @@ end
 def get_number_complete
   number_complete = 0
   
-  [:age, :race_ethnicity, :first_child, :breast_feeding_months, :relatives, :height, :weight, :diet_habits, :fresh_or_frozen, :charred_meat, :alcohol,
-   :days_of_exercise, :fragrances, :plastic_or_glass, :hormones, :look_and_feel, :talked_to_physician, :breast_exams].each do |col|
+  QUESTIONS.each do |col|
     if !@session[col].nil?
       number_complete = number_complete + 1
     end

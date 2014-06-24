@@ -20,44 +20,53 @@
         <div class="risk health-history">
             <h3 class="risk-name">Health History</h3>
             <div class="risk-level">
-                <a id="age" href="/assessment/age" class="<% if @session.age.nil? %> unanswered <% elsif @session.age > 45 %> high-risk <% else %> low-risk <% end %> risk-question">Age</a>
+                <a id="age" href="/assessment/age" class="<% if @session.age.nil? %> unanswered <% elsif @session.age > 45 %> high-risk <% else %> low-risk <% end %> risk-question">
+                    Age
+                </a>
                 <a id="children" href="/assessment/first_child" class="<% if @session.first_child.nil? %> unanswered <% elsif @session.first_child == "No children" || @session.first_child == "35 or older" %> high-risk <% else %> low-risk <% end %> risk-question">
                     Children before 35
                 </a>
-                <a id="breast-feed-months" href="/assessment" class="risk-question">Months breastfeeding</a>
-                <a id="relatives" href="/assessment" class="risk-question">Relatives with breast cancer</a>
-                <a id="bmi" href="/assessment" class="risk-question">Height &amp; weight (BMI)</a>
+                <a id="breast-feed-months" href="/assessment/breast_feeding_months" class="<% if @session.breast_feeding_months.nil? %> unanswered <% elsif @session.breast_feeding_months == "No children" || @session.breast_feeding_months == "0-11 months" %> high-risk <% else %> low-risk <% end %> risk-question">
+                    Months breastfeeding
+                </a>
+                <a id="relatives" href="/assessment/relatives" class="<% if @session.relatives.nil? %> unanswered <% elsif @session.relatives == "Yes" %> high-risk <% else %> low-risk <% end %>risk-question">
+                    Relatives with breast cancer
+                </a>
+                <!-- This needs to link to a page that is only BMI-->
+                <a id="bmi" href="/assessment/" class="risk-question">
+                    Height &amp; weight (BMI)
+                </a>
             </div>
         </div>
         <div class="risk diet">
             <h3 class="risk-name">Diet</h3>
             <div class="risk-level">
-                <a id="habits" href="/assessment" class="risk-question">Diet habits</a>
-                <a id="food" href="/assessment" class="risk-question">Fresh/frozen food</a>
-                <a id="charred" href="/assessment" class="risk-question">Charred meat</a>
-                <a id="alcohol" href="/assessment" class="risk-question">Alcohol consumption</a>
+                <a id="habits" href="/assessment/diet_habits" class="risk-question">Diet habits</a>
+                <a id="food" href="/assessment/fresh_or_frozen" class="risk-question">Fresh/frozen food</a>
+                <a id="charred" href="/assessment/charred_meat" class="risk-question">Charred meat</a>
+                <a id="alcohol" href="/assessment/alcohol" class="risk-question">Alcohol consumption</a>
             </div>
         </div>
         <div class="risk exercise">
             <h3 class="risk-name">Exercise</h3>
             <div class="risk-level">
-                <a id="exercise" href="/assessment" class="risk-question">Days of exercise/week</a>
+                <a id="exercise" href="/assessment/days_of_exercise" class="risk-question">Days of exercise/week</a>
             </div>
         </div>
         <div class="risk environment">
             <h3 class="risk-name">Environment</h3>
             <div class="risk-level">
-                <a id="fragrances" href="/assessment" class="risk-question">Fragrances</a>
-                <a id="plastics" href="/assessment" class="risk-question">Plastics &amp; food packaging</a>
-                <a id="hormones" href="/assessment" class="risk-question">Hormones</a>
+                <a id="fragrances" href="/assessment/fragrances" class="risk-question">Fragrances</a>
+                <a id="plastics" href="/assessment/plastic_or_glass" class="risk-question">Plastics &amp; food packaging</a>
+                <a id="hormones" href="/assessment/hormones" class="risk-question">Hormones</a>
             </div>
         </div>
         <div class="risk screening">
             <h3 class="risk-name">Screening</h3>
             <div class="risk-level">
-                <a id="look-and-feel" href="/assessment" class="risk-question">Look and feel of your breasts</a>
-                <a id="talked-to-physician" href="/assessment" class="risk-question">Talk to your physician</a>
-                <a id="exams" href="/assessment" class="risk-question">Annual breast exams</a>
+                <a id="look-and-feel" href="/assessment/screening" class="risk-question">Look and feel of your breasts</a>
+                <a id="talked-to-physician" href="/assessment/screening" class="risk-question">Talk to your physician</a>
+                <a id="exams" href="/assessment/screening" class="risk-question">Annual breast exams</a>
             </div>
         </div>                
     </div>

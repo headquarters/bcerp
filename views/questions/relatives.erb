@@ -12,7 +12,6 @@
                 </div>
             </div>
         </div>
-        Data: <%=@session.relatives %>
     </div>
     <input type="hidden" name="next_question" value="height" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "height", :previous_step => "breast_feeding_months" } %>
