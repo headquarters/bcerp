@@ -175,6 +175,15 @@ fieldset legend {
     color:#ccc;
 }
 
+.question h2 {
+    font-size:1.1em;
+}
+
+.question label {
+    font-size:1.2em;
+    font-weight:bold;
+}
+
 /**
  * Sticky nav footer
  */
@@ -184,12 +193,12 @@ html {
     min-height:100%;
 }
 
-body {
-    margin:0 0 6em;
+article {
+    /* make room for #stick-nav with height:5em */
+    margin-bottom:5em;
 }
 
 #sticky-nav {
-    /* position:fixed should be avoided, so a better solution may have to be found */
     position:fixed;
     left:0;
     bottom:0;

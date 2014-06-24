@@ -7,7 +7,11 @@
                 But there's still a chance it will. 
             </p>
             <div class="text-center">
-                <a href="#nogo" class="button">Find Our Your Risk</a>
+                <% if @session.progress > 0 %>
+                    <a href="/assessment" class="button">Continue Survey</a>    
+                <% else %>
+                    <a href="/assessment" class="button">Find Our Your Risk</a>    
+                <% end %>                
             </div>
             <div class="video-placeholder">            
                 <img src="/images/teaser-video-still.jpg" alt="Teaser video">
