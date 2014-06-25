@@ -1,19 +1,33 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
-            <div class="panel">
-                <fieldset>
-                    <legend>How many days per week do you exercise 30 minutes or more?</legend>
-                    <% for days in 0..7 %>
-                        <label><input type="radio" name="days_of_exercise" value="<%=days%>" <% if @session.days_of_exercise == days %> checked="checked" <% end %>> <%=days%></label>
-                    <% end %>
-                </fieldset>
-                <div class="row">
-                  <div id="risk-message" class="small-12 columns"></div>
-                </div>
-            </div>
+            <fieldset>
+                <legend>How many days per week do you exercise 30 minutes or more?</legend>
+                <% for days in 0..7 %>
+                    <label><input type="radio" name="days_of_exercise" value="<%=days%>" <% if @session.days_of_exercise == days %> checked="checked" <% end %>> <%=days%></label>
+                <% end %>
+            </fieldset>
         </div>
     </div>
+    <div class="row">
+        <%
+            high_risk_message = "High risk message"
+            low_risk_message = "Low risk message"
+        %>
+        <!--<div id="risk-message" class="small-12 columns">
+            <% if @session.age > 45 %>
+                <%= high_risk_message %>
+            <% else %>
+                <%= low_risk_message %>
+            <% end %>
+        </div>-->
+    </div>
+    <script>
+        var riskMessage = {
+            "high-risk": "<%= high_risk_message %>",
+            "low-risk": "<%= low_risk_message %>"
+        }
+    </script>      
     <input type="hidden" name="next_question" value="fragrances" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "fragrances", :previous_step => "alcohol" } %>
 </form>

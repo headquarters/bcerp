@@ -35,12 +35,12 @@
             <% end %>
         </div>-->
     </div>
+    <script>
+        var riskMessage = {
+            "high-risk": "<%= high_risk_message %>",
+            "low-risk": "<%= low_risk_message %>"
+        }
+    </script>    
     <input type="hidden" name="next_question" value="race_ethnicity" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => true, :progress => @progress, :next_step => "race_ethnicity" } %>
 </form>
-<script>
-    var riskMessage = {
-        "high-risk": "<%= high_risk_message %>",
-        "low-risk": "<%= low_risk_message %>"
-    }
-</script>

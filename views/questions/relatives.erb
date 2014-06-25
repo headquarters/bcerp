@@ -1,18 +1,32 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
-            <div class="panel">
-                <fieldset>
-                    <legend>Have any of your first-degree relatives (mother, sister, daughter, father, brother, or son) ever had breast or ovarian cancer?</legend>
-                    <label><input type="radio" name="relatives" id="relatives-1" value="No" <% if @session.relatives == "No" %> checked="checked" <% end %>> No</label>
-                    <label><input type="radio" name="relatives" id="relatives-2" value="Yes" <% if @session.relatives == "Yes" %> checked="checked" <% end %>> Yes</label>
-                </fieldset>           
-                <div class="row">
-                  <div id="risk-message" class="small-12 columns"></div>
-                </div>
-            </div>
+            <fieldset>
+                <legend>Have any of your first-degree relatives (mother, sister, daughter, father, brother, or son) ever had breast or ovarian cancer?</legend>
+                <label><input type="radio" name="relatives" id="relatives-1" value="No" <% if @session.relatives == "No" %> checked="checked" <% end %>> No</label>
+                <label><input type="radio" name="relatives" id="relatives-2" value="Yes" <% if @session.relatives == "Yes" %> checked="checked" <% end %>> Yes</label>
+            </fieldset> 
         </div>
     </div>
+    <div class="row">
+        <%
+            high_risk_message = "High risk message"
+            low_risk_message = "Low risk message"
+        %>
+        <!--<div id="risk-message" class="small-12 columns">
+            <% if @session.age > 45 %>
+                <%= high_risk_message %>
+            <% else %>
+                <%= low_risk_message %>
+            <% end %>
+        </div>-->
+    </div>
+    <script>
+        var riskMessage = {
+            "high-risk": "<%= high_risk_message %>",
+            "low-risk": "<%= low_risk_message %>"
+        }
+    </script>     
     <input type="hidden" name="next_question" value="height" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "height", :previous_step => "breast_feeding_months" } %>
 </form>

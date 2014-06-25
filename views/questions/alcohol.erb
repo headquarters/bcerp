@@ -1,18 +1,32 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
-            <div class="panel">
-                <fieldset>
-                    <legend>Do you frequently have more than 8 alcoholic drinks per week?</legend>
-                    <label><input type="radio" name="alcohol" value="Yes" <% if @session.alcohol == "Yes" %> checked="checked" <% end %>> Yes</label>
-                    <label><input type="radio" name="alcohol" value="No" <% if @session.alcohol == "No" %> checked="checked" <% end %>> No</label>
-                </fieldset>
-                <div class="row">
-                  <div id="risk-message" class="small-12 columns"></div>
-                </div>
-            </div>
-        </div>
+            <fieldset>
+                <legend>Do you frequently have more than 8 alcoholic drinks per week?</legend>
+                <label><input type="radio" name="alcohol" value="Yes" <% if @session.alcohol == "Yes" %> checked="checked" <% end %>> Yes</label>
+                <label><input type="radio" name="alcohol" value="No" <% if @session.alcohol == "No" %> checked="checked" <% end %>> No</label>
+            </fieldset>
+        </div>        
     </div>
+    <div class="row">
+        <%
+            high_risk_message = "High risk message"
+            low_risk_message = "Low risk message"
+        %>
+        <!--<div id="risk-message" class="small-12 columns">
+            <% if @session.age > 45 %>
+                <%= high_risk_message %>
+            <% else %>
+                <%= low_risk_message %>
+            <% end %>
+        </div>-->
+    </div>
+    <script>
+        var riskMessage = {
+            "high-risk": "<%= high_risk_message %>",
+            "low-risk": "<%= low_risk_message %>"
+        }
+    </script>    
     <input type="hidden" name="next_question" value="days_of_exercise" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "days_of_exercise", :previous_step => "charred_meat" } %>
 </form>

@@ -169,10 +169,25 @@ get '/resources' do
   erb :resources
 end
 
+get '/resources/:view' do
+  @active = "resources"
+  
+  erb "#{params[:view]}".to_sym
+end
+
 get '/stories' do
   @active = "stories"
+  
   erb :stories
 end
+
+get '/stories/:view' do
+  @active = "stories"
+  
+  erb "stories/#{params[:view]}".to_sym
+end
+
+# TODO: need custom 404 and 500 views
 
 get '/about' do
   @active = "about"
