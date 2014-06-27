@@ -12,10 +12,33 @@ var BCERP = {};
  */
 
 function saveAnswer(){
-   
-   /*
-    *
-    */
+    var form = $('form');
+    var href = $('#skip-button').attr('href');
+    var nextButton = $('<a></a>').attr('href', href).addClass("button small radius").html("Next &raquo;");
+
+    // replace the form submit button with a simple link since the user won't have to submit the form normally
+    var submitButton = form.find('button[type="submit"]').replaceWith(nextButton);
+        
+    $.ajax({
+        url: window.location.href,
+        type: "POST",
+        data: form.serialize(),
+        success: function(data, textStatus, $xhr){
+            if (data.status != true) {
+                // something went wrong on the back-end, so change the button back for normal POST
+                nextButton.replaceWith(submitButton);
+            } else {
+                var progress = data.progress;
+                
+                $('#progress-meter').css('width', progress + '%');
+                $('#percent-complete').text(progress + "% done");
+            }
+        },
+        error: function($xhr, textStatus, error){
+            // a network error most likely occurred, so change the button back for normal POST
+            nextButton.replaceWith(submitButton);
+        }
+    });
 }
 
 /**

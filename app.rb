@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'data_mapper'
-require 'rational'
+require 'json'
 
 set :bind, '0.0.0.0'
 
@@ -14,7 +14,6 @@ configure :development do
   DataMapper::Logger.new($stdout, :debug)
 end
 
-# DataMapper.setup(:default, 'sqlite://#{Dir.pwd}/bcerp.db') throws an error, so do not use
 DataMapper.setup(:default, 'sqlite:bcerp.db')
 
 class Session
@@ -45,12 +44,9 @@ class Session
   property :created_at, DateTime
 end
 
-# auto_migrate clears all the data from the database
-# auto_upgrade tries to reconcile existing database with changes
-# DataMapper.finalize.auto_migrate!
-DataMapper.finalize.auto_upgrade!
+# DataMapper.finalize.auto_migrate! # auto_migrate clears all the data from the database
+DataMapper.finalize.auto_upgrade! # auto_upgrade tries to reconcile existing database with schema changes
 
-# access session ID with session.id
 before do
   # get the first session with this session_id or just create it and return that session row
   @session = Session.first_or_create(:session_id => session.id)
@@ -76,17 +72,15 @@ end
 
 get '/questionnaire' do
   @active = "questionnaire"
-  # TODO: if user has started filling out the questionnaire (progress > 0), go to first unanswered question
+  # if user has started filling out the questionnaire (progress > 0), go to first unanswered question
   if @session.progress > 0
     QUESTIONS.each do |q|
       if @session[q].nil?
-        # redirect to the first unanswered question
         redirect "/questionnaire/#{q}"
       end      
     end
   end
   
-  # TODO: what if user has completed the questionnaire and clicks "Go Back to Questionnaire"?
   erb :intro
 end
 
@@ -146,9 +140,14 @@ post '/questionnaire/:question' do
   
   @session.progress = progress
   
-  @session.save
-
-  redirect "/questionnaire/#{params[:next_question]}"
+  did_save = @session.save
+  
+  if request.xhr?
+    content_type :json
+    { :status => did_save, :progress => progress.round() }.to_json
+  else
+    redirect "/questionnaire/#{params[:next_question]}"
+  end
 end
 
 
@@ -180,6 +179,13 @@ end
 get '/about' do
   @active = "about"
   erb :about
+end
+
+get '/reset' do
+  # clear previous session, but leave the data in the database
+  session.clear
+  
+  redirect "/"
 end
 
 error do
