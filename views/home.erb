@@ -3,14 +3,14 @@
         <div class="large-12 columns">
             <h1>Do you know <em>your</em> breast health?</h1>
             <p>
-                Breast cancer: It doesn't have to run in your family. You probably think it will never happen to you.
-                But there's still a chance it will. 
+                Breast cancer: It doesn't have to run in your family. And though you probably think it will never happen to you,
+                you're still at risk.
             </p>
             <div class="text-center">
                 <% if @session.progress > 0 %>
-                    <a href="/assessment" class="button">Continue Survey</a>    
+                    <a href="/questionnaire" class="button">Continue Questionnaire</a>    
                 <% else %>
-                    <a href="/assessment" class="button">Find Our Your Risk</a>    
+                    <a href="/questionnaire" class="button">Find Our Your Risk</a>    
                 <% end %>                
             </div>
             <div class="video-placeholder">            

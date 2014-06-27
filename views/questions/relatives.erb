@@ -1,32 +1,40 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
+            <h2>Question 5</h2>
             <fieldset>
                 <legend>Have any of your first-degree relatives (mother, sister, daughter, father, brother, or son) ever had breast or ovarian cancer?</legend>
-                <label><input type="radio" name="relatives" id="relatives-1" value="No" <% if @session.relatives == "No" %> checked="checked" <% end %>> No</label>
-                <label><input type="radio" name="relatives" id="relatives-2" value="Yes" <% if @session.relatives == "Yes" %> checked="checked" <% end %>> Yes</label>
+                <label><input type="radio" name="relatives" id="relatives-1" data-risk="lower" value="No" <% if @session.relatives == "No" %> checked="checked" <% end %>> No</label>
+                <label><input type="radio" name="relatives" id="relatives-2" data-risk="higher" value="Yes" <% if @session.relatives == "Yes" %> checked="checked" <% end %>> Yes</label>
             </fieldset> 
         </div>
     </div>
     <div class="row">
         <%
-            high_risk_message = "High risk message"
-            low_risk_message = "Low risk message"
+            high_risk_message = 'Women have higher risk if first degree relatives (mom, dad, sister, brother, son, daughter) have breast cancer history. Find out <a href=\"/resources/more_info\">more information on breast cancer risk and genetics</a>.'
+            low_risk_message = 'Women have higher risk if first degree relatives (mom, dad, sister, brother, son, daughter) have breast cancer history.'
         %>
-        <!--<div id="risk-message" class="small-12 columns">
-            <% if @session.age > 45 %>
-                <%= high_risk_message %>
-            <% else %>
-                <%= low_risk_message %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.relatives.nil? %>
+                <% if @session.reltiaves == "No" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
             <% end %>
-        </div>-->
+            </div>
     </div>
     <script>
         var riskMessage = {
-            "high-risk": "<%= high_risk_message %>",
-            "low-risk": "<%= low_risk_message %>"
+            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
+            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
         }
     </script>     
-    <input type="hidden" name="next_question" value="height" />
-    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "height", :previous_step => "breast_feeding_months" } %>
+    <input type="hidden" name="next_question" value="bmi" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "bmi", :previous_step => "breast_feeding_months" } %>
 </form>

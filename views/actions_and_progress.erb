@@ -5,7 +5,7 @@
         <% end %>
     </div>
     <div class="next small-8 columns">
-        <a href="/assessment/<%= next_step %>" class="button small secondary radius">Skip</a>
+        <a href="/questionnaire/<%= next_step %>" class="button small secondary radius">Skip</a>
         <button type="submit" class="button small radius">Next &raquo;</button>
     </div>
 </div>
@@ -17,7 +17,7 @@
 <div id="progress-bar" class="row">
     <div class="small-9 medium-10 large-11 columns">
         <div class="progress round">
-          <span class="meter" style="width:<%= progress %>%;"></span>
+          <span data-percent="<%= progress %>" class="meter" style="width:<%= progress %>%;"></span>
         </div>
     </div>
     <div class="progress-label small-3 medium-2 large-1 columns"><%= progress %>% done</div>

@@ -6,11 +6,14 @@
             View your results any time by clicking the "View results so far" link.
             </p>
             
-            <% if @session.progress > 0 %>
-                <a href="/assessment/age" class="button">Continue Survey</a>      
-            <% else %>
-                <a href="/assessment/age" class="button">Start the Survey</a>    
-            <% end %>   
+            
+            <a href="/questionnaire/age" class="button">
+                <% if @session.progress > 0 %>
+                    Continue Questionnaire
+                <% else %>
+                    Start the Questionnaire
+                <% end %>
+            </a>      
         </div>
     </div>
 </div>

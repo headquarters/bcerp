@@ -1,32 +1,40 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
+            <h2>Question 13</h2>
             <fieldset>
                 <legend>Do you store, serve or microwave food in plastic or glass dishes?</legend>
-                <label><input type="radio" name="plastic_or_glass" value="Plastic" <% if @session.plastic_or_glass == "Plastic" %> checked="checked" <% end %>> Plastic</label>
-                <label><input type="radio" name="plastic_or_glass" value="Glass" <% if @session.plastic_or_glass == "Glass" %> checked="checked" <% end %>> Glass</label>
+                <label><input type="radio" name="plastic_or_glass" data-risk="higher" value="Plastic" <% if @session.plastic_or_glass == "Plastic" %> checked="checked" <% end %>> Plastic</label>
+                <label><input type="radio" name="plastic_or_glass" data-risk="lower" value="Glass" <% if @session.plastic_or_glass == "Glass" %> checked="checked" <% end %>> Glass</label>
             </fieldset>
         </div>
     </div>
     <div class="row">
         <%
-            high_risk_message = "High risk message"
-            low_risk_message = "Low risk message"
+            high_risk_message = 'Additional chemical exposures that are being investigated for links to breast cancer risk are Bisphenol A (BPA) and phthalates (pronounced tha-lates). BPA and phthalates are used in plastic containers and some food packaging. Find out <a href=\"/resources/more_info\">more information on breast cancer risk and environmental exposures</a>.'
+            low_risk_message = 'Good! Additional chemical exposures that are being investigated for links to breast cancer risk are Bisphenol A (BPA) and phthalates (pronounced tha-lates). BPA and phthalates are used in plastic containers and some food packaging.'
         %>
-        <!--<div id="risk-message" class="small-12 columns">
-            <% if @session.age > 45 %>
-                <%= high_risk_message %>
-            <% else %>
-                <%= low_risk_message %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.plastic_or_glass.nil? %>
+                <% if @session.plastic_or_glass == "Glass" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
             <% end %>
-        </div>-->
+            </div>
     </div>
     <script>
         var riskMessage = {
-            "high-risk": "<%= high_risk_message %>",
-            "low-risk": "<%= low_risk_message %>"
+            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
+            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
         }
-    </script>     
+    </script>        
     <input type="hidden" name="next_question" value="hormones" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "hormones", :previous_step => "fragrances" } %>
 </form>

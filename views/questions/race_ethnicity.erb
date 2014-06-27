@@ -1,10 +1,11 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
+            <h2>Question 2</h2>
             <fieldset id="race-ethnicity">
                 <legend>With which race/ethnicity do you identify?</legend>
                 <label for="race-1">
-                  <input type="radio" name="race_ethnicity" id="race-1" value="Black" <% if @session.race_ethnicity == "Black" %> checked="checked" <% end %>>
+                  <input type="radio" name="race_ethnicity" id="race-1" value="Black" data-risk="higher" <% if @session.race_ethnicity == "Black" %> checked="checked" <% end %>>
                   Black/African American
                 </label>
                 
@@ -39,23 +40,26 @@
     </div>
     <div class="row">
         <%
-            high_risk_message = "High risk message"
-            low_risk_message = "Low risk message"
+            high_risk_message = 'All races and ethnicities are susceptible to breast cancer, but some forms are more common among African Americans. Find out <a href=\"/resources/more_info\">more information on breast cancer risk and race/ethnicity</a>.'
+            low_risk_message = ''
         %>
-        <!--<div id="risk-message" class="small-12 columns">
-            <% if @session.age > 45 %>
-                <%= high_risk_message %>
-            <% else %>
-                <%= low_risk_message %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.race_ethnicity.nil? %>
+                <% if @session.race_ethnicity == "Black" %>
+                    <p>
+                        <%= low_risk_message %>
+                    </p>
+                <% end %>
             <% end %>
-        </div>-->
+            </div>
     </div>
     <script>
         var riskMessage = {
-            "high-risk": "<%= high_risk_message %>",
-            "low-risk": "<%= low_risk_message %>"
+            "higherRisk": "<p><%= high_risk_message %></p>",
+            "lowerRisk": ""
         }
-    </script>     
+    </script>    
     <input type="hidden" name="next_question" value="first_child" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "first_child", :previous_step => "age" } %>
 </form>

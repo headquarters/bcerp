@@ -1,33 +1,41 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
+            <h2>Question 11</h2>
             <fieldset>
                 <legend>How many days per week do you exercise 30 minutes or more?</legend>
                 <% for days in 0..7 %>
-                    <label><input type="radio" name="days_of_exercise" value="<%=days%>" <% if @session.days_of_exercise == days %> checked="checked" <% end %>> <%=days%></label>
+                    <label><input type="radio" name="days_of_exercise" <% if days > 2 %> data-risk="lower" <% else %> data-risk="higher" <% end %> value="<%=days%>" <% if @session.days_of_exercise == days %> checked="checked" <% end %>> <%=days%></label>
                 <% end %>
             </fieldset>
         </div>
     </div>
     <div class="row">
         <%
-            high_risk_message = "High risk message"
-            low_risk_message = "Low risk message"
+            high_risk_message = 'Regardless of your height and weight, regular exercise for 30 minutes or more, most days of the week, has been shown to reduce the risk of breast cancer. Find out <a href=\"/resources/more_info\">more information on breast cancer risk and exercise</a>.'
+            low_risk_message = 'Good! Regular exercise for 30 minutes or more, most days of the week, has been shown to reduce the risk of breast cancer.'
         %>
-        <!--<div id="risk-message" class="small-12 columns">
-            <% if @session.age > 45 %>
-                <%= high_risk_message %>
-            <% else %>
-                <%= low_risk_message %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.days_of_exercise.nil? %>
+                <% if @session.days_of_exercise > 2 %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
             <% end %>
-        </div>-->
+            </div>
     </div>
     <script>
         var riskMessage = {
-            "high-risk": "<%= high_risk_message %>",
-            "low-risk": "<%= low_risk_message %>"
+            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
+            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
         }
-    </script>      
+    </script>    
     <input type="hidden" name="next_question" value="fragrances" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "fragrances", :previous_step => "alcohol" } %>
 </form>

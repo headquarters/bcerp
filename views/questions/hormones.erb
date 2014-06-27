@@ -1,32 +1,40 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
+            <h2>Question 14</h2>
             <fieldset>
                 <legend>Have you used birth control for 10+ years or hormone replacement therapy for 5+ years?</legend>
-                <label><input type="radio" name="hormones" value="Yes" <% if @session.hormones == "Yes" %> checked="checked" <% end %>> Yes</label>
-                <label><input type="radio" name="hormones" value="No" <% if @session.hormones == "No" %> checked="checked" <% end %>> No</label>
+                <label><input type="radio" name="hormones" data-risk="higher" value="Yes" <% if @session.hormones == "Yes" %> checked="checked" <% end %>> Yes</label>
+                <label><input type="radio" name="hormones" data-risk="lower" value="No" <% if @session.hormones == "No" %> checked="checked" <% end %>> No</label>
             </fieldset>
         </div>
     </div>
     <div class="row">
         <%
-            high_risk_message = "High risk message"
-            low_risk_message = "Low risk message"
+            high_risk_message = 'Oral contraceptives and hormone replacement therapy increase a woman\'s lifetime exposure to estrogen, increasing the risk for breast cancer. Find out <a href=\"/resources/more_info\">more information on breast cancer risk and environmental exposures</a>.'
+            low_risk_message = 'Good! Oral contraceptives and hormone replacement therapy increase a woman\'s lifetime exposure to estrogen, increasing the risk for breast cancer.'
         %>
-        <!--<div id="risk-message" class="small-12 columns">
-            <% if @session.age > 45 %>
-                <%= high_risk_message %>
-            <% else %>
-                <%= low_risk_message %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.hormones.nil? %>
+                <% if @session.hormones == "Without fragrances" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
             <% end %>
-        </div>-->
+            </div>
     </div>
     <script>
         var riskMessage = {
-            "high-risk": "<%= high_risk_message %>",
-            "low-risk": "<%= low_risk_message %>"
+            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
+            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
         }
-    </script>     
+    </script>      
     <input type="hidden" name="next_question" value="screening" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "screening", :previous_step => "plastic_or_glass" } %>
 </form>

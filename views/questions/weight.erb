@@ -1,12 +1,13 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
-            <label for="weight" class="inline">How much do you weigh (in pounds)?</label>
+            <h2>Question 7</h2>
+            <label for="weight">How much do you weigh (in pounds)?</label>
         </div>
         
         <div class="large-4 columns end">
             <select id="weight" name="weight">
-                <option value=""></option>
+                <option value="">Weight</option>
                 <!--<option value="">Less than 90</option>-->
                 <% for weight in 90..300 %>
                   <option value="<%=weight%>" <% if @session.weight == weight %> selected="selected" <% end %>><%=weight%></option>
@@ -17,23 +18,30 @@
     </div>
     <div class="row">
         <%
-            high_risk_message = "High risk message"
-            low_risk_message = "Low risk message"
+            high_risk_message = 'Regardless of your height and weight, eating a diet high in fruits and vegetables (5 servings of each per day) has been shown to be protective against developing breast cancer. Find out <a href=\"/resources/more_info\">more information on breast cancer risk and diet</a>.'
+            low_risk_message = 'Good! Eating a diet high in fruits and vegetables (5 servings of each per day) has been shown to be protective against developing breast cancer.'
         %>
-        <!--<div id="risk-message" class="small-12 columns">
-            <% if @session.age > 45 %>
-                <%= high_risk_message %>
-            <% else %>
-                <%= low_risk_message %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.first_child.nil? %>
+                <% if @session.first_child == "Younger than 35" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
             <% end %>
-        </div>-->
+            </div>
     </div>
     <script>
         var riskMessage = {
-            "high-risk": "<%= high_risk_message %>",
-            "low-risk": "<%= low_risk_message %>"
+            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
+            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
         }
-    </script>     
+    </script>    
     <input type="hidden" name="next_question" value="diet_habits" />
     <script>
       //TODO: put user's height here from previous question, then calculate on the fly on dropdown change

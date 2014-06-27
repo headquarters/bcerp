@@ -29,6 +29,7 @@ class Session
   property :relatives, String
   property :height, Integer
   property :weight, Integer
+  property :bmi, Float
   property :diet_habits, String
   property :fresh_or_frozen, String
   property :charred_meat, String
@@ -57,10 +58,10 @@ end
 
 SITE_TITLE = "Breast Health Awareness"
 
-# there are 18 questions, so each question is 5.55% of the whole thing (18 * 5.55 = 99.9, so round() when displaying)
-INCREMENT = 5.55
+# there are 15 questions (height+weight count as 1) , so each question is 6.666% of the whole thing (15 * 6.666 = 99.99, so round() when displaying)
+INCREMENT = 6.666
 
-QUESTIONS = [:age, :race_ethnicity, :first_child, :breast_feeding_months, :relatives, :height, :weight, :diet_habits, :fresh_or_frozen, :charred_meat, :alcohol,
+QUESTIONS = [:age, :race_ethnicity, :first_child, :breast_feeding_months, :relatives, :bmi, :diet_habits, :fresh_or_frozen, :charred_meat, :alcohol,
    :days_of_exercise, :fragrances, :plastic_or_glass, :hormones, :look_and_feel, :talked_to_physician, :breast_exams]
 
 get '/' do
@@ -73,43 +74,43 @@ get '/' do
   end
 end
 
-get '/assessment' do
-  @active = "assessment"
-  # TODO: if user has started filling out the survey (progress > 0), go to first unanswered question
+get '/questionnaire' do
+  @active = "questionnaire"
+  # TODO: if user has started filling out the questionnaire (progress > 0), go to first unanswered question
   if @session.progress > 0
     QUESTIONS.each do |q|
       if @session[q].nil?
         # redirect to the first unanswered question
-        redirect "/assessment/#{q}"
+        redirect "/questionnaire/#{q}"
       end      
     end
   end
   
-  # TODO: what if user has completed the survey and clicks "Go Back to Survey"?
+  # TODO: what if user has completed the questionnaire and clicks "Go Back to Questionnaire"?
   erb :intro
 end
 
-# last question links to /assessment/results
+# last question links to /questionnaire/results
 # all other links point to /results
-["/results", "/assessment/results"].each do |path|
+["/results", "/questionnaire/results"].each do |path|
   get path do
-    @active = "assessment"
+    @active = "questionnaire"
     
     erb :results
   end
 end
 
-get '/assessment/:question' do
+get '/questionnaire/:question' do
   @progress = @session.progress.round()
   
   # keep the same nav item active the whole way through
-  @active = "assessment"
+  @active = "questionnaire"
   
   # render the template corresponding to the question
   erb "questions/#{params[:question]}".to_sym  
 end
 
-post '/assessment/:question' do
+post '/questionnaire/:question' do
   # :question is named the same as the column in the Session row
   
   # e.g. :question => "age"
@@ -123,46 +124,33 @@ post '/assessment/:question' do
   
   # 3 answers are POSTed for this "screening" question
   if question_name == "screening"
-    progress = @session.progress
-    
     @session.look_and_feel = params[:look_and_feel]
     @session.talked_to_physician = params[:talked_to_physician]
     @session.breast_exams = params[:breast_exams]
-
-    number_complete = get_number_complete
+  elsif question_name == "bmi"
+    height_in_inches = params[:height]
+    weight_in_pounds = params[:weight]
     
-    progress = number_complete * INCREMENT
+    bmi = calculate_bmi(weight_in_pounds, height_in_inches)
     
-    @session.progress = progress
-    
-    @session.save
-  end
-  
-  
-  # record answer in DB, along with incrementing progress
-  if question_name != "screening" && !answer.nil? && !answer.empty?
-    progress = @session.progress
-    
+    @session.height = height_in_inches
+    @session.weight = weight_in_pounds
+    @session.bmi = bmi
+  else
     @session[question_name] = answer
-
-    number_complete = get_number_complete
-    
-    progress = number_complete * INCREMENT
-    
-    @session.progress = progress
-    
-    @session.save
   end
-  redirect "/assessment/#{params[:next_question]}"
+  
+  number_complete = get_number_complete
+  
+  progress = number_complete * INCREMENT
+  
+  @session.progress = progress
+  
+  @session.save
+
+  redirect "/questionnaire/#{params[:next_question]}"
 end
 
-=begin
-    @session.attributes = {
-      question_name.to_sym => answer,
-      :progress => progress
-    }
-    @session.save
-=end
 
 get '/resources' do
   @active = "resources"
@@ -194,6 +182,14 @@ get '/about' do
   erb :about
 end
 
+error do
+  erb :'500'
+end
+
+not_found do
+  erb :'404'
+end
+
 def get_number_complete
   number_complete = 0
   
@@ -204,4 +200,9 @@ def get_number_complete
   end
   
   return number_complete
+end
+
+def calculate_bmi(weight_in_pounds, height_in_inches)
+  # coerce values to float to force float division, rather than integer division
+  return ((weight_in_pounds.to_f/height_in_inches.to_f**2) * 703).round(2)
 end

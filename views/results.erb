@@ -12,53 +12,53 @@
             <div class="risk health-history">
                 <h3 class="risk-name">Health History</h3>
                 <div class="risk-level">
-                    <a id="age" href="/assessment/age" class="<% if @session.age.nil? %> unanswered <% elsif @session.age < 45 %> low-risk <% else %> high-risk <% end %> risk-question">
+                    <a id="age" href="/questionnaire/age" class="<% if @session.age.nil? %> unanswered <% elsif @session.age < 45 %> low-risk <% else %> high-risk <% end %> risk-question">
                         Age
                     </a>
-                    <a id="children" href="/assessment/first_child" class="<% if @session.first_child.nil? %> unanswered <% elsif @session.first_child == "Younger than 35" %> low-risk <% else %> high-risk <% end %> risk-question">
+                    <a id="children" href="/questionnaire/first_child" class="<% if @session.first_child.nil? %> unanswered <% elsif @session.first_child == "Younger than 35" %> low-risk <% else %> high-risk <% end %> risk-question">
                         Children before 35
                     </a>
-                    <a id="breast-feed-months" href="/assessment/breast_feeding_months" class="<% if @session.breast_feeding_months.nil? %> unanswered <% elsif @session.breast_feeding_months == "12+ months" %> low-risk <% else %> high-risk <% end %> risk-question">
+                    <a id="breast-feed-months" href="/questionnaire/breast_feeding_months" class="<% if @session.breast_feeding_months.nil? %> unanswered <% elsif @session.breast_feeding_months == "12+ months" %> low-risk <% else %> high-risk <% end %> risk-question">
                         Months breastfeeding
                     </a>
-                    <a id="relatives" href="/assessment/relatives" class="<% if @session.relatives.nil? %> unanswered <% elsif @session.relatives == "No" %> low-risk <% else %> high-risk <% end %> risk-question">
+                    <a id="relatives" href="/questionnaire/relatives" class="<% if @session.relatives.nil? %> unanswered <% elsif @session.relatives == "No" %> low-risk <% else %> high-risk <% end %> risk-question">
                         Relatives with breast cancer
                     </a>
                     <!-- This needs to link to a page that is only BMI-->
-                    <a id="bmi" href="/assessment/" class="risk-question">
-                        Height &amp; weight (BMI)
+                    <a id="bmi" href="/questionnaire/bmi" class="<% if @session.bmi.nil? %> unanswered <% elsif @session.bmi < 25 %> low-risk <% else %> high-risk <% end %> risk-question">
+                        BMI (height &amp; weight)
                     </a>
                 </div>
             </div>
             <div class="risk diet">
                 <h3 class="risk-name">Diet</h3>
                 <div class="risk-level">
-                    <a id="habits" href="/assessment/diet_habits" class="<% if @session.diet_habits.nil? %> unanswered <% elsif @session.diet_habits == "Well-balanced, low-fat diet" %> low-risk <% else %> high-risk <% end %> risk-question">Diet habits</a>
-                    <a id="food" href="/assessment/fresh_or_frozen" class="<% if @session.fresh_or_frozen.nil? %> unanswered <% elsif @session.fresh_or_frozen == "Fresh/frozen foods" %> low-risk <% else %> high-risk <% end %> risk-question">Fresh/frozen food</a>
-                    <a id="charred" href="/assessment/charred_meat" class="<% if @session.charred_meat.nil? %> unanswered <% elsif @session.charred_meat == "No" %> low-risk <% else %> high-risk <% end %> risk-question">Charred meat</a>
-                    <a id="alcohol" href="/assessment/alcohol" class="<% if @session.alcohol.nil? %> unanswered <% elsif @session.alcohol == "No" %> low-risk <% else %> high-risk <% end %> risk-question">Alcohol consumption</a>
+                    <a id="habits" href="/questionnaire/diet_habits" class="<% if @session.diet_habits.nil? %> unanswered <% elsif @session.diet_habits == "Well-balanced, low-fat diet" %> low-risk <% else %> high-risk <% end %> risk-question">Diet habits</a>
+                    <a id="food" href="/questionnaire/fresh_or_frozen" class="<% if @session.fresh_or_frozen.nil? %> unanswered <% elsif @session.fresh_or_frozen == "Fresh/frozen foods" %> low-risk <% else %> high-risk <% end %> risk-question">Fresh/frozen food</a>
+                    <a id="charred" href="/questionnaire/charred_meat" class="<% if @session.charred_meat.nil? %> unanswered <% elsif @session.charred_meat == "No" %> low-risk <% else %> high-risk <% end %> risk-question">Charred meat</a>
+                    <a id="alcohol" href="/questionnaire/alcohol" class="<% if @session.alcohol.nil? %> unanswered <% elsif @session.alcohol == "No" %> low-risk <% else %> high-risk <% end %> risk-question">Alcohol consumption</a>
                 </div>
             </div>
             <div class="risk exercise">
                 <h3 class="risk-name">Exercise</h3>
                 <div class="risk-level">
-                    <a id="exercise" href="/assessment/days_of_exercise" class="<% if @session.days_of_exercise.nil? %> unanswered <% elsif @session.days_of_exercise > 3 %> low-risk <% else %> high-risk <% end %> risk-question">Days of exercise/week</a>
+                    <a id="exercise" href="/questionnaire/days_of_exercise" class="<% if @session.days_of_exercise.nil? %> unanswered <% elsif @session.days_of_exercise > 3 %> low-risk <% else %> high-risk <% end %> risk-question">Days of exercise/week</a>
                 </div>
             </div>
             <div class="risk environment">
                 <h3 class="risk-name">Environment</h3>
                 <div class="risk-level">
-                    <a id="fragrances" href="/assessment/fragrances" class="<% if @session.fragrances.nil? %> unanswered <% elsif @session.fragrances == "Without fragrances" %> low-risk <% else %> high-risk <% end %> risk-question">Fragrances</a>
-                    <a id="plastics" href="/assessment/plastic_or_glass" class="<% if @session.plastic_or_glass.nil? %> unanswered <% elsif @session.plastic_or_glass == "Glass" %> low-risk <% else %> high-risk <% end %> risk-question">Plastics &amp; food packaging</a>
-                    <a id="hormones" href="/assessment/hormones" class="<% if @session.hormones.nil? %> unanswered <% elsif @session.hormones == "No" %> low-risk <% else %> high-risk <% end %> risk-question">Hormones</a>
+                    <a id="fragrances" href="/questionnaire/fragrances" class="<% if @session.fragrances.nil? %> unanswered <% elsif @session.fragrances == "Without fragrances" %> low-risk <% else %> high-risk <% end %> risk-question">Fragrances</a>
+                    <a id="plastics" href="/questionnaire/plastic_or_glass" class="<% if @session.plastic_or_glass.nil? %> unanswered <% elsif @session.plastic_or_glass == "Glass" %> low-risk <% else %> high-risk <% end %> risk-question">Plastics &amp; food packaging</a>
+                    <a id="hormones" href="/questionnaire/hormones" class="<% if @session.hormones.nil? %> unanswered <% elsif @session.hormones == "No" %> low-risk <% else %> high-risk <% end %> risk-question">Hormones</a>
                 </div>
             </div>
             <div class="risk screening">
                 <h3 class="risk-name">Screening</h3>
                 <div class="risk-level">
-                    <a id="look-and-feel" href="/assessment/screening" class="<% if @session.look_and_feel.nil? %> unanswered <% elsif @session.look_and_feel == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Look and feel of your breasts</a>
-                    <a id="talked-to-physician" href="/assessment/screening" class="<% if @session.talked_to_physician.nil? %> unanswered <% elsif @session.talked_to_physician == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Talk to your physician</a>
-                    <a id="breast-exams" href="/assessment/screening" class="<% if @session.breast_exams.nil? %> unanswered <% elsif @session.breast_exams == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Annual breast exams</a>
+                    <a id="look-and-feel" href="/questionnaire/screening" class="<% if @session.look_and_feel.nil? %> unanswered <% elsif @session.look_and_feel == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Look and feel of your breasts</a>
+                    <a id="talked-to-physician" href="/questionnaire/screening" class="<% if @session.talked_to_physician.nil? %> unanswered <% elsif @session.talked_to_physician == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Talk to your physician</a>
+                    <a id="breast-exams" href="/questionnaire/screening" class="<% if @session.breast_exams.nil? %> unanswered <% elsif @session.breast_exams == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Annual breast exams</a>
                 </div>
             </div>
             <ul id="key">
@@ -67,7 +67,7 @@
                 <li><img src="/images/unanswered-key.png" alt="" /> Unanswered Question</li>
             </ul>
             
-            <a href="/assessment" class="button">Back to Survey</a>
+            <a href="/questionnaire" class="button">Back to Questionnaire</a>
         </div>
     </div>
 </div>

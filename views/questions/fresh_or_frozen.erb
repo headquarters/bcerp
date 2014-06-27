@@ -1,32 +1,40 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
-                <fieldset>
-                    <legend>Do you most often eat fresh/frozen foods or canned?</legend>
-                    <label><input type="radio" name="fresh_or_frozen" value="Fresh/frozen foods" <% if @session.fresh_or_frozen == "Fresh/frozen foods" %> checked="checked" <% end %>> Fresh/frozen foods</label>
-                    <label><input type="radio" name="fresh_or_frozen" value="Canned" <% if @session.fresh_or_frozen == "Canned" %> checked="checked" <% end %>> Canned</label>
-                </fieldset>
+            <h2>Question 8</h2>
+            <fieldset>
+                <legend>Do you most often eat fresh/frozen foods or canned?</legend>
+                <label><input type="radio" name="fresh_or_frozen" data-risk="lower" value="Fresh/frozen foods" <% if @session.fresh_or_frozen == "Fresh/frozen foods" %> checked="checked" <% end %>> Fresh/frozen foods</label>
+                <label><input type="radio" name="fresh_or_frozen" data-risk="higher" value="Canned" <% if @session.fresh_or_frozen == "Canned" %> checked="checked" <% end %>> Canned</label>
+            </fieldset>
         </div>
     </div>
     <div class="row">
         <%
-            high_risk_message = "High risk message"
-            low_risk_message = "Low risk message"
+            high_risk_message = 'Fresh and frozen foods are healthier alternatives to canned foods. Find out <a href=\"/resources/more_info\">more information on breast cancer risk and diet</a>.'
+            low_risk_message = 'Good! Fresh and frozen foods are healthier alternatives to canned foods.'
         %>
-        <!--<div id="risk-message" class="small-12 columns">
-            <% if @session.age > 45 %>
-                <%= high_risk_message %>
-            <% else %>
-                <%= low_risk_message %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.fresh_or_frozen.nil? %>
+                <% if @session.fresh_or_frozen == "Fresh/frozen foods" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
             <% end %>
-        </div>-->
+            </div>
     </div>
     <script>
         var riskMessage = {
-            "high-risk": "<%= high_risk_message %>",
-            "low-risk": "<%= low_risk_message %>"
+            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
+            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
         }
-    </script>       
+    </script>  
     <input type="hidden" name="next_question" value="charred_meat" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "charred_meat", :previous_step => "diet_habits" } %>
 </form>

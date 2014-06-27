@@ -24,10 +24,17 @@
 			
 			<section class="top-bar-section">
 			  <ul id="menu" class="right">
-				<li <% if @active == "home" %>class="active"<% end %>><a href="/">Home</a></li>
-				<li <% if @active == "assessment" %>class="active"<% end %>><a href="/assessment">Find Out Your Risk</a></li>
-				<li <% if @active == "resources" %>class="active"<% end %>><a href="/resources">Resources</a></li>
-				<li <% if @active == "about" %>class="active"<% end %>><a href="/about">About</a></li>
+				<!--<li <% if @active == "home" %>class="active"<% end %>><a href="/">Home</a></li>-->
+				<li <% if @active == "questionnaire" %>class="active"<% end %>>
+					<a href="/questionnaire">
+						<% if @session.progress > 0 %>
+							Continue Questionnaire
+						<% else %>
+							Find Out Your Risk
+						<% end %>
+					</a>
+				</li>
+				<!--<li <% if @active == "resources" %>class="active"<% end %>><a href="/resources">Resources</a></li>-->
 			  </ul>
 			</section>
 		  </nav>
@@ -43,7 +50,6 @@
 				<li <% if @active == "home" %>class="active"<% end %>><a href="/">Home</a></li>
 				<li <% if @active == "assessment" %>class="active"<% end %>><a href="/assessment">Find Out Your Risk</a></li>
 				<li <% if @active == "resources" %>class="active"<% end %>><a href="/resources">Resources</a></li>
-				<li <% if @active == "about" %>class="active"<% end %>><a href="/about">About</a></li>
 			</ul>
 			<div class="row">
 			  &copy; The University of North Carolina at Chapel Hill. All Rights Reserved.

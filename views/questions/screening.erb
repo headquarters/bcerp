@@ -1,33 +1,41 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
+            <h2>Question 15</h2>
             <fieldset>
                 <legend>Do you do any of the following?</legend>
-                <label><input type="checkbox" name="look_and_feel" id="look-and-feel" value="Yes" <% if @session.look_and_feel == "Yes" %> checked="checked" <% end %>> You know the normal look and feel of your breasts.</label>
-                <label><input type="checkbox" name="talked_to_physician" id="talked-to-physician" value="Yes" <% if @session.talked_to_physician == "Yes" %> checked="checked" <% end %>> You've talked with your personal care physician about your breast health. </label>
-                <label><input type="checkbox" name="breast_exams" id="exams" value="Yes" <% if @session.breast_exams == "Yes" %> checked="checked" <% end %>> You've begun getting clinical breast exams and/or mammograms.</label>
+                <label><input type="checkbox" name="look_and_feel" class="custom-messaging" data-risk="lower" value="Yes" <% if @session.look_and_feel == "Yes" %> checked="checked" <% end %>> You know the normal look and feel of your breasts.</label>
+                <label><input type="checkbox" name="talked_to_physician" class="custom-messaging" data-risk="lower" value="Yes" <% if @session.talked_to_physician == "Yes" %> checked="checked" <% end %>> You've talked with your personal care physician about your breast health. </label>
+                <label><input type="checkbox" name="breast_exams" class="custom-messaging" data-risk="lower" value="Yes" <% if @session.breast_exams == "Yes" %> checked="checked" <% end %>> You've begun getting clinical breast exams and/or mammograms.</label>
             </fieldset>
         </div>
     </div>
     <div class="row">
         <%
-            high_risk_message = "High risk message"
-            low_risk_message = "Low risk message"
+            high_risk_message = ' Find out <a href=\"/resources/more_info\">more information on breast cancer risk and screening</a>.'
+            low_risk_message = 'Good!'
         %>
-        <!--<div id="risk-message" class="small-12 columns">
-            <% if @session.age > 45 %>
-                <%= high_risk_message %>
-            <% else %>
-                <%= low_risk_message %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.look_and_feel.nil? %>
+                <% if @session.look_and_feel == "Yes" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
             <% end %>
-        </div>-->
+            </div>
     </div>
     <script>
         var riskMessage = {
-            "high-risk": "<%= high_risk_message %>",
-            "low-risk": "<%= low_risk_message %>"
+            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
+            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
         }
-    </script>         
+    </script>            
     <input type="hidden" name="next_question" value="results" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "results", :previous_step => "hormones" } %>
 </form>
