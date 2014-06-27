@@ -2,6 +2,10 @@
     <div class="question row">
         <div class="large-12 columns">
             <h2>Question 15</h2>
+            <!-- hidden input fields for leaving an answer blank-->
+            <input type="hidden" name="look_and_feel" value="No" />
+            <input type="hidden" name="talked_to_physician" value="No" />
+            <input type="hidden" name="breast_exams" value="No" />
             <fieldset>
                 <legend>Do you do any of the following?</legend>
                 <label><input type="checkbox" name="look_and_feel" class="custom-messaging" data-risk="lower" value="Yes" <% if @session.look_and_feel == "Yes" %> checked="checked" <% end %>> You know the normal look and feel of your breasts.</label>
@@ -12,19 +16,49 @@
     </div>
     <div class="row">
         <%
-            high_risk_message = ' Find out <a href=\"/resources/more_info\">more information on breast cancer risk and screening</a>.'
-            low_risk_message = 'Good!'
+            look_and_feel_low_risk_message = 'Good! Knowing the normal look and feel of your breasts makes it easier to spot possible abnormalities.'
+            look_and_feel_high_risk_message = 'Know the normal look and feel of your breasts so that it is easier to spot possible abnormalities. Find out <a href=\"/resources/more_info\">more information on breast cancer risk and screening</a>.'
+            
+            talked_to_physician_low_risk_message = 'With your physician, discuss your family history, annual exams and the age to start mammograms.'
+            talked_to_physician_high_risk_message = 'With your physician, discuss your family history, annual exams and the age to start mammograms.'
+            
+            breast_exams_low_risk_message = 'Annual breast exams by a physician and mammograms help detect breast cancer early, giving you a better chance for survival. US Preventive Services Task Force recommends that women ages 50-74 get mammograms every two years.'
+            breast_exams_high_risk_message = 'Annual breast exams by a physician and mammograms help detect breast cancer early, giving you a better chance for survival. US Preventive Services Task Force recommends that women ages 50-74 get mammograms every two years.'
         %>
         
             <div id="risk-message" class="small-12 columns">
             <% if !@session.look_and_feel.nil? %>
                 <% if @session.look_and_feel == "Yes" %>
                     <p>
-                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                        <span class="lower-risk">Lower risk:</span> <%= look_and_feel_low_risk_message %>
                     </p>
                 <% else %>
                     <p>
-                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                        <span class="higher-risk">Higher risk:</span> <%= look_and_feel_high_risk_message %>
+                    </p>
+                <% end %>
+            <% end %>
+            
+            <% if !@session.talked_to_physician.nil? %>
+                <% if @session.talked_to_physician == "Yes" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= talked_to_physician_low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= talked_to_physician_high_risk_message %>
+                    </p>
+                <% end %>
+            <% end %>
+            
+            <% if !@session.breast_exams.nil? %>
+                <% if @session.breast_exams == "Yes" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= breast_exams_low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= breast_exams_high_risk_message %>
                     </p>
                 <% end %>
             <% end %>
@@ -32,8 +66,18 @@
     </div>
     <script>
         var riskMessage = {
-            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
-            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
+            "lookAndFeel": {
+                "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= look_and_feel_low_risk_message %></p>",
+                "higherRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= look_and_feel_high_risk_message %></p>"                
+            },
+            "talkedToPhysician": {
+                "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= talked_to_physician_low_risk_message %></p>",
+                "higherRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= talked_to_physician_high_risk_message %></p>"                
+            },
+            "breastExams": {
+                "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= breast_exams_low_risk_message %></p>",
+                "higherRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= breast_exams_high_risk_message %></p>"                
+            }
         }
     </script>            
     <input type="hidden" name="next_question" value="results" />
