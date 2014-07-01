@@ -90,12 +90,25 @@ button.secondary,
     margin-top:0;
 }
 
-.actions .next {
-    text-align:right;
-}
-
 .actions .button {
     margin-bottom:0;
+    padding-right:0.9rem;
+    padding-left:0.9rem;
+}
+
+.actions #previous-button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.actions #next-button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.actions .button-group {
+    width:17.875em;
+    margin:0 auto;
 }
 
 label,
@@ -192,16 +205,34 @@ fieldset legend {
 
 #results #key {
     margin:0.5em 0;
+    font-size:0.9em;
 }
 
 #results #key li {
     margin:0.25em 0;
 }
 
+
+#results .inset {
+    /*position:relative;
+    top:-248px;
+    left:200px;    */
+}
+
+#results .risk-name {
+    font-size:1.1em;
+}
+
 #stories .story.row {
     margin-bottom:1em;
     border-bottom:1px solid #ccc;
     padding-bottom:0.25em;
+}
+
+.progress .meter {
+    -webkit-transition:width 0.7s ease;
+    -moz-transition:width 0.7s ease;
+    transition:width 0.7s ease;
 }
 
 #stories .story .small-3 {
@@ -463,11 +494,17 @@ article {
 }
 
 @media only screen and (min-width: 60em) {
-    /*#sticky-nav {
+    /*article {
+        padding-bottom:0.5em;
+    }
+    #sticky-nav {
         position:static;
         left:auto;
         bottom:auto;
     }*/
+    article {
+        padding-bottom:11em;
+    }
     #sticky-nav ul li {
         height:11em;
     }

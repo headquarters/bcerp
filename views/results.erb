@@ -1,14 +1,14 @@
 <div id="results">
     <div class="row">
         <div class="large-12 columns">
-            <h2>Your Risk</h2>
+            <h2>Your Results</h2>
         </div>
-        <div class="large-push-6 large-6 columns">
+        <div class="large-12 columns">
             <p>
-                Click or tap an icon to return to that question.
+                Each circle below represents your answer to a question. Click or tap a circle to return to that question.
             </p>
         </div>
-        <div class="large-pull-6 large-6 columns risk-infographic">
+        <div class="small-6 columns risk-infographic">
             <div class="risk health-history">
                 <h3 class="risk-name">Health History</h3>
                 <div class="risk-level">
@@ -61,13 +61,17 @@
                     <a id="breast-exams" href="/questionnaire/breast_exams" class="<% if @session.breast_exams.nil? %> unanswered <% elsif @session.breast_exams == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Annual breast exams</a>
                 </div>
             </div>
-            <ul id="key">
-                <li><img src="/images/high-risk-key.png" alt="" /> Higher Risk</li>
-                <li><img src="/images/low-risk-key.png" alt="" /> Lower Risk</li>
-                <li><img src="/images/unanswered-key.png" alt="" /> Unanswered Question</li>
-            </ul>
+        </div>
+        <div class="small-6 columns">
+            <div class="inset">
+                <ul id="key">
+                    <li><img src="/images/high-risk-key.png" alt="" /> Higher Risk</li>
+                    <li><img src="/images/low-risk-key.png" alt="" /> Lower Risk</li>
+                    <li><img src="/images/unanswered-key.png" alt="" /> Unanswered Question</li>
+                </ul>
             
-            <a href="/questionnaire" class="button">Back to Questionnaire</a>
+                <a href="/questionnaire" class="button small">Back to Questionnaire</a>
+            </div>
         </div>
     </div>
 </div>

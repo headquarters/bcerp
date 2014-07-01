@@ -40,6 +40,7 @@ class Session
   property :look_and_feel, String
   property :talked_to_physician, String
   property :breast_exams, String
+  property :current_question, String
   property :progress, Float, :default => 0
   property :created_at, DateTime
 end
@@ -76,20 +77,11 @@ end
 
 get '/questionnaire' do
   @active = "questionnaire"
-  # if user has started filling out the questionnaire (progress > 0), go to first unanswered question
-  if @session.progress > 0
-    QUESTIONS.each do |q|
-      if @session[q].nil?
-        if [:look_and_feel, :talked_to_physician, :breast_exams].include?(q)
-          redirect "/questionnaire/screening"
-        else
-          redirect "/questionnaire/#{q}"
-        end
-      end      
-    end
+  if !@session.current_question.nil?
+    redirect "/questionnaire/#{@session.current_question}"
+  else
+    erb :intro
   end
-  
-  erb :intro
 end
 
 # last question links to /questionnaire/results
@@ -120,6 +112,8 @@ post '/questionnaire/:question' do
   
   # e.g. input name="age"
   answer = params[question_name]
+  
+  @session.current_question = question_name
   
   # TODO: if the first_child is answered as "No Children", skip the breast feeding question, but
   # put the same high risk answer there???
