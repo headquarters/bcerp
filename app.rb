@@ -138,7 +138,7 @@ post '/questionnaire/:question' do
     @session.height = height_in_inches
     @session.weight = weight_in_pounds
     
-    if height_in_inches.kind_of?(Integer) && weight_in_pounds.kind_of?(Integer)
+    if height_in_inches.size > 0 && weight_in_pounds.size > 0
       bmi = calculate_bmi(weight_in_pounds, height_in_inches)  
       @session.bmi = bmi
     end
