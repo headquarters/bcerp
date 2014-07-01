@@ -35,6 +35,6 @@
             "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
         }
     </script>      
-    <input type="hidden" name="next_question" value="screening" />
-    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "screening", :previous_step => "plastic_or_glass" } %>
+    <input type="hidden" name="next_question" value="look_and_feel" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "look_and_feel", :previous_step => "plastic_or_glass" } %>
 </form>

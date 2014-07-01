@@ -42,7 +42,7 @@
             <div class="risk exercise">
                 <h3 class="risk-name">Exercise</h3>
                 <div class="risk-level">
-                    <a id="exercise" href="/questionnaire/days_of_exercise" class="<% if @session.days_of_exercise.nil? %> unanswered <% elsif @session.days_of_exercise > 3 %> low-risk <% else %> high-risk <% end %> risk-question">Days of exercise/week</a>
+                    <a id="exercise" href="/questionnaire/days_of_exercise" class="<% if @session.days_of_exercise.nil? %> unanswered <% elsif @session.days_of_exercise > 2 %> low-risk <% else %> high-risk <% end %> risk-question">Days of exercise/week</a>
                 </div>
             </div>
             <div class="risk environment">
@@ -56,9 +56,9 @@
             <div class="risk screening">
                 <h3 class="risk-name">Screening</h3>
                 <div class="risk-level">
-                    <a id="look-and-feel" href="/questionnaire/screening" class="<% if @session.look_and_feel.nil? %> unanswered <% elsif @session.look_and_feel == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Look and feel of your breasts</a>
-                    <a id="talked-to-physician" href="/questionnaire/screening" class="<% if @session.talked_to_physician.nil? %> unanswered <% elsif @session.talked_to_physician == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Talk to your physician</a>
-                    <a id="breast-exams" href="/questionnaire/screening" class="<% if @session.breast_exams.nil? %> unanswered <% elsif @session.breast_exams == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Annual breast exams</a>
+                    <a id="look-and-feel" href="/questionnaire/look_and_feel" class="<% if @session.look_and_feel.nil? %> unanswered <% elsif @session.look_and_feel == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Look and feel of your breasts</a>
+                    <a id="talked-to-physician" href="/questionnaire/talked_to_physician" class="<% if @session.talked_to_physician.nil? %> unanswered <% elsif @session.talked_to_physician == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Talk to your physician</a>
+                    <a id="breast-exams" href="/questionnaire/breast_exams" class="<% if @session.breast_exams.nil? %> unanswered <% elsif @session.breast_exams == "Yes" %> low-risk <% else %> high-risk <% end %> risk-question">Annual breast exams</a>
                 </div>
             </div>
             <ul id="key">

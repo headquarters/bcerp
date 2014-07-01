@@ -54,8 +54,12 @@ end
 
 SITE_TITLE = "Breast Health Awareness"
 
-# there are 15 questions (height+weight count as 1) , so each question is 6.666% of the whole thing (15 * 6.666 = 99.99, so round() when displaying)
-INCREMENT = 6.666
+=begin
+There are 17 questions. Height and weight count as 1 question (BMI).
+Each question is worth 100/17 or 5.88% of the whole questionnaire.
+Use round() when displaying.
+=end
+INCREMENT = 5.88
 
 QUESTIONS = [:age, :race_ethnicity, :first_child, :breast_feeding_months, :relatives, :bmi, :diet_habits, :fresh_or_frozen, :charred_meat, :alcohol,
    :days_of_exercise, :fragrances, :plastic_or_glass, :hormones, :look_and_feel, :talked_to_physician, :breast_exams]
@@ -76,7 +80,11 @@ get '/questionnaire' do
   if @session.progress > 0
     QUESTIONS.each do |q|
       if @session[q].nil?
-        redirect "/questionnaire/#{q}"
+        if [:look_and_feel, :talked_to_physician, :breast_exams].include?(q)
+          redirect "/questionnaire/screening"
+        else
+          redirect "/questionnaire/#{q}"
+        end
       end      
     end
   end
@@ -117,19 +125,23 @@ post '/questionnaire/:question' do
   # put the same high risk answer there???
   
   # 3 answers are POSTed for this "screening" question
-  if question_name == "screening"
-    @session.look_and_feel = params[:look_and_feel]
-    @session.talked_to_physician = params[:talked_to_physician]
-    @session.breast_exams = params[:breast_exams]
-  elsif question_name == "bmi"
+  #if question_name == "screening"
+  #  @session.look_and_feel = params[:look_and_feel]
+  #  @session.talked_to_physician = params[:talked_to_physician]
+  #  @session.breast_exams = params[:breast_exams]
+  #els
+  if question_name == "bmi"
+    
     height_in_inches = params[:height]
     weight_in_pounds = params[:weight]
     
-    bmi = calculate_bmi(weight_in_pounds, height_in_inches)
-    
     @session.height = height_in_inches
     @session.weight = weight_in_pounds
-    @session.bmi = bmi
+    
+    if height_in_inches.kind_of?(Integer) && weight_in_pounds.kind_of?(Integer)
+      bmi = calculate_bmi(weight_in_pounds, height_in_inches)  
+      @session.bmi = bmi
+    end
   else
     @session[question_name] = answer
   end

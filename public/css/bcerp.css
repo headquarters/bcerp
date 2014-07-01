@@ -204,6 +204,11 @@ fieldset legend {
     padding-bottom:0.25em;
 }
 
+#stories .story .small-3 {
+    padding:0 0 0 0.25em;
+    line-height: 9; /* for vertical aligning image */
+}
+
 #stories .story.row img {
     width:100%;
 }
@@ -457,9 +462,32 @@ article {
     margin:1em 0 0;
 }
 
+@media only screen and (min-width: 60em) {
+    /*#sticky-nav {
+        position:static;
+        left:auto;
+        bottom:auto;
+    }*/
+    #sticky-nav ul li {
+        height:11em;
+    }
+    #sticky-nav ul li a {
+        background:#fff;
+        max-width:20em;
+        padding:1em 1em 0.5em;
+        margin:0.5em auto;
+        border-radius:4px;
+    }
+    #sticky-nav ul li a p {
+        color:#666;
+        line-height:1;
+        font-size:0.9em;
+    }
+}
+
 
 @media only screen and (min-width: 40em) {
-    footer {
+    /*footer {
         text-align:center;
     }
     
@@ -473,5 +501,5 @@ article {
     
     #secondary-menu li:last-child {
         border-right:0;
-    }
+    }*/
 }

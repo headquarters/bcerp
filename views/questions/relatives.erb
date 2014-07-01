@@ -4,8 +4,8 @@
             <h2>Question 5</h2>
             <fieldset>
                 <legend>Have any of your first-degree relatives (mother, sister, daughter, father, brother, or son) ever had breast or ovarian cancer?</legend>
-                <label><input type="radio" name="relatives" id="relatives-1" data-risk="lower" value="No" <% if @session.relatives == "No" %> checked="checked" <% end %>> No</label>
                 <label><input type="radio" name="relatives" id="relatives-2" data-risk="higher" value="Yes" <% if @session.relatives == "Yes" %> checked="checked" <% end %>> Yes</label>
+                <label><input type="radio" name="relatives" id="relatives-1" data-risk="lower" value="No" <% if @session.relatives == "No" %> checked="checked" <% end %>> No</label>
             </fieldset> 
         </div>
     </div>
@@ -17,7 +17,7 @@
         
             <div id="risk-message" class="small-12 columns">
             <% if !@session.relatives.nil? %>
-                <% if @session.reltiaves == "No" %>
+                <% if @session.relatives == "No" %>
                     <p>
                         <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
                     </p>
