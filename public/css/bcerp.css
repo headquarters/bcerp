@@ -151,6 +151,11 @@ fieldset legend {
   color:#A3A1C6;
 }
 
+.higher-risk,
+.lower-risk {
+    font-weight:bold;
+}
+
 #age-message {
   padding:0.5em;
 }
@@ -167,6 +172,15 @@ fieldset legend {
 .question input,
 .question select {
     margin-bottom:0;
+}
+
+.question fieldset label {
+    margin-bottom: 0;
+    border: 1px solid #ccc;
+    padding: 0 0.5em;
+    line-height: 2;
+    background:#FAFAFA;
+    margin-bottom:0.2em;
 }
 
 .question h2 {
@@ -330,7 +344,7 @@ article {
 #sticky-nav ul li {
     width:50%;
     float:left;
-    background:#eee;
+    background:#3c3c3c;
     text-align:center;
     height:5em;
     font-size:1rem;
@@ -338,7 +352,7 @@ article {
 
 #sticky-nav ul li a {
     display:block;
-    color:#333;
+    color:#fff;
     font-weight:bold;
 }
 
@@ -457,57 +471,7 @@ article {
         top:-220px;
     }
 }
-/*
-.risk-infographic .risk .risk-question {
-  background: transparent url(/images/sprite.png) left top no-repeat; }
 
-
-/*
-.risk-infographic .health-history .risk-question {
-  background-position: -225px -75px; }
-
-.risk-infographic .health-history .risk-question.low-risk {
-  background-position: -225px 0px; }
-
-.risk-infographic .health-history .risk-question.high-risk {
-  background-position: -225px -150px; }
-
-.risk-infographic .diet .risk-question {
-  background-position: -300px -75px; }
-
-.risk-infographic .diet .risk-question.low-risk {
-  background-position: -300px 0px; }
-
-.risk-infographic .diet .risk-question.high-risk {
-  background-position: -300px -150px; }
-
-.risk-infographic .exercise .risk-question {
-  background-position: -150px -75px; }
-
-.risk-infographic .exercise .risk-question.low-risk {
-  background-position: -150px 0px; }
-
-.risk-infographic .exercise .risk-question.high-risk {
-  background-position: -150px -150px; }
-
-.risk-infographic .environment .risk-question {
-  background-position: 0 -75px; }
-
-.risk-infographic .environment .risk-question.low-risk {
-  background-position: 0 0px; }
-
-.risk-infographic .environment .risk-question.high-risk {
-  background-position: 0 -150px; }
-
-.risk-infographic .screening .risk-question {
-  background-position: -75px -75px; }
-
-.risk-infographic .screening .risk-question.low-risk {
-  background-position: -75px 0px; }
-
-.risk-infographic .screening .risk-question.high-risk {
-  background-position: -75px -150px; }
-*/
 #key {
     list-style:none;
     margin:0;
@@ -534,6 +498,7 @@ article {
     }
     #sticky-nav ul li a {
         background:#fff;
+        color:#333;
         max-width:20em;
         padding:1em 1em 0.5em;
         margin:0.5em auto;

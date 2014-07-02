@@ -32,8 +32,8 @@
             <% if !@session.age.nil? %>
                 <% if @session.age < 45 %>
                     <p>
-                        <!--<span class="lower-risk">Lower risk:</span>-->
-                        <img src="/images/icons/health-history-lower-risk.png" alt="Lower risk: " /><%= low_risk_message %>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                        <!--<img src="/images/icons/health-history-lower-risk.png" alt="Lower risk: " />-->
                     </p>
                 <% else %>
                     <p>
