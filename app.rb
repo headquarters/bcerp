@@ -66,8 +66,8 @@ QUESTIONS = [:age, :race_ethnicity, :first_child, :breast_feeding_months, :relat
    :days_of_exercise, :fragrances, :plastic_or_glass, :hormones, :look_and_feel, :talked_to_physician, :breast_exams]
 
 get '/' do
-  # "Session: #{@session.session_id}"
   @active = "home"
+  # TODO: remove alt_nav layout when done with user testing
   if params[:alt_nav]
     erb :home, :layout => :alt_nav_layout
   else
@@ -179,8 +179,6 @@ get '/stories/:view' do
   
   erb "stories/#{params[:view]}".to_sym
 end
-
-# TODO: need custom 404 and 500 views
 
 get '/about' do
   @active = "about"

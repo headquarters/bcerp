@@ -1,7 +1,7 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
-            <h2>Question 1</h2>
+            <h2>Health History &rsaquo; Question 1</h2>
             <label for="age">How old are you?</label>
         </div>
         <div class="large-4 columns end">
@@ -32,7 +32,8 @@
             <% if !@session.age.nil? %>
                 <% if @session.age < 45 %>
                     <p>
-                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                        <!--<span class="lower-risk">Lower risk:</span>-->
+                        <img src="/images/icons/health-history-lower-risk.png" alt="Lower risk: " /><%= low_risk_message %>
                     </p>
                 <% else %>
                     <p>
@@ -49,5 +50,7 @@
         }
     </script>    
     <input type="hidden" name="next_question" value="race_ethnicity" />
-    <%= erb :actions_and_progress, :locals => { :suppress_back_button => true, :progress => @progress, :next_step => "race_ethnicity" } %>
+    <div class="no-previous">
+        <%= erb :actions_and_progress, :locals => { :suppress_back_button => true, :progress => @progress, :next_step => "race_ethnicity" } %>
+    </div>
 </form>
