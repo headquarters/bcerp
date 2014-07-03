@@ -11,8 +11,8 @@
     </div>
     <div class="row">
         <%
-            high_risk_message = 'Additional chemical exposures that are being investigated for links to breast cancer risk are Bisphenol A (BPA) and phthalates (pronounced tha-lates). BPA and phthalates are used in plastic containers and some food packaging. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
-            low_risk_message = 'Good! Additional chemical exposures that are being investigated for links to breast cancer risk are Bisphenol A (BPA) and phthalates (pronounced tha-lates). BPA and phthalates are used in plastic containers and some food packaging. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
+            high_risk_message = 'Additional chemical exposures that are being investigated for links to breast cancer risk are Bisphenol A (BPA) and phthalates (pronounced tha-lates). BPA and phthalates are used in plastic containers and some food packaging. <a href="/resources/more_info">More information &rsaquo;</a>'
+            low_risk_message = 'Good! Additional chemical exposures that are being investigated for links to breast cancer risk are Bisphenol A (BPA) and phthalates (pronounced tha-lates). BPA and phthalates are used in plastic containers and some food packaging. <a href="/resources/more_info">More information &rsaquo;</a>'
         %>
         
             <div id="risk-message" class="small-12 columns">
@@ -31,8 +31,8 @@
     </div>
     <script>
         var riskMessage = {
-            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
-            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>',
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>'
         }
     </script>        
     <input type="hidden" name="next_question" value="hormones" />

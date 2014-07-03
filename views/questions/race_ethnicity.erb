@@ -40,7 +40,7 @@
     </div>
     <div class="row">
         <%
-            high_risk_message = 'All races and ethnicities are susceptible to breast cancer, but some forms are more common among African Americans. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
+            high_risk_message = 'All races and ethnicities are susceptible to breast cancer, but some forms are more common among African Americans. <a href="/resources/more_info">More information &rsaquo;</a>'
             low_risk_message = ''
         %>
         
@@ -56,8 +56,8 @@
     </div>
     <script>
         var riskMessage = {
-            "higherRisk": "<p><%= high_risk_message %></p>",
-            "lowerRisk": ""
+            "higherRisk": '<p><%= high_risk_message %></p>',
+            "lowerRisk": ''
         }
     </script>    
     <input type="hidden" name="next_question" value="first_child" />

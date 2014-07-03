@@ -9,7 +9,8 @@
         <div class="large-6 columns">
             <select id="height" name="height" class="custom-messaging">
                 <option value="">Height</option>
-                <% for feet in 3..7 %>
+                <option value="3">Less than 4&#039;</option>
+                <% for feet in 4..6 %>
                   <% for inches in 0..11 %>
                     <% value = feet * 12 + inches %>
                     <% if(inches == 0) %>
@@ -18,7 +19,8 @@
                       <option value="<%=value%>" <% if @session.height == value %> selected="selected" <% end %>><%="#{feet}&#039; #{inches}&#34;"%></option>
                     <% end %>
                   <% end %>
-                <% end %>                
+                <% end %>
+                <option value="7">More than 6&#039;</option>
             </select>
         </div>
     </div>
@@ -29,18 +31,18 @@
         <div class="large-6 columns">
             <select id="weight" name="weight" class="custom-messaging">
                 <option value="">Weight</option>
-                <!--<option value="">Less than 90</option>-->
+                <option value="89">Less than 90</option>
                 <% for weight in 90..300 %>
                   <option value="<%=weight%>" <% if @session.weight == weight %> selected="selected" <% end %>><%=weight%></option>
                 <% end %>
-                <!--<option value="300+">300+</option>-->
+                <option value="301">More than 300</option>
             </select>
         </div>        
     </div>
     <div class="row">
         <%
-            high_risk_message = 'A BMI over 25 is overweight and over 29.9 is obese. Obesity has been linked to increased risk for breast cancer. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
-            low_risk_message = 'Good! A BMI between 18.5 and 24.9 is considered normal. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
+            high_risk_message = 'A BMI over 25 is overweight and over 29.9 is obese. Obesity has been linked to increased risk for breast cancer. <a href="/resources/more_info">More information &rsaquo;</a>'
+            low_risk_message = 'Good! A BMI between 18.5 and 24.9 is considered normal. <a href="/resources/more_info">More information &rsaquo;</a>'
         %>
         
             <div id="risk-message" class="small-12 columns">
@@ -59,8 +61,8 @@
     </div>
     <script>
         var riskMessage = {
-            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
-            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>',
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>'
         }
     </script>     
     <input type="hidden" name="next_question" value="diet_habits" />

@@ -12,8 +12,8 @@
     </div>
     <div class="row">
         <%
-            high_risk_message = 'Regardless of your height and weight, eating a diet high in fruits and vegetables (5 servings of each per day) has been shown to be protective against developing breast cancer. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
-            low_risk_message = 'Good! Eating a diet high in fruits and vegetables (5 servings of each per day) has been shown to be protective against developing breast cancer. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
+            high_risk_message = 'Regardless of your height and weight, eating a diet high in fruits and vegetables (5 servings of each per day) has been shown to be protective against developing breast cancer. <a href="/resources/more_info">More information &rsaquo;</a>'
+            low_risk_message = 'Good! Eating a diet high in fruits and vegetables (5 servings of each per day) has been shown to be protective against developing breast cancer. <a href="/resources/more_info">More information &rsaquo;</a>'
         %>
         
             <div id="risk-message" class="small-12 columns">
@@ -32,8 +32,8 @@
     </div>
     <script>
         var riskMessage = {
-            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
-            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>',
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>'
         }
     </script>    
     <input type="hidden" name="next_question" value="fresh_or_frozen" />

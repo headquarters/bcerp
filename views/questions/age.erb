@@ -1,7 +1,7 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
-            <h2>Health History &rsaquo; Question 1</h2>
+            <h2><img src="/images/icons/health-history-lower-risk.png" alt="" width="32" /> Health History &rsaquo; Question 1</h2>
             <label for="age">How old are you?</label>
         </div>
         <div class="large-4 columns end">
@@ -24,8 +24,8 @@
     </div><!-- .question -->
     <div class="row">
         <%
-            high_risk_message = 'Women over 45 are at a higher risk for breast cancer. The median age for breast cancer is 62. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
-            low_risk_message = 'Although women over 45 are at a higher risk for breast cancer, there is still a risk for women of all ages. The median age for breast cancer is 62. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
+            high_risk_message = 'Women over 45 are at a higher risk for breast cancer. The median age for breast cancer is 62. <a href="/resources/more_info">More information &rsaquo;</a>'
+            low_risk_message = 'Although women over 45 are at a higher risk for breast cancer, there is still a risk for women of all ages. The median age for breast cancer is 62. <a href="/resources/more_info">More information &rsaquo;</a>'
         %>
         
             <div id="risk-message" class="small-12 columns">
@@ -45,8 +45,8 @@
     </div>
     <script>
         var riskMessage = {
-            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
-            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>',
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>'
         }
     </script>    
     <input type="hidden" name="next_question" value="race_ethnicity" />

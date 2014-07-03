@@ -46,10 +46,10 @@ footer {
     margin-bottom:0.25rem;
 }
 
-#risk-message p {
+/*#risk-message p {
     margin:0.5em 0;
     padding:0.25em 0.5em;
-}
+}*/
 
 #bmi-questions .question:first-child {
     margin-bottom:0.5em;

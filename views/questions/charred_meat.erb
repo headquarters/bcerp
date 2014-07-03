@@ -11,8 +11,8 @@
     </div>
     <div class="row">
         <%
-            high_risk_message = 'Eating char grilled food exposes you to dangerous chemicals called PAHs (polycyclic aromatic hydrocarbons) that have been linked to increased risk for breast cancer. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
-            low_risk_message = 'Good! Char grilled food contains dangerous chemicals called PAHs (polycyclic aromatic hydrocarbons) that have been linked to increased risk for breast cancer. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
+            high_risk_message = 'Eating char grilled food exposes you to dangerous chemicals called PAHs (polycyclic aromatic hydrocarbons) that have been linked to increased risk for breast cancer. <a href="/resources/more_info">More information &rsaquo;</a>'
+            low_risk_message = 'Good! Char grilled food contains dangerous chemicals called PAHs (polycyclic aromatic hydrocarbons) that have been linked to increased risk for breast cancer. <a href="/resources/more_info">More information &rsaquo;</a>'
         %>
         
             <div id="risk-message" class="small-12 columns">
@@ -31,8 +31,8 @@
     </div>
     <script>
         var riskMessage = {
-            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
-            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>',
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>'
         }
     </script>   
     <input type="hidden" name="next_question" value="alcohol" />

@@ -12,8 +12,8 @@
     </div>
     <div class="row">
         <%
-            high_risk_message = 'Regardless of your height and weight, regular exercise for 30 minutes or more, most days of the week, has been shown to reduce the risk of breast cancer. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
-            low_risk_message = 'Good! Regular exercise for 30 minutes or more, most days of the week, has been shown to reduce the risk of breast cancer. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
+            high_risk_message = 'Regardless of your height and weight, regular exercise for 30 minutes or more, most days of the week, has been shown to reduce the risk of breast cancer. <a href="/resources/more_info">More information &rsaquo;</a>'
+            low_risk_message = 'Good! Regular exercise for 30 minutes or more, most days of the week, has been shown to reduce the risk of breast cancer. <a href="/resources/more_info">More information &rsaquo;</a>'
         %>
         
             <div id="risk-message" class="small-12 columns">
@@ -32,8 +32,8 @@
     </div>
     <script>
         var riskMessage = {
-            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>",
-            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>"
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>',
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>'
         }
     </script>    
     <input type="hidden" name="next_question" value="fragrances" />

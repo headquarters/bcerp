@@ -11,8 +11,8 @@
     </div>
     <div class="row">
         <%
-            low_risk_message = 'Good! Knowing the normal look and feel of your breasts makes it easier to spot possible abnormalities. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
-            high_risk_message = 'Know the normal look and feel of your breasts so that it is easier to spot possible abnormalities. <a href=\"/resources/more_info\">More information &rsaquo;</a>'
+            low_risk_message = 'Good! Knowing the normal look and feel of your breasts makes it easier to spot possible abnormalities. <a href="/resources/more_info">More information &rsaquo;</a>'
+            high_risk_message = 'Know the normal look and feel of your breasts so that it is easier to spot possible abnormalities. <a href="/resources/more_info">More information &rsaquo;</a>'
         %>
         
             <div id="risk-message" class="small-12 columns">
@@ -30,8 +30,8 @@
     </div>
     <script>
         var riskMessage = {
-            "lowerRisk": "<p><span class=\"lower-risk\">Lower risk:</span> <%= low_risk_message %></p>",
-            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>"                
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>',
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>'
         }
     </script>            
     <input type="hidden" name="next_question" value="talked_to_physician" />
