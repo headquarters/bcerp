@@ -113,12 +113,12 @@ button.secondary,
 }
 
 .actions .button-group {
-    width:17.875em;
+    width:18em;
     margin:0 auto;
 }
 
 .no-previous .actions .button-group {
-    width:12.3125em;
+    width:12.5em;
 }
 
 #results .share-buttons a img {
@@ -181,6 +181,11 @@ fieldset legend {
     line-height: 2;
     background:#FAFAFA;
     margin-bottom:0.2em;
+}
+
+.question fieldset label:hover {
+    background-color: #F3F3F3;
+    border-color: #999;
 }
 
 .question h2 {
