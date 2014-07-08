@@ -38,6 +38,7 @@ class RiskLevel
   property :risk_level_name, String
   property :risk_level_identifier, String
   
+  has 1, :risk_message  
   has n, :question_option
 end
 
@@ -46,8 +47,10 @@ class RiskMessage
   
   property :id, Serial
   property :message, Text
+  property :group_id, Integer
   
-  has n, :question_option
+  belongs_to :risk_level
+  #has n, :question_option
 end
 
 class OptionChoice
@@ -55,6 +58,7 @@ class OptionChoice
   
   property :id, Serial
   property :option_choice_name, String
+  property :option_choice_value, Float, :required => false
   
   has n, :question_option
 end
@@ -87,6 +91,7 @@ class Answer
   include DataMapper::Resource
   
   property :id, Serial
+  property :group_id, Integer
   
   belongs_to :session
   belongs_to :question_option

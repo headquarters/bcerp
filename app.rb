@@ -18,7 +18,7 @@ DataMapper.setup(:default, 'sqlite:bcerp.db')
 
 require './models'
 
-rebuild_tables = true
+rebuild_tables = false
 
 if rebuild_tables
   DataMapper.finalize.auto_migrate! # auto_migrate clears all the data from the database
@@ -40,6 +40,16 @@ Each question is worth 100/17 or 5.88% of the whole questionnaire.
 Use round() when displaying.
 =end
 INCREMENT = 5.88
+# Group ID is set manually in the schema.rb
+HEIGHT_WEIGHT_GROUP_ID = 6
+BMI_GROUP_ID = 100
+LAST_GROUP_ID = 17
+# These IDs are set by the database engine, so these *could* change, but hopefully won't
+HEIGHT_QUESTION_ID = 6
+WEIGHT_QUESTION_ID = 7
+BMI_QUESTION_ID = 19
+HIGHER_RISK_LEVEL_ID = 1
+LOWER_RISK_LEVEL_ID = 2
 
 get '/' do
   @active = "home"
@@ -80,6 +90,16 @@ get '/questionnaire/:group_id' do
   # all questions in a group share the same category
   @category_name = @questions[0].category.category_name
   
+  if group_id != HEIGHT_WEIGHT_GROUP_ID.to_s
+    @risk_messages = RiskMessage.all(:group_id => group_id)
+  else
+    # risk messages for height and weight must come from BMI
+    @risk_messages = RiskMessage.all(:group_id => BMI_GROUP_ID)
+    puts ">>>>>> #{@risk_messages}"
+  end
+  
+  #TODO: fetch this BMI answer on the get method
+  
   @question_options = {}
   
   @answers = {}
@@ -98,7 +118,7 @@ end
 post '/questionnaire/:group_id' do
   group_id = params[:group_id]
   
-  next_question_id = group_id.to_i + 1;
+  next_group_id = group_id.to_i + 1;
 
   answers = params[:answers]
   
@@ -108,8 +128,38 @@ post '/questionnaire/:group_id' do
   # put the same high risk answer there???
 
   if !answers.nil?
+    if group_id == HEIGHT_WEIGHT_GROUP_ID.to_s
+      height_question_option_id = answers[HEIGHT_QUESTION_ID.to_s]
+      weight_question_option_id = answers[WEIGHT_QUESTION_ID.to_s]
+      
+      height_question_option = QuestionOption.get(height_question_option_id)
+      weight_question_option = QuestionOption.get(weight_question_option_id)
+      
+      height_in_inches = height_question_option.option_choice.option_choice_value
+      weight_in_pounds = weight_question_option.option_choice.option_choice_value
+  
+      bmi = calculate_bmi(weight_in_pounds, height_in_inches)
+      bmi_question_options = QuestionOption.all(:question_id => BMI_QUESTION_ID) 
+      bmi_option_choice = bmi_question_options.option_choices.first(:conditions => ['option_choice_value > ?', bmi])
+      
+      #puts ">>>> #{bmi_question_options}, #{bmi_option_choice}"
+      
+      # save the BMI "question" answer, which isn't visible to the user
+      # height and weight answers are saved independently below where the other answers are saved
+      answer = Answer.first_or_new(:session_id => @session.id, :question_id => BMI_QUESTION_ID)
+      answer.group_id = group_id
+      answer.question_option = QuestionOption.first(:option_choice_id => bmi_option_choice.id, :question_id => BMI_QUESTION_ID)
+      answer.save
+      
+      # save the BMI value to the session for easier retrieval later
+      @session.bmi = bmi
+      @session.save
+    end
+    
+    
     answers.each do |question_id, question_option_id|
       answer = Answer.first_or_new(:session_id => @session.id, :question_id => question_id)
+      answer.group_id = group_id
       answer.question_option = QuestionOption.get(question_option_id)
       answer.save
     end    
@@ -125,8 +175,8 @@ post '/questionnaire/:group_id' do
     content_type :json
     { :status => did_save, :progress => progress.round() }.to_json
   else
-    if next_question_id < 18
-      redirect "/questionnaire/#{next_question_id}"
+    if next_group_id <= LAST_GROUP_ID
+      redirect "/questionnaire/#{next_group_id}"
     else
       redirect "/results"
     end

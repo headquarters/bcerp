@@ -1,7 +1,6 @@
 <form method="post" action="/questionnaire/<%= @group_id %>">
   <div class="question row">
     <div class="large-12 columns">
-        <!-- TODO: loop over questions here to show multiple questions in the partial -->
         <h2><%= "#{@category_name} &rsaquo; Question #{@group_id}" %></h2>
         <% for q in @questions %>
           <%= erb :question_partial, :locals => { :question => q, :question_options => @question_options[q.id] } %>
@@ -23,6 +22,39 @@
       </div>    
   </div>
 </form>
+<div class="row">
+  <div id="risk-message" class="small-12 columns">
+<%
+  # @answers is an array with group_id as key
+  # this supports having multiple questions and answers on the same page
+%>
+    <% if !@answers[@group_id].nil? %>
+      <p>
+        <span class="<%= @answers[@group_id].question_option.risk_level.risk_level_identifier %>"><%= @answers[@group_id].question_option.risk_level.risk_level_name %>:</span>
+        <%= @answers[@group_id].question_option.risk_message.message %>
+      </p>
+    <% end %>
+<%
+  # height and weight do not have individual risk messages
+  # show BMI risk messaging for height and weight group
+%>
+    <% if @group_id == HEIGHT_WEIGHT_GROUP_ID && !@session.bmi.nil? %>
+        <% if @session.bmi < 25.0 %>
+            <% risk_message = @risk_messages.first(:risk_level_id => LOWER_RISK_LEVEL_ID) %>
+            <p>
+                <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
+                <%= risk_message.message %>
+            </p>
+        <% else %>
+            <% risk_message = @risk_messages.first(:risk_level_id => HIGHER_RISK_LEVEL_ID) %>
+            <p>
+                <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
+                <%= risk_message.message %>
+            </p>
+        <% end %>
+    <% end %>
+  </div>
+</div>
 <div id="progress-bar" class="row">
     <div class="small-9 medium-10 large-11 columns">
         <div class="progress round">
@@ -31,3 +63,10 @@
     </div>
     <div id="percent-complete" class="progress-label small-3 medium-2 large-1 columns"><%= @progress %>% done</div>
 </div>
+<script>
+  var riskMessages = {
+    <% for risk_message in @risk_messages %>
+      "<%= risk_message.risk_level.risk_level_identifier %>": "<%= risk_message.message %>"<% if risk_message != @risk_messages.last %>,<% end %>      
+    <% end %>
+  };
+</script>
