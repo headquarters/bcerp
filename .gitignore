@@ -1,3 +1,7 @@
 .komodoproject
 assets
 *.sass*
+bcerp.db
+bcerp.db
+
+run.sh

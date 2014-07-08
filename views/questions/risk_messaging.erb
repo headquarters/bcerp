@@ -1,0 +1,22 @@
+    <div class="row">
+      <div id="risk-message" class="small-12 columns">
+      <% if !@session.age.nil? %>
+          <% if @session.age < 45 %>
+              <p>
+                  <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                  <!--<img src="/images/icons/health-history-lower-risk.png" alt="Lower risk: " />-->
+              </p>
+          <% else %>
+              <p>
+                  <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+              </p>
+          <% end %>
+      <% end %>
+      </div>
+    </div>
+    <script>
+        var riskMessage = {
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>',
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>'
+        }
+    </script>

@@ -1,0 +1,39 @@
+<form action="" method="post">
+    <div class="question row">
+        <div class="large-12 columns">
+            <h2>Question 15</h2>
+            <fieldset>
+                <legend>Do you know the normal look and feel of your breasts?</legend>
+                <label><input type="radio" name="look_and_feel" data-risk="lower" value="Yes" <% if @session.look_and_feel == "Yes" %> checked="checked" <% end %>> Yes</label>
+                <label><input type="radio" name="look_and_feel" data-risk="higher" value="No" <% if @session.look_and_feel == "No" %> checked="checked" <% end %>> No</label>
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        <%
+            low_risk_message = 'Good! Knowing the normal look and feel of your breasts makes it easier to spot possible abnormalities. <a href="/resources/more_info">More information &rsaquo;</a>'
+            high_risk_message = 'Know the normal look and feel of your breasts so that it is easier to spot possible abnormalities. <a href="/resources/more_info">More information &rsaquo;</a>'
+        %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.look_and_feel.nil? %>
+                <% if @session.look_and_feel == "Yes" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
+            <% end %>
+    </div>
+    <script>
+        var riskMessage = {
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>',
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>'
+        }
+    </script>            
+    <input type="hidden" name="next_question" value="talked_to_physician" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "talked_to_physician", :previous_step => "hormones" } %>
+</form>

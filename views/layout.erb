@@ -16,20 +16,28 @@
 		<header>
 		  <nav class="top-bar" data-topbar>
 			<ul class="title-area">
-			  <li class="name">
-				<h1><a href="/"><img id="logo" src="/images/bcerp-logo.png" alt="BCERP Logo" /> Breast Health Guide</a></h1>
-			  </li>
-			  <li class="toggle-topbar menu-icon"><a href="#menu"><span>Menu</span></a></li>
+				<li class="name">
+				  <h1><a href="/"><img id="logo" src="/images/bcerp-logo.png" alt="BCERP Logo" /> Breast Health Guide</a></h1>
+				</li>
+			  <!--<li class="toggle-topbar menu-icon"><a href="#menu"><span>Menu</span></a></li>-->
 			</ul>
-			
+<% if false %>			
 			<section class="top-bar-section">
 			  <ul id="menu" class="right">
-				<li <% if @active == "home" %>class="active"<% end %>><a href="/">Home</a></li>
-				<li <% if @active == "assessment" %>class="active"<% end %>><a href="/assessment">Find Out Your Risk</a></li>
-				<li <% if @active == "resources" %>class="active"<% end %>><a href="/resources">Resources</a></li>
-				<li <% if @active == "about" %>class="active"<% end %>><a href="/about">About</a></li>
+				<!--<li <% if @active == "home" %>class="active"<% end %>><a href="/">Home</a></li>-->
+				<li <% if @active == "questionnaire" %>class="active"<% end %>>
+					<a href="/questionnaire">
+						<% if @session.progress > 0 %>
+							Continue Questionnaire
+						<% else %>
+							Find Out Your Risk
+						<% end %>
+					</a>
+				</li>
+				<!--<li <% if @active == "resources" %>class="active"<% end %>><a href="/resources">Resources</a></li>-->
 			  </ul>
 			</section>
+<% end %>
 		  </nav>
 		</header>
 		<article id="article">
@@ -43,26 +51,30 @@
 				<li <% if @active == "home" %>class="active"<% end %>><a href="/">Home</a></li>
 				<li <% if @active == "assessment" %>class="active"<% end %>><a href="/assessment">Find Out Your Risk</a></li>
 				<li <% if @active == "resources" %>class="active"<% end %>><a href="/resources">Resources</a></li>
-				<li <% if @active == "about" %>class="active"<% end %>><a href="/about">About</a></li>
 			</ul>
 			<div class="row">
 			  &copy; The University of North Carolina at Chapel Hill. All Rights Reserved.
 			</div>
 		</footer>
 <% end %>		
-
 		<nav id="sticky-nav">
 			<ul>
 				<li>
 					<a href="/resources">
 						<img src="/images/resources.png" alt="Play">
 						Resources
+						<p class="hide-for-small-only">
+							Find more information about how to lower your breast cancer risk.
+						</p>
 					</a>					
 				</li>
 				<li>
 					<a href="/stories">
 						<img src="/images/videos.png" alt="Play">
 						Stories
+						<p class="hide-for-small-only">
+							Watch videos of survivors telling their stories about living through breast cancer.
+						</p>
 					</a>
 				</li>
 			</ul>			

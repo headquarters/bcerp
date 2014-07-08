@@ -1,18 +1,21 @@
 <div id="home">
     <div class="row">
-        <div class="large-12 columns">
+        <div class="text-center large-6 large-push-3 medium-6 medium-push-3 columns">
             <h1>Do you know <em>your</em> breast health?</h1>
             <p>
-                Breast cancer: It doesn't have to run in your family. You probably think it will never happen to you.
-                But there's still a chance it will. 
+                Breast cancer: It doesn't have to run in your family. And though you probably think it will never happen to you,
+                you're still at risk.
             </p>
-            <div class="text-center">
+            <div>
                 <% if @session.progress > 0 %>
-                    <a href="/assessment" class="button">Continue Survey</a>    
+                    <a href="/questionnaire" class="button">Continue Questionnaire</a>    
                 <% else %>
-                    <a href="/assessment" class="button">Find Our Your Risk</a>    
+                    <a href="/questionnaire" class="button">Find Our Your Risk</a>    
                 <% end %>                
-            </div>
+            </div>            
+        </div>
+        <div class="large-8 large-pull-2 medium-8 medium-pull-2 columns">
+
             <div class="video-placeholder">            
                 <img src="/images/teaser-video-still.jpg" alt="Teaser video">
             </div>

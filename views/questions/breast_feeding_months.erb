@@ -1,19 +1,41 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
-            <div class="panel">
-                <fieldset>
-                    <legend>How many months (total) did you breast feed across all your children?</legend>
-                    <label><input type="radio" name="breast_feeding_months" id="breast-feed-months-1" value="No children" <% if @session.breast_feeding_months == "No children" %> checked="checked" <% end %>> I have no children</label>
-                    <label><input type="radio" name="breast_feeding_months" id="breast-feed-months-2" value="0-11 months" <% if @session.breast_feeding_months == "0-11 months" %> checked="checked" <% end %>> 0-11 months</label>
-                    <label><input type="radio" name="breast_feeding_months" id="breast-feed-months-3" value="12+ months" <% if @session.breast_feeding_months == "12+ months" %> checked="checked" <% end %>> 12+ months</label>
-                </fieldset>                
-                <div class="row">
-                  <div id="risk-message" class="small-12 columns"></div>
-                </div>
-            </div>
+            <h2>Question 4 <!-- might not be question 4 if we decide to skip this one --></h2>
+            <fieldset>
+                <legend>How many months (total) did you breast feed across all your children?</legend>
+                <label><input type="radio" name="breast_feeding_months" data-risk="higher" value="No children" <% if @session.breast_feeding_months == "No children" %> checked="checked" <% end %>> I have no children</label>
+                <label><input type="radio" name="breast_feeding_months" data-risk="higher" value="0-11 months" <% if @session.breast_feeding_months == "0-11 months" %> checked="checked" <% end %>> 0-11 months</label>
+                <label><input type="radio" name="breast_feeding_months" data-risk="lower" value="12+ months" <% if @session.breast_feeding_months == "12+ months" %> checked="checked" <% end %>> 12+ months</label>
+            </fieldset>  
         </div>
     </div>
+    <div class="row">
+        <%
+            high_risk_message = 'Most risks for breast cancer are associated with your lifetime exposure to estrogen. Breast feeding less than 12 months across all your children may increase your lifetime exposure. <a href="/resources/more_info">More information &rsaquo;</a>'
+            low_risk_message = 'Good! Most risks for breast cancer are associated with your lifetime exposure to estrogen. Breast feeding more than 12 months across all your children decreases your lifetime exposure. <a href="/resources/more_info">More information &rsaquo;</a>'
+        %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.breast_feeding_months.nil? %>
+                <% if @session.breast_feeding_months == "12+ months" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
+            <% end %>
+            </div>
+    </div>
+    <script>
+        var riskMessage = {
+            "higherRisk": '<p><span class="higher-risk">Higher risk:</span> <%= high_risk_message %></p>',
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>'
+        }
+    </script>    
     <input type="hidden" name="next_question" value="relatives" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "relatives", :previous_step => "first_child" } %>
 </form>

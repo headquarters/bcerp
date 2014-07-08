@@ -1,0 +1,41 @@
+<form action="" method="post">
+    <div class="question row">
+        <div class="large-12 columns">
+            <h2>Question 17</h2>
+            <fieldset>
+                <legend>Have you begun getting clinical breast exams and/or mammograms?</legend>
+                <label><input type="radio" name="breast_exams" data-risk="lower" value="Yes" <% if @session.breast_exams == "Yes" %> checked="checked" <% end %>> Yes</label>
+                <label><input type="radio" name="breast_exams" data-risk="higher" value="No" <% if @session.breast_exams == "No" %> checked="checked" <% end %>> No</label>
+            </fieldset>
+        </div>
+    </div>
+    <div class="row">
+        <%  
+            low_risk_message = 'Annual breast exams by a physician and mammograms help detect breast cancer early, giving you a better chance for survival. US Preventive Services Task Force recommends that women ages 50-74 get mammograms every two years. <a href="/resources/more_info">More information &rsaquo;</a>'
+            high_risk_message = 'Annual breast exams by a physician and mammograms help detect breast cancer early, giving you a better chance for survival. US Preventive Services Task Force recommends that women ages 50-74 get mammograms every two years. <a href="/resources/more_info">More information &rsaquo;</a>'
+        %>
+        
+            <div id="risk-message" class="small-12 columns">
+            
+            <% if !@session.breast_exams.nil? %>
+                <% if @session.breast_exams == "Yes" %>
+                    <p>
+                        <span class="lower-risk">Lower risk:</span> <%= low_risk_message %>
+                    </p>
+                <% else %>
+                    <p>
+                        <span class="higher-risk">Higher risk:</span> <%= high_risk_message %>
+                    </p>
+                <% end %>
+            <% end %>
+            </div>
+    </div>
+    <script>
+        var riskMessage = {
+            "lowerRisk": '<p><span class="lower-risk">Lower risk:</span> <%= low_risk_message %></p>',
+            "higherRisk": "<p><span class=\"higher-risk\">Higher risk:</span> <%= high_risk_message %></p>"                
+        }
+    </script>            
+    <input type="hidden" name="next_question" value="results" />
+    <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "results", :previous_step => "talked_to_physician" } %>
+</form>

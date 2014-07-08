@@ -1,16 +1,18 @@
 <div id="intro" class="row">
     <div class="large-12 columns">
+        <h2>Starting the Questionnaire</h2>
         <div class="callout panel">
             <p>
-            We're going to ask you a few questions to determine your level of risk. For each question, you can answer it, skip it, or go back to the previous question.
-            View your results any time by clicking the "View results so far" link.
+                We're going to ask you a few questions to determine your level of risk. For each question, you can answer it, skip it, or go back to the previous question. <br />
+                View your results any time by clicking or tapping the "Results" button.
             </p>
-            
-            <% if @session.progress > 0 %>
-                <a href="/assessment/age" class="button">Continue Survey</a>      
-            <% else %>
-                <a href="/assessment/age" class="button">Start the Survey</a>    
-            <% end %>   
+            <a href="/questionnaire/1" class="button">
+                <% if @session.progress > 0 %>
+                    Continue Questionnaire
+                <% else %>
+                    Start the Questionnaire
+                <% end %>
+            </a>      
         </div>
     </div>
 </div>

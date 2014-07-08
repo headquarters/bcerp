@@ -1,47 +1,65 @@
 <form action="" method="post">
     <div class="question row">
         <div class="large-12 columns">
-            <div class="panel">
-                <fieldset id="race-ethnicity">
-                    <legend>With which race/ethnicity do you identify?</legend>
-                    <label for="race-1">
-                      <input type="radio" name="race_ethnicity" id="race-1" value="Black" <% if @session.race_ethnicity == "Black" %> checked="checked" <% end %>>
-                      Black/African American
-                    </label>
-                    
-                    <label for="race-2">
-                      <input type="radio" name="race_ethnicity" id="race-2" value="White" <% if @session.race_ethnicity == "White" %> checked="checked" <% end %>>
-                      White
-                    </label>
-                    
-                    <label for="race-3">
-                      <input type="radio" name="race_ethnicity" id="race-3" value="Hispanic/Latin Amerian" <% if @session.race_ethnicity == "Hispanic/Latin Amerian" %> checked="checked" <% end %>>
-                      Hispanic/Latin American
-                    </label>
-                    
-                    
-                    <label for="race-4">
-                      <input type="radio" name="race_ethnicity" id="race-4" value="American Indian/Pacific Islander" <% if @session.race_ethnicity == "American Indian/Pacific Islander" %> checked="checked" <% end %>>
-                      American Indian/Pacific Islander
-                    </label>
-                    
-                    <label for="race-5">
-                      <input type="radio" name="race_ethnicity" id="race-5" value="Asian" <% if @session.race_ethnicity == "Asian" %> checked="checked" <% end %>>
-                      Asian
-                    </label>
-                    
-                    
-                    <label for="race-6">
-                      <input type="radio" name="race_ethnicity" id="race-6" value="Other" <% if @session.race_ethnicity == "Other" %> checked="checked" <% end %>>
-                      Other
-                    </label>
-                </fieldset>
-                <div class="row">
-                    <div id="risk-message" class="small-12 columns"></div>
-                </div>
-            </div>
+            <h2>Question 2</h2>
+            <fieldset id="race-ethnicity">
+                <legend>With which race/ethnicity do you identify?</legend>
+                <label for="race-1">
+                  <input type="radio" name="race_ethnicity" id="race-1" value="Black" data-risk="higher" <% if @session.race_ethnicity == "Black" %> checked="checked" <% end %>>
+                  Black/African American
+                </label>
+                
+                <label for="race-2">
+                  <input type="radio" name="race_ethnicity" id="race-2" value="White" <% if @session.race_ethnicity == "White" %> checked="checked" <% end %>>
+                  White
+                </label>
+                
+                <label for="race-3">
+                  <input type="radio" name="race_ethnicity" id="race-3" value="Hispanic/Latin Amerian" <% if @session.race_ethnicity == "Hispanic/Latin Amerian" %> checked="checked" <% end %>>
+                  Hispanic/Latin American
+                </label>
+                
+                
+                <label for="race-4">
+                  <input type="radio" name="race_ethnicity" id="race-4" value="American Indian/Pacific Islander" <% if @session.race_ethnicity == "American Indian/Pacific Islander" %> checked="checked" <% end %>>
+                  American Indian/Pacific Islander
+                </label>
+                
+                <label for="race-5">
+                  <input type="radio" name="race_ethnicity" id="race-5" value="Asian" <% if @session.race_ethnicity == "Asian" %> checked="checked" <% end %>>
+                  Asian
+                </label>
+                
+                
+                <label for="race-6">
+                  <input type="radio" name="race_ethnicity" id="race-6" value="Other" <% if @session.race_ethnicity == "Other" %> checked="checked" <% end %>>
+                  Other
+                </label>
+            </fieldset>
         </div>
     </div>
+    <div class="row">
+        <%
+            high_risk_message = 'All races and ethnicities are susceptible to breast cancer, but some forms are more common among African Americans. <a href="/resources/more_info">More information &rsaquo;</a>'
+            low_risk_message = ''
+        %>
+        
+            <div id="risk-message" class="small-12 columns">
+            <% if !@session.race_ethnicity.nil? %>
+                <% if @session.race_ethnicity == "Black" %>
+                    <p>
+                        <%= high_risk_message %>
+                    </p>
+                <% end %>
+            <% end %>
+            </div>
+    </div>
+    <script>
+        var riskMessage = {
+            "higherRisk": '<p><%= high_risk_message %></p>',
+            "lowerRisk": ''
+        }
+    </script>    
     <input type="hidden" name="next_question" value="first_child" />
     <%= erb :actions_and_progress, :locals => { :suppress_back_button => false, :progress => @progress, :next_step => "first_child", :previous_step => "age" } %>
 </form>

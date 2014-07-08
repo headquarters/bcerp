@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="large-12 columns">
+    <form method="post" action="/question/<%= @question.id %>">
+    <%= @question.category.category_name %><br />
+    <label for="question<%= @question.id %>"><%= @question.question_name %></label>
+    <% if @question.input_type.input_type_name == "select" %>
+      <select id="question<%= @question.id %>" name="answer">
+        <% for question_option in @question_options %>
+          <option value="<%= question_option.id %>" <% if !@answer.nil? && question_option.id == @answer.question_option.option_choice_id %>selected="selected"<% end %> data-risk="<%= question_option.risk_level.risk_level_identifier %>">
+            <%= question_option.option_choice.option_choice_name %>
+            </option>
+        <% end %>                
+      </select>
+    <% elsif @question.input_type.input_type_name == "radio" %>
+      <% for question_option in @question_options %>
+        <label><input type="radio" name="answer" value="<%= question_option.id %>" /> <%=question_option.option_choice.option_choice_name %></label>
+      <% end %>         
+    <% else %>
+      Not implemented yet.
+    <% end %>
+    <button type="submit">Go!</button>
+    </form>
+  </div>
+</div>
+
+
+
