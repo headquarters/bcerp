@@ -22,11 +22,13 @@
             <% end %>
         </div>
     </div><!-- .question -->
+    <%
+        high_risk_message = 'Women over 45 are at a higher risk for breast cancer. The median age for breast cancer is 62. <a href="/resources/more_info">More information &rsaquo;</a>'
+        low_risk_message = 'Although women over 45 are at a higher risk for breast cancer, there is still a risk for women of all ages. The median age for breast cancer is 62. <a href="/resources/more_info">More information &rsaquo;</a>'
+    %>
+    <%= erb :risk_messaging, :locals => { :high_risk_message => high_risk_message, :low_risk_message => low_risk_message, :answered => { |q| !q.nil? }, :q => @session.age} %>
     <div class="row">
-        <%
-            high_risk_message = 'Women over 45 are at a higher risk for breast cancer. The median age for breast cancer is 62. <a href="/resources/more_info">More information &rsaquo;</a>'
-            low_risk_message = 'Although women over 45 are at a higher risk for breast cancer, there is still a risk for women of all ages. The median age for breast cancer is 62. <a href="/resources/more_info">More information &rsaquo;</a>'
-        %>
+
         
             <div id="risk-message" class="small-12 columns">
             <% if !@session.age.nil? %>

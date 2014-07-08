@@ -1,0 +1,33 @@
+<form method="post" action="/questionnaire/<%= @group_id %>">
+  <div class="question row">
+    <div class="large-12 columns">
+        <!-- TODO: loop over questions here to show multiple questions in the partial -->
+        <h2><%= "#{@category_name} &rsaquo; Question #{@group_id}" %></h2>
+        <% for q in @questions %>
+          <%= erb :question_partial, :locals => { :question => q, :question_options => @question_options[q.id] } %>
+        <% end %>
+    </div>
+  </div>
+   <div class="<% if @group_id == 1 %>no-previous<% end %> actions row">
+      <div class="large-12 columns">
+          <ul class="button-group">
+              <li>
+                  <% if @group_id != 1  %>
+                      <a href="<%= @group_id - 1 %>" id="previous-button" class="button small secondary radius">&laquo; Previous</a>
+                  <% end %>
+              </li>
+              <li><a href="/results" id="results-button" class="button small secondary">Results</a></li>
+              <li><a href="/questionnaire/<%= @group_id < 17 ? @group_id + 1 : "results" %>" id="skip-button" class="button small secondary">Skip</a></li>
+              <li><button type="submit" id="next-button" class="button small radius">Next &raquo;</button></li>
+          </ul>
+      </div>    
+  </div>
+</form>
+<div id="progress-bar" class="row">
+    <div class="small-9 medium-10 large-11 columns">
+        <div class="progress round">
+          <span id="progress-meter" data-percent="<%= @progress %>" class="meter" style="width:<%= @progress %>%;"></span>
+        </div>
+    </div>
+    <div id="percent-complete" class="progress-label small-3 medium-2 large-1 columns"><%= @progress %>% done</div>
+</div>

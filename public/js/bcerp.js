@@ -46,7 +46,7 @@ function saveAnswer(){
  * 1. Send an AJAX request to save the answer to the database
  * 2. Flash the risk messaging appropriate for the choice
  */
-$('.question input, .question select').filter(':not(.custom-messaging)').on('change', function(){
+$('#no-id .question input, #no-id.question select').filter(':not(.custom-messaging)').on('change', function(){
     saveAnswer();
     
     var $this = $(this);

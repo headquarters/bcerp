@@ -42,6 +42,7 @@ class Session
   property :breast_exams, String
   property :current_question, String
   property :progress, Float, :default => 0
+  property :has_viewed_results, Boolean, :default => false
   property :created_at, DateTime
 end
 
