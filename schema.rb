@@ -1,11 +1,11 @@
 select = InputType.create(:input_type_name => "select")
 radio = InputType.create(:input_type_name => "radio")
 
-health_history_category = Category.create(:category_name => "Health History")
-diet_category = Category.create(:category_name => "Diet")
-exercise_category = Category.create(:category_name => "Exercise")
-environment_category = Category.create(:category_name => "Environment")
-screening_category = Category.create(:category_name => "Screening")
+health_history_category = Category.create(:category_name => "Health History", :category_identifier => "health-history")
+diet_category = Category.create(:category_name => "Diet", :category_identifier => "diet")
+exercise_category = Category.create(:category_name => "Exercise", :category_identifier => "exercise")
+environment_category = Category.create(:category_name => "Environment", :category_identifier => "environment")
+screening_category = Category.create(:category_name => "Screening", :category_identifier => "screening")
 
 higher_risk_level = RiskLevel.create(:risk_level_name => "Higher Risk", :risk_level_identifier => "higher-risk")
 lower_risk_level = RiskLevel.create(:risk_level_name => "Lower Risk", :risk_level_identifier => "lower-risk")
@@ -172,8 +172,8 @@ QuestionOption.create(:question => diet_habits_question, :option_choice => diet_
 
 ### Fresh/frozen foods
 group_id += 1
-higher_risk_message = RiskMessage.create(:message => "Fresh and frozen foods are healthier alternatives to canned foods.")
-lower_risk_message = RiskMessage.create(:message => "Good! Fresh and frozen foods are healthier alternatives to canned foods.")
+higher_risk_message = RiskMessage.create(:message => "Fresh and frozen foods are healthier alternatives to canned foods.", :group_id => group_id, :risk_level => higher_risk_level)
+lower_risk_message = RiskMessage.create(:message => "Good! Fresh and frozen foods are healthier alternatives to canned foods.", :group_id => group_id, :risk_level => lower_risk_level)
 
 fresh_or_frozen_question = Question.create(:question_name => "Do you most often eat fresh/frozen foods or canned?", :group_id => group_id, :input_type => radio, :category => diet_category)
 
@@ -290,7 +290,7 @@ QuestionOption.create(:question => screening_question, :option_choice => no_opti
 higher_risk_message = RiskMessage.create(:message => "Having a Body Mass Index (BMI) of 25 or higher increases your risk for breast cancer. Keep reading to learn about changes you can make to your diet and exercise routines to maintain a healthy weight and lower your risk.", :group_id => 100, :risk_level => higher_risk_level)
 lower_risk_message = RiskMessage.create(:message => "Congratulations! By maintaining your BMI between 18.5 and 24, you're reducing your risk for postmenopausal breast cancer. Keep reading for more ideas on steps in maintaining a healthy lifestyle and reducing breast cancer risk.", :group_id => 100, :risk_level => lower_risk_level)
 
-bmi_question = Question.create(:question_name => "BMI", :group_id => 100, :input_type => select, :category => health_history_category)
+bmi_question = Question.create(:question_name => "Your BMI", :group_id => 18, :input_type => select, :category => health_history_category)
 
 bmi_option_choice = OptionChoice.create(:option_choice_name => "Underweight (< 18.5)", :option_choice_value => 18.5)
 QuestionOption.create(:question => bmi_question, :option_choice => bmi_option_choice, :risk_level => lower_risk_level, :risk_message => lower_risk_message)

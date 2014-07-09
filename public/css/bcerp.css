@@ -116,16 +116,24 @@ button.secondary,
 }
 
 .actions .button-group {
-    width:18em;
+    width:19em;
     margin:0 auto;
 }
 
+.actions .button-group .push-right {
+    margin-left:0.5em;
+}
+
 .no-previous.actions .button-group {
-    width:12.5em;
+    width:13.5em;
 }
 
 #results .share-buttons a img {
     width:2em;
+}
+
+#results-button {
+    background: #963F61;
 }
 
 fieldset {

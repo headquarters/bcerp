@@ -1,5 +1,5 @@
 <form method="post" action="/questionnaire/<%= @group_id %>">
-  <div id="question-<%= @group_id %>" class="question row">
+  <div id="group-<%= @group_id %>" class="question row">
     <div class="large-12 columns">
         <h2><%= "#{@category_name} &rsaquo; Question #{@group_id}" %></h2>
         <% for q in @questions %>
@@ -7,54 +7,59 @@
         <% end %>
     </div>
   </div>
-   <div class="<% if @group_id == 1 %>no-previous<% end %> actions row">
-      <div class="large-12 columns">
-          <ul class="button-group">
-              <li>
-                  <% if @group_id != 1  %>
-                      <a href="<%= @group_id - 1 %>" id="previous-button" class="button small secondary radius">&laquo; Previous</a>
-                  <% end %>
-              </li>
-              <li><a href="/results" id="results-button" class="button small secondary">Results</a></li>
-              <li><a href="/questionnaire/<%= @group_id < 17 ? @group_id + 1 : "results" %>" id="skip-button" class="button small secondary">Skip</a></li>
-              <li><button type="submit" id="next-button" class="button small radius">Next &raquo;</button></li>
-          </ul>
-      </div>    
-  </div>
-</form>
-<div class="row">
-  <div id="risk-message" class="small-12 columns">
-<%
-  # @answers is an array with group_id as key
-  # this supports having multiple questions and answers on the same page
-%>
-    <% if !@answers[@group_id].nil? %>
-      <p>
-        <span class="<%= @answers[@group_id].question_option.risk_level.risk_level_identifier %>"><%= @answers[@group_id].question_option.risk_level.risk_level_name %>:</span>
-        <%= @answers[@group_id].question_option.risk_message.message %>
-      </p>
-    <% end %>
-<%
-  # height and weight do not have individual risk messages
-  # show BMI risk messaging for height and weight group
-%>
-    <% if @group_id == HEIGHT_WEIGHT_GROUP_ID && !@session.bmi.nil? %>
-        <% if @session.bmi < 25.0 %>
+  <div class="row">
+    <div id="risk-message" class="small-12 columns">
+  <%
+    # @answers is an array with group_id as key; this supports having multiple questions and answers on the same page
+  %>
+      <% if !@answers[@group_id].nil?%>
+        <% if @group_id != HEIGHT_WEIGHT_GROUP_ID %>
+        <p>
+          <% if @group_id != RACE_GROUP_ID %>
+            <%
+              # Race/ethnicity is not displayed as "higher risk"
+            %>
+            <span class="<%= @answers[@group_id].question_option.risk_level.risk_level_identifier %>"><%= @answers[@group_id].question_option.risk_level.risk_level_name %>:</span>
+          <% end %>
+          <%= @answers[@group_id].question_option.risk_message.message %>
+        </p>
+        <% else %>
+          <%
+            # height and weight do not have individual risk messages
+            # show BMI risk messaging for height and weight group
+          %>
+          <% if @session.bmi < 25.0 %>
             <% risk_message = @risk_messages.first(:risk_level_id => LOWER_RISK_LEVEL_ID) %>
             <p>
                 <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
-                <%= risk_message.message %>
+                Your BMI is <%= @session.bmi %>. <%= risk_message.message %>
             </p>
-        <% else %>
+          <% else %>
             <% risk_message = @risk_messages.first(:risk_level_id => HIGHER_RISK_LEVEL_ID) %>
             <p>
                 <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
-                <%= risk_message.message %>
+                Your BMI is <%= @session.bmi %>. <%= risk_message.message %>
             </p>
+          <% end %>
         <% end %>
-    <% end %>
+      <% end %>
+    </div>
+  </div>  
+  <div class="<% if @group_id == 1 %>no-previous<% end %> actions row">
+     <div class="large-12 columns">
+         <ul class="button-group">
+             <li>
+                 <% if @group_id != 1  %>
+                     <a href="<%= @group_id - 1 %>" id="previous-button" class="button small secondary radius">&laquo; Previous</a>
+                 <% end %>
+             </li>
+             <li><a href="/questionnaire/<%= @group_id < 17 ? @group_id + 1 : "results" %>" id="skip-button" class="button small secondary">Skip</a></li>
+             <li><button type="submit" id="next-button" class="button small radius">Next &raquo;</button></li>
+             <li class="push-right"><a href="/results" id="results-button" class="button small secondary">Results</a></li>
+         </ul>
+     </div>    
   </div>
-</div>
+</form>
 <div id="progress-bar" class="row">
     <div class="small-9 medium-10 large-11 columns">
         <div class="progress round">

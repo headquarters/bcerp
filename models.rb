@@ -27,6 +27,7 @@ class Category
   
   property :id, Serial
   property :category_name, String
+  property :category_identifier, String
   
   has n, :question
 end

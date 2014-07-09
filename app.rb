@@ -22,12 +22,14 @@ rebuild_tables = false
 
 if rebuild_tables
   # auto_migrate clears all the data from the database
-  DataMapper.finalize.auto_migrate! 
+  DataMapper.auto_migrate! 
   require './schema'
 else
   # auto_upgrade tries to reconcile existing database with schema changes
-  DataMapper.finalize.auto_upgrade! 
+  DataMapper.auto_upgrade! 
 end
+
+DataMapper.finalize
 
 before do
   # get the first session with this session_id or just create it and return that session row
@@ -43,8 +45,9 @@ INCREMENT = 5.88
 
 # Group ID is set manually in the schema.rb
 HEIGHT_WEIGHT_GROUP_ID = 6
-BMI_GROUP_ID = 100
 LAST_GROUP_ID = 17
+BMI_GROUP_ID = 18
+RACE_GROUP_ID = 2
 
 # These IDs are set by the database engine, so they could theoretically change,
 # but we're assuming nothing runs before the schema.rb script to insert other data
@@ -68,11 +71,53 @@ get '/questionnaire' do
   end
 end
 
-# last question links to /questionnaire/results
-# all other links point to /results
 ["/results", "/questionnaire/results"].each do |path|
   get path do
     @active = "questionnaire"
+    
+    @results = {}    
+    
+    questions = Question.all()
+    
+    questions.each do |question|
+      # leave out race, height, and weight
+      group_id = question.group_id
+      if group_id == HEIGHT_WEIGHT_GROUP_ID || group_id == RACE_GROUP_ID
+        next
+      end
+      
+      category = question.category
+      
+      if @results[category.id].nil?
+        # new category ID for the data structure, set it up to contain answers
+        @results[category.id] = {}
+  
+        @results[category.id]["category_name"] = category.category_name
+        @results[category.id]["category_id"] = category.category_identifier
+        @results[category.id]["answers"] = []      
+      end
+      
+      answer_hash = {}
+      
+      if group_id == BMI_GROUP_ID
+        answer_hash["group_id"] = HEIGHT_WEIGHT_GROUP_ID
+      else
+        answer_hash["group_id"] = group_id
+      end
+      
+      answer = Answer.first(:session_id => @session.id, :group_id => group_id)
+
+      if answer.nil?
+        answer_hash["risk"] = "unanswered"
+      else
+        answer_hash["risk"] = answer.question_option.risk_level.risk_level_identifier
+      end
+      
+      answer_hash["question"] = Question.first(:group_id => group_id).question_name
+      
+      @results[category.id]["answers"].push(answer_hash)
+        
+    end
     
     erb :results
   end
@@ -100,8 +145,6 @@ get '/questionnaire/:group_id' do
     @risk_messages = RiskMessage.all(:group_id => BMI_GROUP_ID)
   end
   
-  #TODO: fetch this BMI answer on the get method
-  
   @question_options = {}
   
   @answers = {}
@@ -123,9 +166,7 @@ post '/questionnaire/:group_id' do
   next_group_id = group_id.to_i + 1;
 
   answers = params[:answers]
-  
-  @session.current_question = group_id
-  
+    
   # TODO: if the first_child is answered as "No Children", skip the breast feeding question, but
   # put the same high risk answer there???
 
