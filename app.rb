@@ -21,10 +21,12 @@ require './models'
 rebuild_tables = false
 
 if rebuild_tables
-  DataMapper.finalize.auto_migrate! # auto_migrate clears all the data from the database
+  # auto_migrate clears all the data from the database
+  DataMapper.finalize.auto_migrate! 
   require './schema'
 else
-  DataMapper.finalize.auto_upgrade! # auto_upgrade tries to reconcile existing database with schema changes
+  # auto_upgrade tries to reconcile existing database with schema changes
+  DataMapper.finalize.auto_upgrade! 
 end
 
 before do
@@ -34,17 +36,18 @@ end
 
 SITE_TITLE = "Breast Health Awareness"
 
-=begin
-There are 17 questions. Height and weight count as 1 question (BMI).
-Each question is worth 100/17 or 5.88% of the whole questionnaire.
-Use round() when displaying.
-=end
+# There are 17 questions. Height and weight count as 1 question (BMI).
+# Each question is worth 100/17 or 5.88% of the whole questionnaire.
+# Use round() when displaying.
 INCREMENT = 5.88
+
 # Group ID is set manually in the schema.rb
 HEIGHT_WEIGHT_GROUP_ID = 6
 BMI_GROUP_ID = 100
 LAST_GROUP_ID = 17
-# These IDs are set by the database engine, so these *could* change, but hopefully won't
+
+# These IDs are set by the database engine, so they could theoretically change,
+# but we're assuming nothing runs before the schema.rb script to insert other data
 HEIGHT_QUESTION_ID = 6
 WEIGHT_QUESTION_ID = 7
 BMI_QUESTION_ID = 19
@@ -87,15 +90,14 @@ get '/questionnaire/:group_id' do
   
   @group_id = group_id.to_i
   
-  # all questions in a group share the same category
-  @category_name = @questions[0].category.category_name
+  # assumes all questions in a group share the same category
+  @category_name = @questions.first.category.category_name
   
   if group_id != HEIGHT_WEIGHT_GROUP_ID.to_s
     @risk_messages = RiskMessage.all(:group_id => group_id)
   else
     # risk messages for height and weight must come from BMI
     @risk_messages = RiskMessage.all(:group_id => BMI_GROUP_ID)
-    puts ">>>>>> #{@risk_messages}"
   end
   
   #TODO: fetch this BMI answer on the get method

@@ -1,5 +1,5 @@
 <form method="post" action="/questionnaire/<%= @group_id %>">
-  <div class="question row">
+  <div id="question-<%= @group_id %>" class="question row">
     <div class="large-12 columns">
         <h2><%= "#{@category_name} &rsaquo; Question #{@group_id}" %></h2>
         <% for q in @questions %>
@@ -66,7 +66,7 @@
 <script>
   var riskMessages = {
     <% for risk_message in @risk_messages %>
-      "<%= risk_message.risk_level.risk_level_identifier %>": "<%= risk_message.message %>"<% if risk_message != @risk_messages.last %>,<% end %>      
+      "<%= risk_message.risk_level.risk_level_identifier %>": "<p><span class=\"<%= risk_message.risk_level.risk_level_identifier %>\"><%= risk_message.risk_level.risk_level_name %>:</span> <%= risk_message.message %></p>"<% if risk_message != @risk_messages.last %>,<% end %>      
     <% end %>
   };
 </script>

@@ -46,7 +46,8 @@ function saveAnswer(){
  * 1. Send an AJAX request to save the answer to the database
  * 2. Flash the risk messaging appropriate for the choice
  */
-$('#no-id .question input, #no-id.question select').filter(':not(.custom-messaging)').on('change', function(){
+$('.question input, .question select').filter(':not(#question-6)').on('change', function(){
+    
     saveAnswer();
     
     var $this = $(this);
@@ -58,10 +59,10 @@ $('#no-id .question input, #no-id.question select').filter(':not(.custom-messagi
         riskLevel = $this.find(':selected').data('risk');
     }
     
-    if (riskLevel == "higher") {
-        riskMessageBlock.html(riskMessage.higherRisk);
+    if (riskLevel == "higher-risk") {
+        riskMessageBlock.html(riskMessages["higher-risk"]);
     } else {
-        riskMessageBlock.html(riskMessage.lowerRisk);
+        riskMessageBlock.html(riskMessages["lower-risk"]);
     }
     riskMessageBlock.css('background', '#FFFF6B')
                     .stop()
@@ -91,10 +92,10 @@ function updateHeightAndWeight(args) {
         
         if (bmi >= 25) {
             //higher risk
-            riskMessageBlock.html(riskMessage.higherRisk);
+            riskMessageBlock.html(riskMessages["higher-risk"]);
         } else {
             //lower risk
-            riskMessageBlock.html(riskMessage.lowerRisk);
+            riskMessageBlock.html(riskMessages["lower-risk"]);
         }
         riskMessageBlock.css('background', '#FFFF6B')
                     .stop()
