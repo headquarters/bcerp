@@ -1,26 +1,38 @@
 <% if question.input_type.input_type_name == "select" %>
-  <label for="question<%= question.id %>"><%= question.question_name %></label>
-  <select id="question<%= question.id %>" name="answers[<%= question.id %>]">    
-    <% question_options.each do |question_option| %>
-      <option value="<%= question_option.id %>"
-                         <% if !@answers[question.id].nil? && question_option.option_choice.id == @answers[question.id].question_option.option_choice_id %>selected="selected" data-selected="true"<% end %>
-                         data-risk="<%= question_option.risk_level.risk_level_identifier %>"
-                         data-value="<%= question_option.option_choice.option_choice_value %>">
-        <%= question_option.option_choice.option_choice_name %>
-        </option>
-    <% end %>
-  </select>
+  <div class="row group-<%= @group_id %> question-<%= question.id %>">
+    <div class="large-7 medium-6 columns">
+      <label for="question-<%= question.id %>"><%= question.question_name %></label>
+    </div>
+    <div class="large-5 medium-6 columns">
+      <select id="question-<%= question.id %>" name="answers[<%= question.id %>]">    
+        <% question_options.each do |question_option| %>
+          <option value="<%= question_option.id %>"
+                             <% if !@answers[question.id].nil? && question_option.option_choice.id == @answers[question.id].question_option.option_choice_id %>selected="selected" data-selected="true"<% end %>
+                             data-risk="<%= question_option.risk_level.risk_level_identifier %>"
+                             data-value="<%= question_option.option_choice.option_choice_value %>">
+            <%= question_option.option_choice.option_choice_name %>
+            </option>
+        <% end %>
+      </select>
+    </div>
+  </div>
 <% elsif question.input_type.input_type_name == "radio" %>
-  <fieldset>
-    <legend><%= question.question_name %></legend>
-    <% question_options.each do |question_option| %>
-      <label>
-        <input type="radio" name="answers[<%= question.id %>]"
-                            value="<%= question_option.id %>"
-                            <% if !@answers[question.id].nil? && question_option.option_choice.id == @answers[question.id].question_option.option_choice_id %>checked="checked" data-selected="true"<% end %>
-                            data-risk="<%= question_option.risk_level.risk_level_identifier %>" />
-        <%=question_option.option_choice.option_choice_name %>
-      </label>
-    <% end %>           
-  </fieldset>
+  <div class="row group-<%= @group_id %> question-<%= question.id %>">
+    <fieldset>
+      <div class="large-7 medium-6 columns">
+        <legend><%= question.question_name %></legend>
+      </div>
+      <div class="large-5 medium-6 columns">
+        <% question_options.each do |question_option| %>
+          <label>
+            <input type="radio" name="answers[<%= question.id %>]"
+                                value="<%= question_option.id %>"
+                                <% if !@answers[question.id].nil? && question_option.option_choice.id == @answers[question.id].question_option.option_choice_id %>checked="checked" data-selected="true"<% end %>
+                                data-risk="<%= question_option.risk_level.risk_level_identifier %>" />
+            <%=question_option.option_choice.option_choice_name %>
+          </label>
+        <% end %>
+      </div>
+    </fieldset>
+  </div>
 <% end %>

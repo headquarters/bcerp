@@ -52,7 +52,7 @@ var BCERP = (function($, window){
          * 1. Send an AJAX request to save the answer to the database
          * 2. Flash the risk messaging appropriate for the choice
          */
-        $('.question input, .question select').filter(':not(#question6, #question7)').on('change', function(){
+        $('.question input, .question select').filter(':not(#question-6, #question-7)').on('change', function(){
             saveAnswer();
             
             var $this = $(this);
@@ -78,7 +78,7 @@ var BCERP = (function($, window){
                             }, 1500);
         });
         
-        $('#question6, #question7').on('change', function(){
+        $('#question-6, #question-7').on('change', function(){
             var $this = $(this);
             
             $this.find(":selected").data('selected', true);
@@ -96,13 +96,13 @@ var BCERP = (function($, window){
             
             //select > option values are question_option_id, so use the data-value property which
             //stores the actual height/weight values, rather than parsing #' #" to create inches
-            height = $('#question6 :selected').data('value');
-            weight = $('#question7 :selected').data('value');
+            height = $('#question-6 :selected').data('value');
+            weight = $('#question-7 :selected').data('value');
             
             //the dropdowns have defaults that the user may not want, so use data-selected to determine
             //if user chose these values or they were "selected" when page loaded
-            heightUpdatedByUser = BCERP.UTILS.isDefined($('#question6 :selected').data("selected"));
-            weightUpdatedByUser = BCERP.UTILS.isDefined($('#question7 :selected').data("selected"));
+            heightUpdatedByUser = BCERP.UTILS.isDefined($('#question-6 :selected').data("selected"));
+            weightUpdatedByUser = BCERP.UTILS.isDefined($('#question-7 :selected').data("selected"));
             
             if (heightUpdatedByUser && weightUpdatedByUser &&
                 BCERP.UTILS.isDefined(height) && BCERP.UTILS.isDefined(weight)) {
@@ -160,7 +160,7 @@ BCERP.UTILS = (function(){
     }
 
     self.calculateBmi = function(weightInPounds, heightInInches) {
-        return ((weightInPounds/Math.pow(heightInInches, 2)) * 703).toFixed(1);
+        return ((weightInPounds/Math.pow(heightInInches, 2)) * 703).toFixed(2);
     }
 
     return self;    

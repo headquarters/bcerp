@@ -31,11 +31,11 @@ select {
     font-size:1rem;
 }
 
-#home h1 {
+#home h2 {
     font-size:1.8em;
 }
 
-#home h1 em {
+#home h2 em {
     font-family:cursive, serif;
     color:#AB74A8;
 }
@@ -128,8 +128,9 @@ button.secondary,
     width:13.5em;
 }
 
-#results .share-buttons a img {
+.share-buttons a img {
     width:2em;
+    margin-bottom:0.25em;
 }
 
 #results-button {
@@ -185,6 +186,11 @@ fieldset legend {
     margin-bottom:0;
 }
 
+.question fieldset legend,
+.question label {
+    font-weight:bold;
+}
+
 .question fieldset label {
     margin-bottom: 0;
     border: 1px solid #ccc;
@@ -192,6 +198,7 @@ fieldset legend {
     line-height: 2;
     background:#FAFAFA;
     margin-bottom:0.2em;
+    font-weight:normal;
 }
 
 .question fieldset label:hover {
@@ -199,9 +206,13 @@ fieldset legend {
     border-color: #999;
 }
 
-.question h2 {
+.breadcrumb {
     font-size:0.9em;
     color:#666;
+}
+
+.question .question-6 {
+    margin-bottom:0.5em;
 }
 
 /*.question label {
@@ -268,9 +279,13 @@ fieldset legend {
 }
 
 #stories .story {
-    margin-bottom:1em;
+    margin-bottom:0.5em;
     border-bottom:1px solid #ccc;
-    padding-bottom:0.25em;
+    padding-bottom:0.5em;
+}
+
+#stories .story:last-child {
+    border-bottom:0;
 }
 
 .progress .meter {
@@ -481,10 +496,13 @@ article {
   height: 2.75em;
 }
 
-@media only screen and (max-width:61em){
+@media only screen and (max-width:60em){
     #results .inset {
         position:relative;
         top:-220px;
+        right:0;
+        width:56%;
+        float:right;
     }
 }
 

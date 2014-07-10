@@ -3,12 +3,33 @@
         <div class="large-12 columns">
             <h2>Your Results</h2>
         </div>
-        <div class="large-12 columns">
+    </div>
+    <div class="row">
+        <% if !@session.has_viewed_results && @session.progress == 100.0 %>
+            <div class="large-7 columns end">
+                <div class="panel">
+                    <p>
+                    <% if @lower_risk_count > @higher_risk_count %>
+                        Congratulations! You have <%= @lower_risk_count %> lower risk indicators and only <%= @higher_risk_count %> higher risk ones. To learn more
+                        about keeping your risk low, check out the information under <a href="/resources/more_info">Resources</a>.
+                    <% else %>
+                        You have some room for improvement&mdash;you have <%= @higher_risk_count %> higher risk indicators and <%= @lower_risk_count %> lower risk indicators. To learn more
+                        about keeping your risk low, check out the information under <a href="/resources/more_info">Resources</a>.
+                    <% end %>
+                    </p>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <div class="row">
+        <div class="large-7 columns end">
             <p>
                 Each circle below represents your answer to a question. Click or tap a circle to return to that question.
             </p>
         </div>
-        <div class="small-12 large-6 columns risk-infographic">
+    </div>
+    <div class="row">
+        <div class="small-12 medium-6 large-6 columns risk-infographic">
             <% @results.each do |category_id, result| %>
                 <div class="risk <%= result["category_id"] %>">
                     <h3 class="risk-name"><%= result["category_name"] %></h3>
@@ -23,12 +44,8 @@
                 </div>
             <% end %>
         </div>
-        <div class="inset small-6 large-6 columns">
-            <div class="share-buttons">
-                <a href="http://facebook.com/sharer/sharer.php?text=Check out this site that helps you determine your breast cancer risk.=http://breasthealth.me"><img src="/images/facebook.png" alt="Facebook" /></a>
-                <a href="http://twitter.com/share?text=Check out this site that helps you determine your breast cancer risk.&url=http://breasthealth.me"><img src="/images/twitter.png" alt="Facebook" /></a>
-                <a href="mailto:?subject=My breast cancer risk results&body=Check out this site that helps you determine your breast cancer risk: http://breasthealth.me"><img src="/images/mail.png" alt="Facebook" /></a>
-            </div>
+        <div class="inset small-12 medium-6 large-6 columns">
+            <%= erb :share_buttons_partial %>
             <ul id="key">
                 <li><img src="/images/high-risk-key.png" alt="" /> Higher Risk</li>
                 <li><img src="/images/low-risk-key.png" alt="" /> Lower Risk</li>

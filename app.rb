@@ -31,17 +31,11 @@ end
 
 DataMapper.finalize
 
-before do
-  # get the first session with this session_id or just create it and return that session row
-  @session = Session.first_or_create(:session_id => session.id)
-end
-
 SITE_TITLE = "Breast Health Awareness"
 
 # There are 17 questions. Height and weight count as 1 question (BMI).
-# Each question is worth 100/17 or 5.88% of the whole questionnaire.
 # Use round() when displaying.
-INCREMENT = 5.88
+INCREMENT = 100.0/17
 
 # Group ID is set manually in the schema.rb
 HEIGHT_WEIGHT_GROUP_ID = 6
@@ -56,6 +50,11 @@ WEIGHT_QUESTION_ID = 7
 BMI_QUESTION_ID = 19
 HIGHER_RISK_LEVEL_ID = 1
 LOWER_RISK_LEVEL_ID = 2
+
+before do
+  # get the first session with this session_id or just create it and return that session row
+  @session = Session.first_or_create(:session_id => session.id)
+end
 
 get '/' do
   @active = "home"
@@ -77,7 +76,10 @@ end
     
     @results = {}    
     
-    questions = Question.all()
+    questions = Question.all(:order => :category_id.asc)
+    
+    @lower_risk_count = 0
+    @higher_risk_count = 0
     
     questions.each do |question|
       # leave out race, height, and weight
@@ -111,6 +113,12 @@ end
         answer_hash["risk"] = "unanswered"
       else
         answer_hash["risk"] = answer.question_option.risk_level.risk_level_identifier
+        
+        if answer.question_option.risk_level.id == HIGHER_RISK_LEVEL_ID
+          @higher_risk_count += 1
+        elsif answer.question_option.risk_level.id == LOWER_RISK_LEVEL_ID
+          @lower_risk_count += 1
+        end
       end
       
       answer_hash["question"] = Question.first(:group_id => group_id).question_name
@@ -119,6 +127,7 @@ end
         
     end
     
+    #"#{@results.inspect}"
     erb :results
   end
 end
@@ -190,7 +199,7 @@ post '/questionnaire/:group_id' do
       # save the BMI "question" answer, which isn't visible to the user
       # height and weight answers are saved independently below where the other answers are saved
       answer = Answer.first_or_new(:session_id => @session.id, :question_id => BMI_QUESTION_ID)
-      answer.group_id = group_id
+      answer.group_id = BMI_GROUP_ID
       answer.question_option = QuestionOption.first(:option_choice_id => bmi_option_choice.id, :question_id => BMI_QUESTION_ID)
       answer.save
       
@@ -234,19 +243,16 @@ end
 
 get '/resources/:view' do
   @active = "resources"
-  
   erb "#{params[:view]}".to_sym
 end
 
 get '/stories' do
   @active = "stories"
-  
   erb :stories
 end
 
 get '/stories/:view' do
   @active = "stories"
-  
   erb "stories/#{params[:view]}".to_sym
 end
 
@@ -257,8 +263,8 @@ end
 
 get '/reset' do
   # clear previous session, but leave the data in the database
-  session.clear
   
+  session.destroy
   redirect "/"
 end
 
@@ -272,7 +278,7 @@ end
 
 def get_progress
   # in answers table, count number of rows with this session_id
-  count = Answer.count(:session_id => @session.id)
+  count = Answer.count(:session_id => @session.id, :conditions => ['group_id != ?', HEIGHT_WEIGHT_GROUP_ID])
   
   # there are only 17 questions (height and weight are 1 and BMI is not visible to users)
   if count > 17
