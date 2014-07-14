@@ -4,6 +4,8 @@ $(document).foundation({
     }
 });
 
+$('#results-modal').foundation('reveal', 'open');
+
 /**
  * BCERP is a module that contains functionality for the BCERP website.
  * It serves as a single namespace to avoid collisions. Other modules should be part of its namespace, e.g. BCERP.UTILS.
@@ -43,10 +45,20 @@ var BCERP = (function($, window){
     }    
     
     self.init = function(){
-        self.bindEvents();    
+        self.bindQuestionAnswerEvents();
+        self.bindCloseResultsModalEvent();
     };
     
-    self.bindEvents = function(){
+    self.bindCloseResultsModalEvent = function(){
+        $('#results-modal .close-reveal-modal').on('click', function(e){
+            $.ajax({
+                url: $(this).attr('href'),
+                type: "GET"
+            });
+        });
+    };
+    
+    self.bindQuestionAnswerEvents = function(){
         /**
          * On all questions except height and weight do the following when an answer is chosen:
          * 1. Send an AJAX request to save the answer to the database

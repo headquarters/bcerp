@@ -7,7 +7,8 @@
     <div class="row">
         <% if !@session.has_viewed_results && @session.progress == 100.0 %>
             <div class="large-7 columns end">
-                <div class="panel">
+                <!--<div class="panel callout">-->
+                <div id="results-modal" class="reveal-modal medium" data-reveal>
                     <p>
                     <% if @lower_risk_count > @higher_risk_count %>
                         Congratulations! You have <%= @lower_risk_count %> lower risk indicators and only <%= @higher_risk_count %> higher risk ones. To learn more
@@ -17,6 +18,8 @@
                         about keeping your risk low, check out the information under <a href="/resources/more_info">Resources</a>.
                     <% end %>
                     </p>
+                    <!--<a href="#" class="dismiss">Don't show this again</a>-->
+                    <a href="/results/dismiss" class="close-reveal-modal">&#215;</a>
                 </div>
             </div>
         <% end %>

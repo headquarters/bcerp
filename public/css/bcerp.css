@@ -1,8 +1,15 @@
-
+/*
+ * Global
+ */
 .top-bar {
     background:#AB74A8;
     color:#000;
     letter-spacing:0.5px;
+}
+
+button.secondary, 
+.button.secondary {
+    background:#A29097;
 }
 
 footer {
@@ -14,65 +21,8 @@ footer {
     color:#bbb;
 }
 
-.top-bar .toggle-topbar a,
-.top-bar-section ul li > a {
-    /* 14px for MENU button to make it even, instead of 13px */
-    font-size:0.875rem;
-}
-
-.accordion a {
-  border:1px solid #ddd;
-}
-.accordion .content {
-  border:1px solid #ddd;
-}
-
 select {
     font-size:1rem;
-}
-
-#home h2 {
-    font-size:1.8em;
-}
-
-#home h2 em {
-    font-family:cursive, serif;
-    color:#AB74A8;
-}
-
-#home p {
-    margin-bottom:0.25em;
-    line-height:1.4;
-}
-
-#home .button {
-    margin-bottom:0.25rem;
-}
-
-/*#risk-message p {
-    margin:0.5em 0;
-    padding:0.25em 0.5em;
-}*/
-
-#bmi-questions .question:first-child {
-    margin-bottom:0.5em;
-}
-
-#progress-bar {
-  background: #fff;
-  line-height:1.2;
-  margin-top:0.25em;
-}
-
-#progress-bar .progress {
-    background:#BEA4BD;
-}
-
-#progress-bar .progress-label {
-    padding:0;
-    font-size:0.9em;
-    line-height:1.6;
-    color:#666;
 }
 
 #logo {
@@ -80,271 +30,10 @@ select {
     height:auto;
 }
 
-.top-bar .toggle-topbar.menu-icon a {
-    border:1px solid #efefef;
-    border-radius:5px;
-    padding:0 4px;
-}
-
-.top-bar.expanded .toggle-topbar.menu-icon a {
-    border-color:#888;
-}
-
-button.secondary, 
-.button.secondary {
-    background:#A29097;
-}
-
-.actions {
-    margin-top:0.5em;
-}
-
-.actions .button {
-    margin-bottom:0;
-    padding-right:0.9rem;
-    padding-left:0.9rem;
-}
-
-.actions #previous-button {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.actions #next-button {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-
-.actions .button-group {
-    width:19em;
-    margin:0 auto;
-}
-
-.actions .button-group .push-right {
-    margin-left:0.5em;
-}
-
-.no-previous.actions .button-group {
-    width:13.5em;
-}
-
-.share-buttons a img {
-    width:2em;
-    margin-bottom:0.25em;
-}
-
-#results-button {
-    background: #963F61;
-}
-
-fieldset {
-    margin:0;
-    border:0;
-    padding:0;
-}
-
-label,
-fieldset legend {
-  color:#333;
-  font-size:1rem;
-}
-
-fieldset legend {
-  font-weight:normal;
-  line-height:1.5;
-  background:transparent;
-}
-
-.higher-risk {
-  color:#B6004E;
-}
-
-.lower-risk {
-  color:#A3A1C6;
-}
-
-.higher-risk,
-.lower-risk {
-    font-weight:bold;
-}
-
-#age-message {
-  padding:0.5em;
-}
-
-.quote {
-    font-size:1.4em;
-    font-style:italic;
-    font-family:Georgia, serif;
-    line-height:1.3;
-    margin-bottom:0.25em;
-}
-
-.question label,
-.question input,
-.question select {
-    margin-bottom:0;
-}
-
-.question fieldset legend,
-.question label {
-    font-weight:bold;
-}
-
-.question fieldset label {
-    margin-bottom: 0;
-    border: 1px solid #ccc;
-    padding: 0 0.5em;
-    line-height: 2;
-    background:#FAFAFA;
-    margin-bottom:0.2em;
-    font-weight:normal;
-}
-
-.question fieldset label:hover {
-    background-color: #F3F3F3;
-    border-color: #999;
-}
-
 .breadcrumb {
     font-size:0.9em;
     color:#666;
 }
-
-.question .question-6 {
-    margin-bottom:0.5em;
-}
-
-/*.question label {
-    font-size:1.2em;
-    font-weight:bold;
-}*/
-
-
-.video-placeholder {
-    width:100%;
-    text-align:center;
-}
-
-.video-placeholder img {
-    display:block;
-    margin:0.25em auto;
-    width:100%;
-    height:auto;
-}
-
-.accordion p {
-    margin-top:0.5em;
-    margin-bottom:0;
-}
-
-#secondary-menu {
-    list-style:none;
-    margin:0;
-}
-
-#secondary-menu li {
-    border-bottom:1px solid #8f8f8f;
-}
-
-#secondary-menu li.active:before {
-    content: "\00bb";
-}
-
-#secondary-menu li.active a {
-    text-indent:5px;
-}
-
-#secondary-menu li a {
-    display:inline-block;
-    color:#ccc;
-}
-
-#results p {
-    margin-bottom:0;
-}
-
-#results #key {
-    margin:0.5em 0;
-    font-size:0.9em;
-}
-
-#results #key li {
-    margin:0.25em 0;
-}
-
-
-#results .risk-name {
-    font-size:1.1em;
-}
-
-#stories .story {
-    margin-bottom:0.5em;
-    border-bottom:1px solid #ccc;
-    padding-bottom:0.5em;
-}
-
-#stories .story:last-child {
-    border-bottom:0;
-}
-
-.progress .meter {
-    -webkit-transition:width 0.7s ease;
-    -moz-transition:width 0.7s ease;
-    transition:width 0.7s ease;
-}
-
-#stories .story .video-frame {
-    padding:0.25em 0 0 0.25em;
-   /* line-height: 10; /* for vertical aligning image */
-}
-
-#stories .story.row img {
-    width:100%;
-}
-
-#stories .story h3 {
-    margin-top:0;
-    font-size:1.1em;
-    line-height:1.1;
-    color:#AB74A8;
-}
-
-#stories .story a {
-    color:#333;
-}
-
-#stories .story .description {
-    line-height:1.3;
-}
-
-.story .row > .columns {
-    height:100%;
-}
-
-.story iframe {
-  min-width: 16em;
-  width: 100%;
-  max-width: 62.5rem;
-  min-height:12em;
-  height:auto;
-}
-
-@media screen and (min-width: 30em) {
-    .story iframe {
-       height:22em;
-    }
-}
-
-@media screen and (min-width: 60em) {
-    .story iframe {
-       height:28em;
-    }
-}
-
-/**
- * Sticky nav footer
- */
 
 html {
     position:relative;
@@ -395,88 +84,231 @@ article {
     height:auto;
 }
 
-/* end sticky nav */
-
-#age-list {
-    list-style:none;
-    margin:0;
-    float:left;
-    width:100%;
-}
-
-#age-list li,
-.hidden-list li {
-    border-top:1px solid #ccc;
-    padding:0.5em 0;
-}
-
-#age-list li:last-child {
-    border-bottom:1px solid #ccc;
-}
-
-.hidden-list {
-    float:left;
-    width:100%;
-    list-style:none;
-    margin:0;
-}
-
-#age-panel {
-    overflow:hidden;
-}
-
 /*
- * Low risk: #A3A1C6
- * High risk: #B6004E
+ * Home
  */
-
-/*.high-risk {
-    background:#B6004E;
+#home h2 {
+    font-size:1.8em;
 }
 
-.low-risk {
-    background:#A3A1C6;
-}*/
-
-.infographic-teaser {
-    position:relative;
-    padding:0.25em;
-    border:1px solid #ececec;
-    margin-bottom:1em;
+#home h2 em {
+    font-family:cursive, serif;
+    color:#AB74A8;
 }
 
-.infographic-teaser .infographic-overlay {
-    position:absolute;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:#fff;
-    opacity:0.7;
-}
-
-.infographic-teaser .teaser-text {
-    position:absolute;
-    top:25%;
-    left:50%;
-    width:14em;
-    margin-left:-7em;
-}
-
-.infographic-teaser .teaser-text p {
-    line-height:1.2;
+#home p {
     margin-bottom:0.25em;
+    line-height:1.4;
+}
+
+#home .button {
+    margin-bottom:0.25rem;
+}
+
+/*temp*/
+.video-placeholder {
+    width:100%;
+    text-align:center;
+}
+/*temp*/
+.video-placeholder img {
+    display:block;
+    margin:0.25em auto;
+    width:100%;
+    height:auto;
 }
 
 /*
- * Results page
+ * Intro
  */
-
-.risk-infographic {
-  /*max-width: 18.125em;
-  text-align: left;
-  margin: 10px auto;*/
+#intro a {
+    margin:1em 0 0;
 }
+
+/*
+ * Questions
+ */
+#bmi-questions .question:first-child {
+    margin-bottom:0.5em;
+}
+
+#progress-bar {
+  background: #fff;
+  line-height:1.2;
+  margin-top:0.25em;
+}
+
+#progress-bar .progress {
+    background:#BEA4BD;
+}
+
+#progress-bar .progress-label {
+    padding:0;
+    font-size:0.9em;
+    line-height:1.6;
+    color:#666;
+}
+
+.actions {
+    margin-top:0.5em;
+}
+
+.actions .button {
+    margin-bottom:0;
+    padding-right:0.9rem;
+    padding-left:0.9rem;
+}
+
+.actions #previous-button {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.actions #next-button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.actions .button-group {
+    width:19em;
+    margin:0 auto;
+}
+
+.actions .button-group .push-right {
+    margin-left:0.5em;
+}
+
+.no-previous.actions .button-group {
+    width:13.5em;
+}
+
+fieldset {
+    margin:0;
+    border:0;
+    padding:0;
+}
+
+label,
+fieldset legend {
+  color:#333;
+  font-size:1rem;
+}
+
+fieldset legend {
+  font-weight:normal;
+  line-height:1.5;
+  background:transparent;
+}
+
+.higher-risk {
+  color:#B6004E;
+}
+
+.lower-risk {
+  color:#A3A1C6;
+}
+
+.higher-risk,
+.lower-risk {
+    font-weight:bold;
+}
+
+.progress .meter {
+    -webkit-transition:width 0.7s ease;
+    -moz-transition:width 0.7s ease;
+    transition:width 0.7s ease;
+}
+.question label,
+.question input,
+.question select {
+    margin-bottom:0;
+}
+
+.question fieldset legend,
+.question label {
+    font-weight:bold;
+}
+
+.question fieldset label {
+    margin-bottom: 0;
+    border: 1px solid #ccc;
+    padding: 0 0.5em;
+    line-height: 2;
+    background:#FAFAFA;
+    margin-bottom:0.2em;
+    font-weight:normal;
+}
+
+.question fieldset label:hover {
+    background-color: #F3F3F3;
+    border-color: #999;
+}
+
+.question .question-6 {
+    margin-bottom:0.5em;
+}
+
+
+#results-button {
+    background: #963F61;
+}
+
+/*
+ * Stories
+ */
+.story .share-buttons a img {
+    width:100%;
+    max-width:2.75em;
+}
+
+#stories .story {
+    margin-bottom:0.5em;
+    border-bottom:1px solid #ccc;
+    padding-bottom:0.5em;
+}
+#stories .story:last-child {
+    border-bottom:0;
+}
+
+#stories .story .video-frame {
+    padding:0.25em 0 0 0.25em;
+   /* line-height: 10; /* for vertical aligning image */
+}
+
+#stories .story.row img {
+    width:100%;
+}
+
+#stories .story h3 {
+    margin-top:0;
+    font-size:1.1em;
+    line-height:1.1;
+    color:#AB74A8;
+}
+
+#stories .story a {
+    color:#333;
+}
+
+#stories .story .description {
+    line-height:1.3;
+}
+
+.story .row > .columns {
+    height:100%;
+}
+
+.story iframe {
+  min-width: 16em;
+  width: 100%;
+  max-width: 62.5rem;
+  min-height:12em;
+  height:auto;
+}
+
+/*
+ * Results
+ */
 
 .risk-infographic .risk-name {
     margin:0.25em 0;
@@ -489,11 +321,53 @@ article {
 }
 
 .risk-infographic .risk-question {
-/*  text-indent: -9999em;
-  overflow: hidden;
-  display: inline-block;*/
   width: 2.75em; /* 44px */
   height: 2.75em;
+}
+
+#key {
+    list-style:none;
+    margin:0;
+}
+
+#results .share-buttons a img {
+    width:2.75em;
+    margin-bottom:0.25em;
+}
+
+#results .dismiss {
+    font-size:0.9em;
+    float:right;
+}
+
+#results p {
+    margin-bottom:0;
+}
+
+#results #key {
+    margin:0.5em 0;
+    font-size:0.9em;
+}
+
+#results #key li {
+    margin:0.25em 0;
+}
+
+
+#results .risk-name {
+    font-size:1.1em;
+}
+
+@media screen and (min-width: 30em) {
+    .story iframe {
+       height:22em;
+    }
+}
+
+@media screen and (min-width: 60em) {
+    .story iframe {
+       height:28em;
+    }
 }
 
 @media only screen and (max-width:60em){
@@ -506,24 +380,13 @@ article {
     }
 }
 
-#key {
-    list-style:none;
-    margin:0;
-}
-
-#intro a {
-    margin:1em 0 0;
+@media only screen and (max-width: 40em) {
+    dialog, .reveal-modal {
+      min-height: 0;
+    }
 }
 
 @media only screen and (min-width: 60em) and (min-height: 40em) {
-    /*article {
-        padding-bottom:0.5em;
-    }
-    #sticky-nav {
-        position:static;
-        left:auto;
-        bottom:auto;
-    }*/
     article {
         padding-bottom:11em;
     }
@@ -544,23 +407,4 @@ article {
         line-height:1;
         font-size:0.9em;
     }
-}
-
-
-@media only screen and (min-width: 40em) {
-    /*footer {
-        text-align:center;
-    }
-    
-    #secondary-menu li {
-        border-bottom:0;
-        border-right:1px solid #8f8f8f;
-        display:inline-block;
-        padding-right:1em;
-        margin-right:1em;
-    }
-    
-    #secondary-menu li:last-child {
-        border-right:0;
-    }*/
 }

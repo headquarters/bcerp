@@ -70,6 +70,18 @@ get '/questionnaire' do
   end
 end
 
+get '/results/dismiss' do
+  @session.has_viewed_results = true
+  did_save = @session.save
+  
+  if request.xhr?
+    content_type :json
+    { :status => did_save }.to_json
+  else
+    redirect "/results"
+  end
+end
+
 ["/results", "/questionnaire/results"].each do |path|
   get path do
     @active = "questionnaire"
