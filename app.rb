@@ -172,6 +172,7 @@ get '/questionnaire/:group_id' do
   
   @questions.each do |q|
     @question_options[q.id] = QuestionOption.all(:question_id => q.id)
+    # messes up after BMI questions because q.id would be 13, while group_id was one behind (12)
     @answers[q.id] = Answer.first(:session_id => @session.id, :question_id => q.id)
   end
   
