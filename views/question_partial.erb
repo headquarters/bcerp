@@ -15,20 +15,23 @@
     <fieldset>
       <legend><%= question.question_name %></legend>
         <% question_options.each do |question_option| %>
-          <label>
+          <label class="<%= question_option.risk_level.risk_level_identifier %>">
+            <!--<img src="/images/icons/exercise-<%= question_option.risk_level.risk_level_identifier %>.png" alt="" />-->
             <input type="radio" name="answers[<%= question.id %>]"
                                 value="<%= question_option.id %>"
                                 <% if !@answers[question.id].nil? && question_option.option_choice.id == @answers[question.id].question_option.option_choice_id %>checked="checked" data-selected="true"<% end %>
                                 data-risk="<%= question_option.risk_level.risk_level_identifier %>" />
             <%=question_option.option_choice.option_choice_name %>
+            <!--<span>(<%= question_option.risk_level.risk_level_name %>)</span>-->
           </label>
         <% end %>
     </fieldset>
 <% end %>
 </div>
-<% if !@answers[question.id].nil? && @group_id != HEIGHT_WEIGHT_GROUP_ID%>
-  </div>
+<% if @group_id != HEIGHT_WEIGHT_GROUP_ID%>
+  </div><!-- .columns -->
   <div id="risk-message" class="large-6 medium-6 columns">
+    <% if !@answers[question.id].nil? %>
     <p>
       <% if @group_id != RACE_GROUP_ID %>
         <%
@@ -40,5 +43,7 @@
         <%= @answers[question.id].question_option.risk_message.message %> <a href="/resources/more_info">More information &rsaquo;</a>
       <% end %>
     </p>
+  <% end %>
   </div>
+</div><!-- .row -->
 <% end %>

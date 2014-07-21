@@ -1,34 +1,41 @@
 <form method="post" action="/questionnaire/<%= @group_id %>">
   <div id="group-<%= @group_id %>" class="question">
     <div class="row">
-      <div class="large-12 columns">
+      <div class="small-10 columns">
         <h2 class="breadcrumb"><%= "#{@category_name} &rsaquo; Question #{@group_id}" %></h2>
       </div>
+      <!--<div class="small-2 columns">
+        <img src="/images/icons/exercise-unanswered.png" alt="" />
+      </div>-->
     </div>
-  <div class="row">
-    <div class="large-6 medium-6 columns">
-      <% for q in @questions %>
-        <%= erb :question_partial, :locals => { :question => q, :question_options => @question_options[q.id] } %>
-      <% end %>
-      <% if @group_id == HEIGHT_WEIGHT_GROUP_ID %>
-        </div>
-        <div id="risk-message" class="large-6 medium-6 columns">
-          <% if @session.bmi < 25.0 %>
-            <% risk_message = @risk_messages.first(:risk_level_id => LOWER_RISK_LEVEL_ID) %>
-            <p>
-                <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
-                Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/more_info">More information &rsaquo;</a>
-            </p>
-          <% else %>
-            <% risk_message = @risk_messages.first(:risk_level_id => HIGHER_RISK_LEVEL_ID) %>
-            <p>
-                <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
-                Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/more_info">More information &rsaquo;</a>
-            </p>
-          <% end %>
-        </div>
-      <% end %>
-  </div>  
+    <div class="row">
+      <div class="large-6 medium-6 columns">
+        <% for q in @questions %>
+          <%= erb :question_partial, :locals => { :question => q, :question_options => @question_options[q.id] } %>
+        <% end %>
+        <% if @group_id == HEIGHT_WEIGHT_GROUP_ID %>
+      </div><!-- .columns -->
+          <div id="risk-message" class="large-6 medium-6 columns">
+            <% if !@answers[BMI_QUESTION_ID].nil? && !@session.bmi.nil? %>
+              <% if @session.bmi < 25.0 %>
+                <% risk_message = @risk_messages.first(:risk_level_id => LOWER_RISK_LEVEL_ID) %>
+                <p>
+    
+                    <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
+                    Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/more_info">More information &rsaquo;</a>
+                </p>
+              <% else %>            
+                <% risk_message = @risk_messages.first(:risk_level_id => HIGHER_RISK_LEVEL_ID) %>
+                <p>
+                    <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
+                    Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/more_info">More information &rsaquo;</a>
+                </p>
+              <% end %>
+            <% end %>
+          </div>
+        </div><!-- .row -->
+        <% end %>
+    </div><!-- .question -->
   <div class="<% if @group_id == 1 %>no-previous<% end %> actions row">
      <div class="large-12 columns">
          <ul class="button-group">

@@ -105,6 +105,10 @@ article {
     margin-bottom:0.25rem;
 }
 
+#home iframe {
+    width:100%;
+}
+
 /*temp*/
 .video-placeholder {
     width:100%;
@@ -200,16 +204,16 @@ fieldset legend {
   background:transparent;
 }
 
-.higher-risk {
+#risk-message .higher-risk {
   color:#B6004E;
 }
 
-.lower-risk {
+#risk-message .lower-risk {
   color:#A3A1C6;
 }
 
-.higher-risk,
-.lower-risk {
+#risk-message .higher-risk,
+#risk-message .lower-risk {
     font-weight:bold;
 }
 
@@ -358,15 +362,63 @@ fieldset legend {
     font-size:1.1em;
 }
 
-@media screen and (min-width: 30em) {
-    .story iframe {
-       height:22em;
+/*
+ * Resources
+ */
+#resources ul {
+    margin:0 -0.9375rem 1em -0.9375rem;
+    list-style:none;
+}
+
+#resources ul li {
+    border-top:1px solid #ccc;
+    background:#efefef;
+    padding:0.5rem 0.9375rem;
+}
+
+#resources ul li:last-child {
+    border-bottom:1px solid #ccc;
+}
+
+#resources ul li a {
+    display:block;
+    overflow:auto;
+}
+
+#resources ul li a span {
+    float:right;
+    font-weight:bold;
+    color:#000;
+}
+
+@media screen and (max-width: 30em) {
+    #home iframe {
+        height:16em;
     }
 }
 
+@media screen and (min-width: 30em) {
+    .story iframe,
+    #home iframe {
+       height:22em;
+    }
+    
+    
+}
+
 @media screen and (min-width: 60em) {
-    .story iframe {
+    .story iframe,
+    #home iframe {
        height:28em;
+    }
+    
+    #resources ul {
+        margin:0 0 1em 0;
+    }
+    
+    #resources ul li {
+        border-right:1px solid #ccc;
+        border-left:1px solid #ccc;
     }
 }
 
@@ -375,7 +427,7 @@ fieldset legend {
         position:relative;
         top:-220px;
         right:0;
-        width:56%;
+        width:54%;
         float:right;
     }
 }
@@ -408,3 +460,30 @@ fieldset legend {
         font-size:0.9em;
     }
 }
+
+/*
+ *
+ * Tests
+ */
+/*
+.exercise label.higher-risk,
+.exercise label.lower-risk {
+    padding-left:0.5em;
+    background: #fff;
+}
+
+.exercise label.higher-risk {
+    color:#B6004E;
+}
+
+.exercise label.lower-risk {
+    color: #A3A1C6;
+}
+
+.exercise label img {
+    display:none;
+}
+
+.exercise label span {
+    font-size:0.9em;
+}*/
