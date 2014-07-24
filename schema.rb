@@ -86,7 +86,7 @@ QuestionOption.create(:question => children_question, :option_choice => children
 ### Breastfeeding
 group_id += 1
 higher_risk_message = RiskMessage.create(:message => "Breastfeeding for less than 12 months across all children increases your exposure to estrogen. Most risks for breast cancer are associated with lifetime exposure to estrogen.", :group_id => group_id, :risk_level => higher_risk_level)
-lower_risk_message = RiskMessage.create(:message => "Breastfeeding for more than 12 months across all children decreases your risk, and it protects your child's health, too.", :group_id => group_id, :risk_level => lower_risk_level)
+lower_risk_message = RiskMessage.create(:message => "Good! Breastfeeding for more than 12 months across all children decreases your risk, and it protects your child's health, too.", :group_id => group_id, :risk_level => lower_risk_level)
 
 breastfeeding_question = Question.create(:question_name => "How many months (total) did you breast feed across all your children?", :group_id => group_id, :input_type => radio, :category => health_history_category)
 
@@ -212,7 +212,7 @@ exercise_question = Question.create(:question_name => "How many days per week do
 
 for exercise in 0..7
   exercise_option_choice = OptionChoice.create(:option_choice_name => exercise)
-  if exercise > 2
+  if exercise > 3
     QuestionOption.create(:question => exercise_question, :option_choice => exercise_option_choice, :risk_level => lower_risk_level, :risk_message => lower_risk_message)  
   else
     QuestionOption.create(:question => exercise_question, :option_choice => exercise_option_choice, :risk_level => higher_risk_level, :risk_message => higher_risk_message)
@@ -235,7 +235,7 @@ QuestionOption.create(:question => fragrances_question, :option_choice => fragra
 ### Plastics/glass
 group_id += 1
 higher_risk_message = RiskMessage.create(:message => "Bisphenol A (BPA) and phthalates (pronounced tha-lates) are chemicals in plastic containers and some food packaging. Researchers are investigating their potential links to breast cancer risk. When possible, microwave your food in glass dishes, reduce the use of canned goods and avoid plastic containers with recycle codes 3, 6 and 7.", :group_id => group_id, :risk_level => higher_risk_level)
-lower_risk_message = RiskMessage.create(:message => "Great! Keep using glass containers for food whenever you can.", :group_id => group_id, :risk_level => lower_risk_level)
+lower_risk_message = RiskMessage.create(:message => "Good! Keep using glass containers for food whenever you can.", :group_id => group_id, :risk_level => lower_risk_level)
 
 materials_question = Question.create(:question_name => "Do you store, serve or microwave food in plastic or glass dishes?", :group_id => group_id, :input_type => radio, :category => environment_category)
 
@@ -250,7 +250,7 @@ group_id += 1
 higher_risk_message = RiskMessage.create(:message => "Oral contraceptives and hormone replacement therapy (HRT) increase a woman's lifetime exposure to estrogen, increasing her risk for breast cancer. Avoid prolonged use of menopausal HRT, unless recommended by your doctor.", :group_id => group_id, :risk_level => higher_risk_level)
 lower_risk_message = RiskMessage.create(:message => "Great! Oral contraceptives and hormone replacement therapy (HRT) increase a woman's lifetime exposure to estrogen, so avoid prolonged exposure when possible.", :group_id => group_id, :risk_level => lower_risk_level)
 
-hormones_question = Question.create(:question_name => "Have you used birth control for 10+ years or hormone replacement therapy for 5+ years?", :group_id => group_id, :input_type => radio, :category => environment_category)
+hormones_question = Question.create(:question_name => "Have you used oral birth control for 10+ years or hormone replacement therapy for 5+ years?", :group_id => group_id, :input_type => radio, :category => environment_category)
 
 QuestionOption.create(:question => hormones_question, :option_choice => yes_option_choice, :risk_level => higher_risk_level, :risk_message => higher_risk_message)
 QuestionOption.create(:question => hormones_question, :option_choice => no_option_choice, :risk_level => lower_risk_level, :risk_message => lower_risk_message)
@@ -258,7 +258,7 @@ QuestionOption.create(:question => hormones_question, :option_choice => no_optio
 ### Screening: look and feel
 group_id += 1
 higher_risk_message = RiskMessage.create(:message => "Know the normal look and feel of your breasts so that it is easier to spot possible abnormalities.", :group_id => group_id, :risk_level => higher_risk_level)
-lower_risk_message = RiskMessage.create(:message => "Great! Knowing the normal look and feel of your breasts makes it easier to spot possible abnormalities.", :group_id => group_id, :risk_level => lower_risk_level)
+lower_risk_message = RiskMessage.create(:message => "Excellent! Knowing the normal look and feel of your breasts makes it easier to spot possible abnormalities.", :group_id => group_id, :risk_level => lower_risk_level)
 
 screening_question = Question.create(:question_name => "Do you know the normal look and feel of your breasts?", :group_id => group_id, :input_type => radio, :category => screening_category)
 
@@ -268,7 +268,7 @@ QuestionOption.create(:question => screening_question, :option_choice => no_opti
 ### Screening: talked to physician
 group_id += 1
 higher_risk_message = RiskMessage.create(:message => "With your physician, discuss your family history, annual exams and the age to start mammograms.", :group_id => group_id, :risk_level => higher_risk_level)
-lower_risk_message = RiskMessage.create(:message => "Great! Be sure to discuss your family history, annual exams and the age to start mammograms.", :group_id => group_id, :risk_level => lower_risk_level)
+lower_risk_message = RiskMessage.create(:message => "Fantastic! Be sure to discuss your family history, annual exams and the age to start mammograms.", :group_id => group_id, :risk_level => lower_risk_level)
 
 screening_question = Question.create(:question_name => "Have you talked with your personal care physician about your breast health?", :group_id => group_id, :input_type => radio, :category => screening_category)
 
@@ -289,7 +289,7 @@ QuestionOption.create(:question => screening_question, :option_choice => no_opti
 # User isn't explicitly asked BMI, but these rows are used to store the user's BMI as a range with a particular feedback message.
 group_id += 1
 higher_risk_message = RiskMessage.create(:message => "Having a Body Mass Index (BMI) of 25 or higher increases your risk for breast cancer. Keep reading to learn about changes you can make to your diet and exercise routines to maintain a healthy weight and lower your risk.", :group_id => group_id, :risk_level => higher_risk_level)
-lower_risk_message = RiskMessage.create(:message => "Congratulations! By maintaining your BMI between 18.5 and 24, you're reducing your risk for postmenopausal breast cancer. Keep reading for more ideas on steps in maintaining a healthy lifestyle and reducing breast cancer risk.", :group_id => group_id, :risk_level => lower_risk_level)
+lower_risk_message = RiskMessage.create(:message => "sBy maintaining your BMI between 18.5 and 24, you're reducing your risk for postmenopausal breast cancer. Keep reading for more ideas on steps in maintaining a healthy lifestyle and reducing breast cancer risk.", :group_id => group_id, :risk_level => lower_risk_level)
 
 bmi_question = Question.create(:question_name => "Your BMI", :group_id => group_id, :input_type => select, :category => health_history_category)
 
@@ -302,5 +302,6 @@ QuestionOption.create(:question => bmi_question, :option_choice => bmi_option_ch
 bmi_option_choice = OptionChoice.create(:option_choice_name => "Overweight (25 - 29.9)", :option_choice_value => 29.9)
 QuestionOption.create(:question => bmi_question, :option_choice => bmi_option_choice, :risk_level => higher_risk_level, :risk_message => higher_risk_message)
 
-bmi_option_choice = OptionChoice.create(:option_choice_name => "Obese (30+)", :option_choice_value => 30)
+# Max BMI for the height and weight combinations available is 95.79, so provide 100 as the upper limit
+bmi_option_choice = OptionChoice.create(:option_choice_name => "Obese (30+)", :option_choice_value => 100)
 QuestionOption.create(:question => bmi_question, :option_choice => bmi_option_choice, :risk_level => higher_risk_level, :risk_message => higher_risk_message)

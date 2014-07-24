@@ -12,6 +12,11 @@ button.secondary,
     background:#A29097;
 }
 
+button.radius,
+.button.radius {
+    border-radius:8px;
+}
+
 footer {
     line-height:1.2;
     font-size:0.8em;
@@ -217,6 +222,11 @@ fieldset legend {
     font-weight:bold;
 }
 
+#risk-message img {
+    vertical-align:bottom;
+    width:2em;
+}
+
 .progress .meter {
     -webkit-transition:width 0.7s ease;
     -moz-transition:width 0.7s ease;
@@ -231,6 +241,15 @@ fieldset legend {
 .question fieldset legend,
 .question label {
     font-weight:bold;
+}
+
+.question .unanswered label img {
+    display:none;
+}
+
+.question label img {
+    float:right;
+    width:2em;
 }
 
 .question fieldset label {
@@ -362,10 +381,26 @@ fieldset legend {
     font-size:1.1em;
 }
 
+#results-modal {
+    top:50%;
+    margin-top:-8.25em;
+    max-width:80%;
+}
+
+#results-modal p img {
+    vertical-align: top;
+}
+
+#results-modal .close-reveal-modal {
+    top:-0.5rem;
+    right:0.125rem;
+}
+
+
 /*
  * Resources
  */
-#resources ul {
+/*#resources ul {
     margin:0 -0.9375rem 1em -0.9375rem;
     list-style:none;
 }
@@ -389,7 +424,7 @@ fieldset legend {
     float:right;
     font-weight:bold;
     color:#000;
-}
+}*/
 
 @media screen and (max-width: 30em) {
     #home iframe {
@@ -412,14 +447,14 @@ fieldset legend {
        height:28em;
     }
     
-    #resources ul {
+/*    #resources ul {
         margin:0 0 1em 0;
     }
     
     #resources ul li {
         border-right:1px solid #ccc;
         border-left:1px solid #ccc;
-    }
+    }*/
 }
 
 @media only screen and (max-width:60em){
@@ -435,6 +470,7 @@ fieldset legend {
 @media only screen and (max-width: 40em) {
     dialog, .reveal-modal {
       min-height: 0;
+      margin-left:10%;
     }
 }
 

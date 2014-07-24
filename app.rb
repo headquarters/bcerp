@@ -33,9 +33,11 @@ DataMapper.finalize
 
 SITE_TITLE = "Breast Health Awareness"
 
-# There are 17 questions. Height and weight count as 1 question (BMI).
+# Height and weight count as 1 question (BMI).
+TOTAL_QUESTIONS = 17
+
 # Use round() when displaying.
-INCREMENT = 100.0/17
+INCREMENT = 100.0/TOTAL_QUESTIONS
 
 # Group ID is set manually in the schema.rb
 HEIGHT_WEIGHT_GROUP_ID = 6
@@ -61,18 +63,25 @@ get '/' do
   erb :home  
 end
 
+get '/questionnaire/intro' do
+  erb :intro
+end
+
 get '/questionnaire' do
   @active = "questionnaire"
+  # "#{@session.current_question.inspect}"
   if !@session.current_question.nil?
     redirect "/questionnaire/#{@session.current_question}"
   else
-    erb :intro
+    redirect "/questionnaire/1"
   end
 end
 
 get '/results/dismiss' do
-  @session.has_viewed_results = true
-  did_save = @session.save
+  # While still developing...
+  # @session.has_viewed_results = true
+  # did_save = @session.save
+  did_save = true
   
   if request.xhr?
     content_type :json
@@ -80,6 +89,12 @@ get '/results/dismiss' do
   else
     redirect "/results"
   end
+end
+
+get '/results/shared' do
+  shared_session_id = params[:session_id]
+  
+  "You are viewing " + shared_session_id
 end
 
 ["/results", "/questionnaire/results"].each do |path|
@@ -158,6 +173,7 @@ get '/questionnaire/:group_id' do
   
   # assumes all questions in a group share the same category
   @category_name = @questions.first.category.category_name
+  @category_identifier = @questions.first.category.category_identifier
   
   if group_id != HEIGHT_WEIGHT_GROUP_ID.to_s
     @risk_messages = RiskMessage.all(:group_id => group_id)
@@ -193,7 +209,7 @@ post '/questionnaire/:group_id' do
   # put the same high risk answer there???
 
   if !answers.nil?
-    if group_id == HEIGHT_WEIGHT_GROUP_ID.to_s
+    if group_id.to_i == HEIGHT_WEIGHT_GROUP_ID
       height_question_option_id = answers[HEIGHT_QUESTION_ID.to_s]
       weight_question_option_id = answers[WEIGHT_QUESTION_ID.to_s]
       
@@ -269,11 +285,6 @@ get '/stories/:view' do
   erb "stories/#{params[:view]}".to_sym
 end
 
-get '/about' do
-  @active = "about"
-  erb :about
-end
-
 get '/reset' do
   # clear previous session, but leave the data in the database
   
@@ -293,9 +304,8 @@ def get_progress
   # in answers table, count number of rows with this session_id
   count = Answer.count(:session_id => @session.id, :conditions => ['group_id != ?', HEIGHT_WEIGHT_GROUP_ID])
   
-  # there are only 17 questions (height and weight are 1 and BMI is not visible to users)
-  if count > 17
-    count = 17
+  if count > TOTAL_QUESTIONS
+    count = TOTAL_QUESTIONS
   end
   
   return count * INCREMENT
@@ -304,4 +314,17 @@ end
 def calculate_bmi(weight_in_pounds, height_in_inches)
   # coerce values to float to force float division, rather than integer division
   return ((weight_in_pounds.to_f/height_in_inches.to_f**2) * 703).round(2)
+end
+
+helpers do
+  def prevent_widows(text)
+    if text.kind_of? String
+      trimmed_text = text.rstrip
+      last_space_index = trimmed_text.rindex(" ")
+      
+      text[last_space_index] = "&nbsp;"
+    end
+
+    return text
+  end
 end

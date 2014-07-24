@@ -1,6 +1,6 @@
 <div class="group-<%= @group_id %> question-<%= question.id %>">
 <% if question.input_type.input_type_name == "select" %>
-    <label for="question-<%= question.id %>"><%= question.question_name %></label>
+    <label for="question-<%= question.id %>"><%= prevent_widows(question.question_name) %></label>
     <select id="question-<%= question.id %>" name="answers[<%= question.id %>]">    
       <% question_options.each do |question_option| %>
         <option value="<%= question_option.id %>"
@@ -12,17 +12,19 @@
       <% end %>
     </select>
 <% elsif question.input_type.input_type_name == "radio" %>
-    <fieldset>
-      <legend><%= question.question_name %></legend>
+    <fieldset class="<% if @answers[question.id].nil? %>unanswered<% end %>">
+      <legend><%= prevent_widows(question.question_name) %></legend>
         <% question_options.each do |question_option| %>
           <label class="<%= question_option.risk_level.risk_level_identifier %>">
-            <!--<img src="/images/icons/exercise-<%= question_option.risk_level.risk_level_identifier %>.png" alt="" />-->
             <input type="radio" name="answers[<%= question.id %>]"
                                 value="<%= question_option.id %>"
                                 <% if !@answers[question.id].nil? && question_option.option_choice.id == @answers[question.id].question_option.option_choice_id %>checked="checked" data-selected="true"<% end %>
                                 data-risk="<%= question_option.risk_level.risk_level_identifier %>" />
             <%=question_option.option_choice.option_choice_name %>
-            <!--<span>(<%= question_option.risk_level.risk_level_name %>)</span>-->
+            <% if @group_id != RACE_GROUP_ID %>
+              <img src="/images/icons/<%= @category_identifier %>-<%= question_option.risk_level.risk_level_identifier %>.png"
+                                    alt="<%= question_option.risk_level.risk_level_name %>" />
+            <% end %>
           </label>
         <% end %>
     </fieldset>
@@ -34,13 +36,13 @@
     <% if !@answers[question.id].nil? %>
     <p>
       <% if @group_id != RACE_GROUP_ID %>
-        <%
-          # Race/ethnicity is not displayed as "higher risk"
-        %>
+        <%# Race/ethnicity is not displayed as "higher risk" %>
+        <img src="/images/icons/<%= @category_identifier %>-<%= @answers[question.id].question_option.risk_level.risk_level_identifier %>.png"
+                      alt="" />
         <span class="<%= @answers[question.id].question_option.risk_level.risk_level_identifier %>"><%= @answers[question.id].question_option.risk_level.risk_level_name %>:</span>
       <% end %>
       <% if !@answers[question.id].question_option.risk_message.nil? %>
-        <%= @answers[question.id].question_option.risk_message.message %> <a href="/resources/more_info">More information &rsaquo;</a>
+        <%= @answers[question.id].question_option.risk_message.message %> <a href="/resources">More&nbsp;information &rsaquo;</a>
       <% end %>
     </p>
   <% end %>

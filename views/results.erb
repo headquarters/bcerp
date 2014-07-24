@@ -5,24 +5,31 @@
         </div>
     </div>
     <div class="row">
-        <% if !@session.has_viewed_results && @session.progress == 100.0 %>
+        <%# if !@session.has_viewed_results && @session.progress == 100.0 %>
             <div class="large-7 columns end">
                 <!--<div class="panel callout">-->
-                <div id="results-modal" class="reveal-modal medium" data-reveal>
+                <div id="results-modal" class="reveal-modal medium" data-reveal data-css-top="50%">
                     <p>
-                    <% if @lower_risk_count > @higher_risk_count %>
-                        Congratulations! You have <%= @lower_risk_count %> lower risk indicators and only <%= @higher_risk_count %> higher risk ones. To learn more
-                        about keeping your risk low, check out the information under <a href="/resources/more_info">Resources</a>.
-                    <% else %>
-                        You have some room for improvement&mdash;you have <%= @higher_risk_count %> higher risk indicators and <%= @lower_risk_count %> lower risk indicators. To learn more
-                        about keeping your risk low, check out the information under <a href="/resources/more_info">Resources</a>.
-                    <% end %>
+                        Congratulations on completing the questionnaire! 
+                        <% if @higher_risk_count < 8 %>
+                            You are doing great!
+                        <% elsif @higher_risk_count < 12 %>
+                            You are doing pretty well.
+                        <% else %>
+                            You could decrease your risk in several areas.
+                        <% end %>
+                        You have <%= @lower_risk_count %> lower risk <img src="/images/low-risk-key.png" alt="" /> factors and
+                        <%= @higher_risk_count %> higher risk <img src="/images/high-risk-key.png" alt="" /> factors.
+                        <% if @lower_risk_count < TOTAL_QUESTIONS %>
+                            Click <strong>See My Results</strong> to see the areas you could improve on.    
+                        <% end %>                        
                     </p>
+                    <a href="/results/dismiss" class="button rounded close">See My Results</a>
                     <!--<a href="#" class="dismiss">Don't show this again</a>-->
-                    <a href="/results/dismiss" class="close-reveal-modal">&#215;</a>
+                    <!--<a href="/results/dismiss" class="close-reveal-modal">&#215;</a>-->
                 </div>
             </div>
-        <% end %>
+        <%# end %>
     </div>
     <div class="row">
         <div class="large-7 columns end">
@@ -51,9 +58,9 @@
             <ul id="key">
                 <li><img src="/images/high-risk-key.png" alt="" /> Higher Risk</li>
                 <li><img src="/images/low-risk-key.png" alt="" /> Lower Risk</li>
-                <li><img src="/images/unanswered-key.png" alt="" /> Unanswered Question</li>
+                <li><img src="/images/unanswered-key.png" alt="" /> Unanswered</li>
             </ul>        
-            <a href="/questionnaire" class="button small">Back to Questionnaire</a>
+            <a href="/questionnaire" class="button small radius">Back to Questionnaire</a>
             <%= erb :share_buttons_partial %>
         </div>
     </div>

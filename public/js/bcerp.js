@@ -17,7 +17,10 @@ var BCERP = (function($, window){
     function saveAnswer(){
         var form = $('form');
         var href = $('#skip-button').attr('href');
-        var nextButton = $('<a></a>').attr('href', href).addClass("button small radius").html("Next &raquo;");
+        var nextButton = $('<a></a>').attr('id', 'next-button')
+                                     .attr('href', href)
+                                     .addClass("button small radius")
+                                     .html("Next &raquo;");
     
         // replace the form submit button with a simple link since the user won't have to submit the form normally
         var submitButton = form.find('button[type="submit"]').replaceWith(nextButton);
@@ -50,7 +53,10 @@ var BCERP = (function($, window){
     };
     
     self.bindCloseResultsModalEvent = function(){
-        $('#results-modal .close-reveal-modal').on('click', function(e){
+        //$('#results-modal .close-reveal-modal').on('click', function(e){
+        $('#results-modal .close').on('click', function(e){
+            e.preventDefault();
+            $('#results-modal').foundation('reveal', 'close');
             $.ajax({
                 url: $(this).attr('href'),
                 type: "GET"
@@ -71,6 +77,8 @@ var BCERP = (function($, window){
             var riskMessageBlock = $('#risk-message');
             var riskLevel = $this.data('risk');
         
+            $this.parents('fieldset').removeClass('unanswered');
+            
             if (this.nodeName.toLowerCase() == "select") {
                 //the data-risk attribute is on each <option> inside the <select>, not on the <select> itself
                 riskLevel = $this.find(':selected').data('risk');
