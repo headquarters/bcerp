@@ -322,7 +322,9 @@ helpers do
       trimmed_text = text.rstrip
       last_space_index = trimmed_text.rindex(" ")
       
-      text[last_space_index] = "&nbsp;"
+      if !last_space_index.nil?
+        text[last_space_index] = "&nbsp;"
+      end
     end
 
     return text

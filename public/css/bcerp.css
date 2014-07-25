@@ -209,6 +209,10 @@ fieldset legend {
   background:transparent;
 }
 
+#risk-message {
+    padding-top:0.5em;
+}
+
 #risk-message .higher-risk {
   color:#B6004E;
 }
@@ -248,18 +252,24 @@ fieldset legend {
 }
 
 .question label img {
-    float:right;
+    position:absolute;
+    right:2px;
+    top:50%;
+    margin-top:-1em;
     width:2em;
 }
 
 .question fieldset label {
     margin-bottom: 0;
     border: 1px solid #ccc;
-    padding: 0 0.5em;
-    line-height: 2;
+    padding:0.5em;
+    line-height: 1.5;
     background:#FAFAFA;
     margin-bottom:0.2em;
     font-weight:normal;
+    position: relative;
+    top:0;
+    left:0;
 }
 
 .question fieldset label:hover {

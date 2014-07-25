@@ -20,7 +20,7 @@
                                 value="<%= question_option.id %>"
                                 <% if !@answers[question.id].nil? && question_option.option_choice.id == @answers[question.id].question_option.option_choice_id %>checked="checked" data-selected="true"<% end %>
                                 data-risk="<%= question_option.risk_level.risk_level_identifier %>" />
-            <%=question_option.option_choice.option_choice_name %>
+            <%= prevent_widows(question_option.option_choice.option_choice_name) %>
             <% if @group_id != RACE_GROUP_ID %>
               <img src="/images/icons/<%= @category_identifier %>-<%= question_option.risk_level.risk_level_identifier %>.png"
                                     alt="<%= question_option.risk_level.risk_level_name %>" />

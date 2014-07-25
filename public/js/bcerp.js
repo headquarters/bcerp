@@ -91,11 +91,14 @@ var BCERP = (function($, window){
             } else {
                 riskMessageBlock.empty();
             }
-            riskMessageBlock.css('background', '#FFFF6B')
-                            .stop()
-                            .animate({
-                                backgroundColor: "transparent"
-                            }, 1500);
+            if (riskLevel != "no-risk") {
+                riskMessageBlock.css('background', '#FFFF6B')
+                                .stop()
+                                .animate({
+                                    backgroundColor: "transparent"
+                                }, 1500);
+            }
+
         });
         
         $('#question-6, #question-7').on('change', function(){
@@ -151,7 +154,6 @@ var BCERP = (function($, window){
             }                
         }        
     };
-    
     
     return self;
 })(jQuery, window);
