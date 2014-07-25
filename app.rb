@@ -69,7 +69,6 @@ end
 
 get '/questionnaire' do
   @active = "questionnaire"
-  # "#{@session.current_question.inspect}"
   if !@session.current_question.nil?
     redirect "/questionnaire/#{@session.current_question}"
   else

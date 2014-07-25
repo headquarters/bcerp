@@ -10,7 +10,8 @@
                 <!--<div class="panel callout">-->
                 <div id="results-modal" class="reveal-modal medium" data-reveal data-css-top="50%">
                     <p>
-                        Congratulations on completing the questionnaire! 
+                        Congratulations on completing the questionnaire!
+                        <%# change this logic to check higher risk count VS lower risk count %>
                         <% if @higher_risk_count < 8 %>
                             You are doing great!
                         <% elsif @higher_risk_count < 12 %>
@@ -21,7 +22,7 @@
                         You have <%= @lower_risk_count %> lower risk <img src="/images/low-risk-key.png" alt="" /> factors and
                         <%= @higher_risk_count %> higher risk <img src="/images/high-risk-key.png" alt="" /> factors.
                         <% if @lower_risk_count < TOTAL_QUESTIONS %>
-                            Click <strong>See My Results</strong> to see the areas you could improve on.    
+                            Click <a href="/results/dismiss" class="close">See My Results</a> to see the areas you could improve on.    
                         <% end %>                        
                     </p>
                     <a href="/results/dismiss" class="button radius close">See My Results</a>
