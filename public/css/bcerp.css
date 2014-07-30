@@ -38,6 +38,7 @@ select {
 .breadcrumb {
     font-size:0.9em;
     color:#666;
+    padding:0.25em 0;
 }
 
 html {

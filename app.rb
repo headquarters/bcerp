@@ -271,7 +271,7 @@ end
 
 get '/resources/:view' do
   @active = "resources"
-  erb "#{params[:view]}".to_sym
+  erb "resources/#{params[:view]}".to_sym
 end
 
 get '/stories' do
