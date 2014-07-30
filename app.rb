@@ -266,7 +266,7 @@ end
 
 get '/resources' do
   @active = "resources"
-  erb :resources
+  erb "resources/index".to_sym
 end
 
 get '/resources/:view' do
@@ -276,7 +276,7 @@ end
 
 get '/stories' do
   @active = "stories"
-  erb :stories
+  erb "stories/index".to_sym
 end
 
 get '/stories/:view' do
