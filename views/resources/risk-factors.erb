@@ -4,7 +4,7 @@
     <h2>Risk Factors</h2>
     <ul id="risk-factors">
       <% @questions.each_with_index do |q, index| %>
-        <li class="row" id="group-<%= q.group_id %>">
+        <li class="row" id="group-<%= (q.group_id == BMI_GROUP_ID) ? HEIGHT_WEIGHT_GROUP_ID : q.group_id %>">
           <h3><%= prevent_widows(q.question_name) %></h3>
           <% if q.group_id == RACE_GROUP_ID %>
             <% risk_message = @risk_messages.first(:group_id => q.group_id) %>
