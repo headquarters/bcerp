@@ -291,7 +291,7 @@ group_id += 1
 higher_risk_message = RiskMessage.create(:message => "Having a Body Mass Index (BMI) of 25 or higher increases your risk for breast cancer. Keep reading to learn about changes you can make to your diet and exercise routines to maintain a healthy weight and lower your risk.", :group_id => group_id, :risk_level => higher_risk_level)
 lower_risk_message = RiskMessage.create(:message => "By maintaining your BMI between 18.5 and 24, you're reducing your risk for postmenopausal breast cancer. Keep reading for more ideas on steps in maintaining a healthy lifestyle and reducing breast cancer risk.", :group_id => group_id, :risk_level => lower_risk_level)
 
-bmi_question = Question.create(:question_name => "Your BMI", :group_id => group_id, :input_type => select, :category => health_history_category)
+bmi_question = Question.create(:question_name => "BMI (Body Mass Index)", :group_id => group_id, :input_type => select, :category => health_history_category)
 
 bmi_option_choice = OptionChoice.create(:option_choice_name => "Underweight (< 18.5)", :option_choice_value => 18.5)
 QuestionOption.create(:question => bmi_question, :option_choice => bmi_option_choice, :risk_level => lower_risk_level, :risk_message => lower_risk_message)

@@ -437,6 +437,23 @@ fieldset legend {
     color:#000;
 }*/
 
+#risk-factors {
+    list-style:none;
+}
+
+#risk-factors li {
+    margin-bottom:1em;
+}
+
+#risk-factors li h3 {
+    font-size:1.2em;
+}
+
+#risk-factors li h4 {
+    font-size:1em;
+    font-weight:bold;
+}
+
 @media screen and (max-width: 30em) {
     #home iframe {
         height:16em;

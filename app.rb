@@ -263,6 +263,13 @@ post '/questionnaire/:group_id' do
   end
 end
 
+get '/resources/risk-factors' do
+  
+  @questions = Question.all(:conditions => ['group_id != ?', HEIGHT_WEIGHT_GROUP_ID])
+  @risk_messages = RiskMessage.all()  
+  
+  erb "resources/risk-factors".to_sym
+end
 
 get '/resources' do
   @active = "resources"
