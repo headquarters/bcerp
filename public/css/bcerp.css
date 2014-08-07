@@ -214,11 +214,13 @@ fieldset legend {
     padding-top:0.5em;
 }
 
-#risk-message .higher-risk {
+#risk-message .higher-risk,
+#risk-factors .higher-risk {
   color:#B6004E;
 }
 
-#risk-message .lower-risk {
+#risk-message .lower-risk,
+#risk-factors .lower-risk {
   color:#A3A1C6;
 }
 

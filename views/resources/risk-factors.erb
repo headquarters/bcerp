@@ -15,15 +15,15 @@
             <div class="medium-6 columns">
               <% risk_message = @risk_messages.first(:group_id => q.group_id, :risk_level_id => LOWER_RISK_LEVEL_ID) %>
               <% if !risk_message.nil? %>
-                <h4><%= risk_message.risk_level.risk_level_name %></h4>
-                <%= risk_message.message %>
+                <h4 class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %></h4>
+                <%= risk_message.long_message %>
               <% end %>
             </div>
             <div class="medium-6 columns">
               <% risk_message = @risk_messages.first(:group_id => q.group_id, :risk_level_id => HIGHER_RISK_LEVEL_ID) %>
               <% if !risk_message.nil? %>
-                <h4><%= risk_message.risk_level.risk_level_name %></h4>
-                <%= risk_message.message %>
+                <h4 class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %></h4>
+                <%= risk_message.long_message %>
               <% end %>
             </div>
           <% end %>

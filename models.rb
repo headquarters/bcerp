@@ -48,6 +48,7 @@ class RiskMessage
   
   property :id, Serial
   property :message, Text
+  property :long_message, Text
   property :group_id, Integer
   
   belongs_to :risk_level
