@@ -1,0 +1,38 @@
+<div id="risk-factors" class="row">
+  <div class="large-12 columns">
+    <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/resources">Resources</a> &rsaquo; Risk Factors</div>
+    <h2>Risk Factors</h2>
+    <ul id="risk-factors">
+      <% @questions.each_with_index do |q, index| %>
+        <li class="row" id="group-<%= (q.group_id == BMI_GROUP_ID) ? HEIGHT_WEIGHT_GROUP_ID : q.group_id %>">
+          <h3><%= prevent_widows(q.question_name) %></h3>
+          <% if q.group_id == RACE_GROUP_ID %>
+            <% risk_message = @risk_messages.first(:group_id => q.group_id) %>
+            <div class="medium-12 columns">
+              <%= risk_message.message %>
+            </div>
+          <% else %>
+            <%# TODO: Remove ORM calls from this view. This hits the database way too much. %>
+            <div class="medium-6 columns">
+              <% risk_message = @risk_messages.first(:group_id => q.group_id, :risk_level_id => LOWER_RISK_LEVEL_ID) %>
+              <% if !risk_message.nil? %>
+                <h4 class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %></h4>
+                <%= risk_message.long_message %>
+              <% end %>
+            </div>
+            <div class="medium-6 columns">
+              <% risk_message = @risk_messages.first(:group_id => q.group_id, :risk_level_id => HIGHER_RISK_LEVEL_ID) %>
+              <% if !risk_message.nil? %>
+                <h4 class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %></h4>
+                <%= risk_message.long_message %>
+              <% end %>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <p>
+      <a href="/questionnaire" class="button small radius">Back to Questionnaire</a>
+    </p>
+  </div>
+</div>

@@ -443,7 +443,7 @@ fieldset legend {
     list-style:none;
 }
 
-#risk-factors li {
+#risk-factors > li {
     margin-bottom:1em;
 }
 
@@ -526,30 +526,3 @@ fieldset legend {
         font-size:0.9em;
     }
 }
-
-/*
- *
- * Tests
- */
-/*
-.exercise label.higher-risk,
-.exercise label.lower-risk {
-    padding-left:0.5em;
-    background: #fff;
-}
-
-.exercise label.higher-risk {
-    color:#B6004E;
-}
-
-.exercise label.lower-risk {
-    color: #A3A1C6;
-}
-
-.exercise label img {
-    display:none;
-}
-
-.exercise label span {
-    font-size:0.9em;
-}*/

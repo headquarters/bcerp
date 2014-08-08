@@ -17,46 +17,14 @@
 		  <nav class="top-bar" data-topbar>
 			<ul class="title-area">
 				<li class="name">
-				  <h1><a href="/"><img id="logo" src="/images/bcerp-logo.png" alt="BCERP Logo" /> Breast Health Guide</a></h1>
+				  <h1><a href="/"><img id="logo" src="/images/bcerp-logo.png" alt="BCERP Logo" /> <%= SITE_TITLE %></a></h1>
 				</li>
-			  <!--<li class="toggle-topbar menu-icon"><a href="#menu"><span>Menu</span></a></li>-->
 			</ul>
-<% if false %>			
-			<section class="top-bar-section">
-			  <ul id="menu" class="right">
-				<!--<li <% if @active == "home" %>class="active"<% end %>><a href="/">Home</a></li>-->
-				<li <% if @active == "questionnaire" %>class="active"<% end %>>
-					<a href="/questionnaire">
-						<% if @session.progress > 0 %>
-							Continue Questionnaire
-						<% else %>
-							Find Out Your Risk
-						<% end %>
-					</a>
-				</li>
-				<!--<li <% if @active == "resources" %>class="active"<% end %>><a href="/resources">Resources</a></li>-->
-			  </ul>
-			</section>
-<% end %>
 		  </nav>
 		</header>
 		<article id="article">
 			<%= yield %>
-		</article>
-
-<% if false #cheap comment for now
-%>
-		<footer>
-			<ul id="secondary-menu">				
-				<li <% if @active == "home" %>class="active"<% end %>><a href="/">Home</a></li>
-				<li <% if @active == "assessment" %>class="active"<% end %>><a href="/assessment">Find Out Your Risk</a></li>
-				<li <% if @active == "resources" %>class="active"<% end %>><a href="/resources">Resources</a></li>
-			</ul>
-			<div class="row">
-			  &copy; The University of North Carolina at Chapel Hill. All Rights Reserved.
-			</div>
-		</footer>
-<% end %>		
+		</article>	
 		<nav id="sticky-nav">
 			<ul>
 				<li>
@@ -81,10 +49,8 @@
 		</nav>		
 		<script src="/js/vendor/jquery.js"></script>
 		<script src="/js/foundation/foundation.js"></script>
-		<!--<script src="/js/foundation/foundation.accordion.js"></script>-->
 		<script src="/js/foundation/foundation.topbar.js"></script>
 		<script src="/js/foundation/foundation.reveal.js"></script>
-		<!-- TODO: this should only be loaded on question pages, not globally -->
 		<script src="/js/jquery.color-2.1.2.min.js"></script>
 		<script src="/js/bcerp.js"></script>
 	</body>

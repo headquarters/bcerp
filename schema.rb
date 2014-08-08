@@ -78,6 +78,19 @@ QuestionOption.create(
   :risk_message => higher_risk_message
 )
 
+
+
+
+Resource.create(
+  :text => '<a href="http://www.cdc.gov/cancer/breast/pdf/BreastCancer_YoungWomen_FactSheet.pdf">Breast Cancer in Young Women fact sheet (PDF)</a>',
+  :group_id => group_id  
+)
+
+Resource.create(
+  :text => '<a href="http://womenshealth.gov/aging/">US DHHS Office of Women\'s Health&mdash;Healthy Aging</a>',
+  :group_id => group_id  
+)
+
 ### Race/Ethnicity
 group_id += 1
 higher_risk_message = RiskMessage.create(
@@ -137,6 +150,32 @@ QuestionOption.create(
   :risk_level => no_risk_level
 )
 
+Resource.create(
+  :text => '<a href="http://cbcs.web.unc.edu/">UNC Lineberger Comprehensive Cancer Center&mdash;The Carolina Breast Cancer Study</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://sisterstudy.niehs.nih.gov/English/index1.htm">NIEHS&mdash;The Sister Study</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.sistersnetworkinc.org/">Sisters Network Inc.</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.wellbodystudy.org/">UNC Chapel Hill&mdash;The Well Body Study</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://ww5.komen.org/uploadedFiles/Content_Binaries/KOMEED079100.pdf">Susan G. Komen&mdash;Triple Negative Breast Cancer (PDF)</a>',
+  :group_id => group_id
+)
+
+
 ### Children
 group_id += 1
 higher_risk_message = RiskMessage.create(
@@ -182,6 +221,21 @@ QuestionOption.create(
   :option_choice => children_option_choice,
   :risk_level => higher_risk_level,
   :risk_message => higher_risk_message
+)
+
+Resource.create(
+  :text => '<a href="http://www.cancer.gov/cancertopics/wyntk/breast/WYNTK_breast.pdf ">NCI&mdash;What You Need to Know about Breast Cancer (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://info.bcerp.org/">NIEHS&mdash;Breast Cancer and the Environment Fact Sheet: The Puberty Connection</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.breastcancerfund.org/assets/pdfs/publications/falling-age-of-puberty-adv-guide.pdf">Breast Cancer Fund&mdash;The Falling Age of Puberty in U.S. Girls: What We Know, What We Need to Know (PDF)</a>',
+  :group_id => group_id
 )
 
 ### Breastfeeding
@@ -230,6 +284,16 @@ QuestionOption.create(
   :risk_message => lower_risk_message
 )
 
+Resource.create(
+  :text => '<a href="http://www.womenshealth.gov/breastfeeding/">US DHHS Office of Women\'s Health&mdash;Breastfeeding</a>',
+  :group_id => group_id  
+)
+
+Resource.create(
+  :text => '<a href="http://www.surgeongeneral.gov/library/calls/breastfeeding/factsheet.html">Surgeon general\'s call to support breastfeeding&mdash;fact sheet</a>',
+  :group_id => group_id  
+)
+
 ### Relatives
 group_id += 1
 higher_risk_message = RiskMessage.create(
@@ -267,6 +331,16 @@ QuestionOption.create(
   :option_choice => no_option_choice,
   :risk_level => lower_risk_level,
   :risk_message => higher_risk_message
+)
+
+Resource.create(
+  :text => '<a href="http://www.cdc.gov/features/hereditarycancer/">Centers for Disease Control and Prevention</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://sisterstudy.niehs.nih.gov/English/index1.htm">NIH&mdash;The Sister Study</a>',
+  :group_id => group_id
 )
 
 ### Height
@@ -393,6 +467,21 @@ QuestionOption.create(
   :risk_message => higher_risk_message
 )
 
+Resource.create(
+  :text => '<a href="http://www.iom.edu/~/media/Files/Report%20Files/2011/Breast-Cancer-Environment/BreastCancerReportbrief_2.pdf">Institute of Medicine&mdash;Breast Cancer and the Environment: A Life Course Approach (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.choosemyplate.gov/">Choose My Plate</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.cnpp.usda.gov/DGAs2010-PolicyDocument.htm">Dietary Guidelines for Americans</a>',
+  :group_id => group_id
+)
+
 ### Fresh/frozen foods
 group_id += 1
 higher_risk_message = RiskMessage.create(
@@ -432,6 +521,21 @@ QuestionOption.create(
   :risk_message => higher_risk_message
 )
 
+Resource.create(
+  :text => '<a href="http://info.bcerp.org/AA/BCERP_Brochure__AA_VerA_Final.pdf">NIEHS Breast Cancer and the Environment Resource Program (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.niehs.nih.gov/health/assets/docs_a_e/bisphenol_a_bpa_508.pdf">NIEHS National Toxicology Program&mdash;Bisphenol A (BPA) Fact Sheet (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="https://www.mountsinai.org/static_files/MSMC/Files/Patient%20Care/Children/Childrens%20Environmental%20Health%20Center/Fact%20Sheet%20-%20Plastic&BPA.pdf">Mt. Sinai Children\'s Environmental Health Center&mdash;"Check the Kind of Plastics You Use" (PDF)</a>',
+  :group_id => group_id
+)
+
 ### Charred Meat
 group_id += 1
 higher_risk_message = RiskMessage.create(
@@ -467,6 +571,22 @@ QuestionOption.create(
   :risk_level => lower_risk_level,
   :risk_message => lower_risk_message
 )
+
+Resource.create(
+  :text => '<a href="http://www.breastcancer.org/risk/factors/grilled_food">Breastcancer.org</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.foodsafety.wisc.edu/assets/pdf_Files/FFH_Reducing%20Cancer%20Risk%20from%20Grilled%20Meats.pdf">University of Wisconsin at Madison&mdash;Fact sheet&mdash;Reducing Cancer Risk from Grilled Meat (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.cancer.gov/cancertopics/factsheet/Risk/cooked-meats">NCI&mdash;Chemicals in Meat Cooked at High Temperatures and Cancer Risk</a>',
+  :group_id => group_id
+)
+
 
 ### Alcohol
 group_id += 1
@@ -504,6 +624,22 @@ QuestionOption.create(
   :risk_level => lower_risk_level,
   :risk_message => lower_risk_message
 )
+
+Resource.create(
+  :text => '<a href="http://rethinkingdrinking.niaaa.nih.gov/whatcountsdrink/whatsastandarddrink.asp">National Institute on Alcohol Abuse and Alcoholism&mdash;Rethinking Drinking&mdash;What\'s a standard drink?</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://rethinkingdrinking.niaaa.nih.gov/whatcountsdrink/HowManyDrinksAreInCommonContainers.asp">NIAAA&mdash;Rethinking Drinking&mdash;How many drinks are in common containers?</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://rethinkingdrinking.niaaa.nih.gov/Strategies/TipsToTry.asp">NIAAA&mdash;Tips to try for limiting consumption</a>',
+  :group_id => group_id
+)
+
 
 ### Exercise
 group_id += 1
@@ -547,6 +683,16 @@ for exercise in 0..7
   end
 end
 
+Resource.create(
+  :text => '<a href="http://www.choosemyplate.gov/physical-activity/increase-physical-activity.html">Choose My Plate&mdash;Tips for Increasing Physical Activity</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.cdc.gov/physicalactivity/">Centers for Disease Control and Prevention&mdash;Physical Activity</a>',
+  :group_id => group_id
+)
+
 ### Fragrances
 group_id += 1
 higher_risk_message = RiskMessage.create(
@@ -584,6 +730,16 @@ QuestionOption.create(
   :option_choice => fragrances_option_choice,
   :risk_level => lower_risk_level,
   :risk_message => lower_risk_message
+)
+
+Resource.create(
+  :text => '<a href="http://info.bcerp.org/AA/BCERP_Brochure__AA_VerA_Final.pdf">NIEHS Breast Cancer and the Environment Resource Program (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://info.bcerp.org/">NIEHS BCERP&mdash;Fact Sheet: The Chemical Connection</a>',
+  :group_id => group_id
 )
 
 ### Plastics/glass
@@ -625,6 +781,22 @@ QuestionOption.create(
   :risk_message => lower_risk_message
 )
 
+Resource.create(
+  :text => '<a href="http://info.bcerp.org/AA/BCERP_Brochure__AA_VerA_Final.pdf">NIEHS Breast Cancer and the Environment Resource Program (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="https://www.mountsinai.org/static_files/MSMC/Files/Patient%20Care/Children/Childrens%20Environmental%20Health%20Center/Fact%20Sheet%20-%20Plastic&BPA.pdf">Mt. Sinai Children\'s Environmental Health Center&mdash;"Check the Kind of Plastics You Use" (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.niehs.nih.gov/health/assets/docs_a_e/bisphenol_a_bpa_508.pdf">NIEHS National Toxicology Program&mdash;Bisphenol A (BPA) Fact Sheet (PDF)</a>',
+  :group_id => group_id
+)
+
+
 ### Hormones
 group_id += 1
 higher_risk_message = RiskMessage.create(
@@ -660,6 +832,11 @@ QuestionOption.create(
   :option_choice => no_option_choice,
   :risk_level => lower_risk_level,
   :risk_message => lower_risk_message
+)
+
+Resource.create(
+  :text => '<a href="http://ww5.komen.org/uploadedFiles/Content_Binaries/806-370.pdf">Susan G. Komen&mdash;How Hormones affect Breast Cancer (PDF)</a>',
+  :group_id => group_id
 )
 
 ### Screening: look and feel
@@ -699,6 +876,21 @@ QuestionOption.create(
   :risk_message => higher_risk_message
 )
 
+Resource.create(
+  :text => '<a href="http://www.cancer.gov/cancertopics/screening/understanding-breast-changes/understanding-breast-changes.pdf">NCI&mdash;Understanding Breast Changes: A Health Guide for Women (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.uspreventiveservicestaskforce.org/uspstf09/breastcancer/brcanrs.pdf">US Preventive Services Task Force Screening Recommendations (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://apps.nccd.cdc.gov/dcpc_Programs/default.aspx?NPID=1">National Breast and Cervical Cancer Early Detection Program (screening options for low income women)</a>',
+  :group_id => group_id
+)
+
 ### Screening: talked to physician
 group_id += 1
 higher_risk_message = RiskMessage.create(
@@ -736,6 +928,31 @@ QuestionOption.create(
   :risk_message => higher_risk_message
 )
 
+Resource.create(
+  :text => '<a href="http://cancercenters.cancer.gov/cancer_centers/index.html">National Cancer Institute&mdash;Cancer Centers</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.uspreventiveservicestaskforce.org/uspstf09/breastcancer/brcanrs.pdf">US Preventive Services Task Force Screening Recommendations (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://apps.nccd.cdc.gov/dcpc_Programs/default.aspx?NPID=1">National Breast and Cervical Cancer Early Detection Program (screening options for low income women)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.cancer.org/">Finding local American Cancer Society branch</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.cancer.org/">Finding local American Cancer Society branch</a>',
+  :group_id => group_id
+)
+
 ### Screening: breast exams
 group_id += 1
 higher_risk_message = RiskMessage.create(
@@ -771,6 +988,30 @@ QuestionOption.create(
   :option_choice => no_option_choice,
   :risk_level => higher_risk_level,
   :risk_message => higher_risk_message
+)
+
+Resource.create(
+  :text => '<a href="http://cancercenters.cancer.gov/cancer_centers/index.html">National Cancer Institute&mdash;Cancer Centers</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.uspreventiveservicestaskforce.org/uspstf09/breastcancer/brcanrs.pdf">US Preventive Services Task Force Screening Recommendations (PDF)</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://apps.nccd.cdc.gov/dcpc_Programs/default.aspx?NPID=1">National Breast and Cervical Cancer Early Detection Program (screening options for low income women)</a>',
+  :group_id => group_id
+)
+Resource.create(
+  :text => '<a href="http://www.cancer.org/">Finding local American Cancer Society branch</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.cancer.org/">Finding local American Cancer Society branch</a>',
+  :group_id => group_id
 )
 
 ### BMI
@@ -813,4 +1054,24 @@ QuestionOption.create(
   :option_choice => bmi_option_choice,
   :risk_level => higher_risk_level,
   :risk_message => higher_risk_message
+)
+
+Resource.create(
+  :text => '<a href="http://health.gov/bmi/">Calculating Your BMI</a>',
+  :group_id => group_id  
+)
+
+Resource.create(
+  :text => '<a href="http://www.iom.edu/~/media/Files/Report%20Files/2011/Breast-Cancer-Environment/BreastCancerReportbrief_2.pdf">Institute of Medicine&mdash;Breast Cancer and the Environment: A Life Course Approach (PDF)</a>',
+  :group_id => group_id  
+)
+
+Resource.create(
+  :text => '<a href="http://www.iom.edu/~/media/Files/Report%20Files/2011/Breast-Cancer-Environment/IOM_breastcancer_QandA.pdf">Institute of Medicine&mdash;Breast Cancer and the Environment: Questions and Answers (PDF)</a>',
+  :group_id => group_id  
+)
+
+Resource.create(
+  :text => '<a href="http://www.cancer.gov/cancertopics/factsheet/Risk/obesity">National Cancer Institute&mdash;Obesity Fact Sheet</a>',
+  :group_id => group_id  
 )

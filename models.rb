@@ -101,3 +101,11 @@ class Answer
   
   property :created_at, DateTime
 end
+
+class Resource
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :text, Text
+  property :group_id, Integer
+end

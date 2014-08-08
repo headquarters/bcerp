@@ -31,7 +31,7 @@ end
 
 DataMapper.finalize
 
-SITE_TITLE = "Breast Health Awareness"
+SITE_TITLE = "My Breast Cancer Risk"
 
 # Height and weight count as 1 question (BMI).
 TOTAL_QUESTIONS = 17
@@ -265,9 +265,31 @@ end
 
 get '/resources/risk-factors' do
   
-  @questions = Question.all(:conditions => ['group_id != ?', HEIGHT_WEIGHT_GROUP_ID])
-  @risk_messages = RiskMessage.all()  
+  @risk_factors = {}
   
+  @questions = Question.all(:conditions => ['group_id != ?', HEIGHT_WEIGHT_GROUP_ID])
+  
+  #@risk_messages = RiskMessage.all()
+
+  @questions.each do |question|
+    group_id = question.group_id
+    # index by group_id that should appear in URL for questions and linking to risk factors
+    index = (question.group_id == BMI_GROUP_ID) ? HEIGHT_WEIGHT_GROUP_ID : question.group_id;
+    
+    @risk_factors[index] = {}
+    @risk_factors[index]["question"] = question;
+    
+    if group_id != RACE_GROUP_ID
+      @risk_factors[index]["lower_risk_message"] = RiskMessage.first(:group_id => group_id, :risk_level_id => LOWER_RISK_LEVEL_ID)    
+      @risk_factors[index]["higher_risk_message"] = RiskMessage.first(:group_id => group_id, :risk_level_id => HIGHER_RISK_LEVEL_ID)
+    else
+      @risk_factors[index]["risk_message"] = RiskMessage.first(:group_id => group_id)
+    end    
+    
+    @risk_factors[index]["resources"] = Resource.all(:group_id => group_id)
+    
+  end
+
   erb "resources/risk-factors".to_sym
 end
 

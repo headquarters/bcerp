@@ -3,30 +3,42 @@
     <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/resources">Resources</a> &rsaquo; Risk Factors</div>
     <h2>Risk Factors</h2>
     <ul id="risk-factors">
-      <% @questions.each_with_index do |q, index| %>
-        <li class="row" id="group-<%= (q.group_id == BMI_GROUP_ID) ? HEIGHT_WEIGHT_GROUP_ID : q.group_id %>">
-          <h3><%= prevent_widows(q.question_name) %></h3>
-          <% if q.group_id == RACE_GROUP_ID %>
-            <% risk_message = @risk_messages.first(:group_id => q.group_id) %>
+      <% @risk_factors.each do |group_id, risk_factor| %>
+        <li class="row" id="group-<%= group_id %>">
+          <h3><%= prevent_widows(risk_factor["question"].question_name) %></h3>
+          <% if group_id == RACE_GROUP_ID %>
             <div class="medium-12 columns">
-              <%= risk_message.message %>
+              <%= risk_factor["risk_message"].message %>
             </div>
           <% else %>
             <div class="medium-6 columns">
-              <% risk_message = @risk_messages.first(:group_id => q.group_id, :risk_level_id => LOWER_RISK_LEVEL_ID) %>
-              <% if !risk_message.nil? %>
-                <h4 class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %></h4>
-                <%= risk_message.long_message %>
+              <% if !risk_factor["higher_risk_message"].nil? %>
+                <h4 class="<%= risk_factor["higher_risk_message"].risk_level.risk_level_identifier %>">
+                  <%= risk_factor["higher_risk_message"].risk_level.risk_level_name %>
+                </h4>
+                <%= risk_factor["higher_risk_message"].long_message %>
               <% end %>
             </div>
             <div class="medium-6 columns">
-              <% risk_message = @risk_messages.first(:group_id => q.group_id, :risk_level_id => HIGHER_RISK_LEVEL_ID) %>
-              <% if !risk_message.nil? %>
-                <h4 class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %></h4>
-                <%= risk_message.long_message %>
+              <% if !risk_factor["lower_risk_message"].nil? %>
+                <h4 class="<%= risk_factor["lower_risk_message"].risk_level.risk_level_identifier %>">
+                  <%= risk_factor["lower_risk_message"].risk_level.risk_level_name %>
+                </h4>
+                <%= risk_factor["lower_risk_message"].long_message %>
               <% end %>
             </div>
+            
           <% end %>
+        
+          <div class="medium-12 columns">
+            <ul>
+              <% risk_factor["resources"].each do |resource| %>
+                <li>
+                  <%= resource.text %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
         </li>
       <% end %>
     </ul>
@@ -35,10 +47,3 @@
     </p>
   </div>
 </div>
-
-<%# if q.group_id == HEIGHT_WEIGHT_GROUP_ID %>
-  <%# next_index = index + 1 %>
-  <%#= prevent_widows(@questions[next_index].question_name) %>
-  <%# delete next item so it doesn't print in the next iteration %>
-  <%# @questions.delete(@questions[next_index]) %>
-<%# end %>
