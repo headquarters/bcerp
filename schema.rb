@@ -928,6 +928,8 @@ QuestionOption.create(
   :risk_message => higher_risk_message
 )
 
+
+
 Resource.create(
   :text => '<a href="http://cancercenters.cancer.gov/cancer_centers/index.html">National Cancer Institute&mdash;Cancer Centers</a>',
   :group_id => group_id
@@ -949,7 +951,7 @@ Resource.create(
 )
 
 Resource.create(
-  :text => '<a href="http://www.cancer.org/">Finding local American Cancer Society branch</a>',
+  :text => '<a href="http://www.breastcancer.org/questions/support">Local breast cancer support groups</a>',
   :group_id => group_id
 )
 
@@ -1010,7 +1012,7 @@ Resource.create(
 )
 
 Resource.create(
-  :text => '<a href="http://www.cancer.org/">Finding local American Cancer Society branch</a>',
+  :text => '<a href="http://www.breastcancer.org/questions/support">Local breast cancer support groups</a>',
   :group_id => group_id
 )
 
