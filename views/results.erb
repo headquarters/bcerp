@@ -61,7 +61,10 @@
                 <li><img src="/images/unanswered-key.png" alt="" /> Unanswered</li>
             </ul>        
             <a href="/questionnaire" class="button small radius">Back to Questionnaire</a>
-            <%= erb :share_buttons_partial %>
+            <%= erb :share_buttons_partial, :locals => {
+                :share_subject => "My breast cancer risk results",
+                :share_body => "Take this questionnaire to find out your breast cancer risk. Here are my results.",
+                :share_url => url("/results/shared?session_id=" + session.id.to_s) } %>
         </div>
     </div>
 </div>

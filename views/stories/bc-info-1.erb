@@ -13,7 +13,10 @@
       </p>
     </div>
     <div class="large-3 columns large-text-right">
-      Share this story: <%= erb :share_buttons_partial %>
+      Share this story: <%= erb :share_buttons_partial, :locals => {
+        :share_subject => "Breast cancer and young African American women",
+        :share_body => "This video explains the breast cancer risk young African American women face.",
+        :share_url => url("/stories/bc-info-1") } %>
     </div>
   </div>
 </div>

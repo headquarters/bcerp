@@ -357,4 +357,10 @@ helpers do
 
     return text
   end
+  
+  def shorten_text_for_tweet(text, url)
+    # the 140th character is the newline break created between text and URL
+    remaining = 139 - url.length
+    return text.slice(0, remaining)
+  end
 end

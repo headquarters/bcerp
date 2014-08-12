@@ -8,7 +8,7 @@
           <h3><%= prevent_widows(risk_factor["question"].question_name) %></h3>
           <% if group_id == RACE_GROUP_ID %>
             <div class="medium-12 columns">
-              <%= risk_factor["risk_message"].message %>
+              <%= risk_factor["risk_message"].long_message %>
             </div>
           <% else %>
             <div class="medium-6 columns">

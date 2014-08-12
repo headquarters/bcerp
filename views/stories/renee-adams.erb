@@ -12,7 +12,10 @@
       </p>
     </div>
     <div class="large-3 columns large-text-right">
-      Share this story: <%= erb :share_buttons_partial %>
+      Share this story: <%= erb :share_buttons_partial, :locals => {
+        :share_subject => "One woman's story of surviving breast cancer while pregnant",
+        :share_body => "Renee Adams shares her story of surviving breast cancer while pregnant.",
+        :share_url => url("/stories/renee-adams") } %>
     </div>
   </div>
 </div>

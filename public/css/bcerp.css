@@ -504,7 +504,7 @@ fieldset legend {
     }
 }
 
-@media only screen and (min-width: 60em) and (min-height: 40em) {
+@media only screen and (min-width: 60em) and (min-height: 30em) {
     article {
         padding-bottom:11em;
     }
