@@ -189,3 +189,45 @@ BCERP.UTILS = (function(){
 })();
 
 BCERP.init();
+
+var player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player("youtube-video", {
+        events: {
+            "onStateChange": "onPlayerStateChange"
+        }
+    });
+}
+
+function onPlayerStateChange(event){
+    return;
+    if (event.data == YT.PlayerState.PLAYING) {
+        $('.video-container').css({
+           position: "absolute",
+           left: 0,
+           top: 0,
+           width: screen.width,
+           height: screen.height,
+           backgroundColor: "#666"
+        });
+        
+        //$('.video-container iframe').css({
+        //   marginTop: "50%" 
+        //});
+    } else {
+        $('.video-container').css({
+           position: "relative",
+           left: 0,
+           top: 0,
+           width: "auto",
+           height: "auto",
+           backgroundColor: "transparent"           
+        });
+        
+        
+        //$('.video-container iframe').css({
+        //   marginTop: "0%" 
+        //});
+    }
+    
+}

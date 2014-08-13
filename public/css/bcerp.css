@@ -456,6 +456,20 @@ fieldset legend {
     font-weight:bold;
 }
 
+.video-container {
+    position:relative;
+    left:0;
+    top:0;
+    z-index:1000;
+}
+
+.video-container iframe {
+    position:relative;
+    left:0;
+    top:0;
+    z-index:2000;
+}
+
 @media screen and (max-width: 30em) {
     #home iframe {
         height:16em;
@@ -502,6 +516,17 @@ fieldset legend {
       min-height: 0;
       margin-left:10%;
     }
+}
+
+@media only screen and (max-height: 30em) {
+    article {
+        padding-bottom:1em;
+    }
+    #sticky-nav {
+        position:static;
+        left:auto;
+        bottom:auto;
+    }    
 }
 
 @media only screen and (min-width: 60em) and (min-height: 30em) {

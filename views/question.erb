@@ -19,14 +19,14 @@
                 <p>
                     <img src="/images/icons/<%= @category_identifier %>-<%= risk_message.risk_level.risk_level_identifier %>.png" alt="" />
                     <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
-                    Congratulations! Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/risk-factors#group-<%= @group_id %>">More&nbsp;information &rsaquo;</a>
+                    Congratulations! Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/risk-factors#group-<%= @group_id %>">More&nbsp;information&nbsp;&rsaquo;</a>
                 </p>
               <% else %>            
                 <% risk_message = @risk_messages.first(:risk_level_id => HIGHER_RISK_LEVEL_ID) %>
                 <p>
                     <img src="/images/icons/<%= @category_identifier %>-<%= risk_message.risk_level.risk_level_identifier %>.png" alt="" />
                     <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
-                    Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/risk-factors#group-<%= @group_id %>">More&nbsp;information &rsaquo;</a>
+                    Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/risk-factors#group-<%= @group_id %>">More&nbsp;information&nbsp;&rsaquo;</a>
                 </p>
               <% end %>
             <% end %>

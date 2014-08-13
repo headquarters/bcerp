@@ -42,7 +42,7 @@
         <span class="<%= @answers[question.id].question_option.risk_level.risk_level_identifier %>"><%= @answers[question.id].question_option.risk_level.risk_level_name %>:</span>
       <% end %>
       <% if !@answers[question.id].question_option.risk_message.nil? %>
-        <%= @answers[question.id].question_option.risk_message.message %> <a href="/resources/risk-factors#group-<%= @group_id %>">More&nbsp;information &rsaquo;</a>
+        <%= @answers[question.id].question_option.risk_message.message %> <a href="/resources/risk-factors#group-<%= @group_id %>">More&nbsp;information&nbsp;&rsaquo;</a>
       <% end %>
     </p>
   <% end %>
