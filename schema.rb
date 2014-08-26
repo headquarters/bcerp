@@ -14,15 +14,15 @@ no_risk_level = RiskLevel.create(:risk_level_name => "No Risk", :risk_level_iden
 ### Age
 group_id = 1
 higher_risk_message = RiskMessage.create(
-  :message => "Older women are at higher risk for breast cancer, especially after menopause. Discuss screening and risk reduction steps with your physician.",
-  :long_message => "Older women are at higher risk for breast cancer, especially after menopause. Discuss screening and risk reduction steps with your physician. Risk gradually increases as women get older. Breast cancer is most frequently diagnosed among women age 55-64 with more than 2/3 of women diagnosed at 55 years or older.",
+  :message => "Older women are at higher risk for breast cancer, especially after menopause.",
+  :long_message => "Older women are at higher risk for breast cancer, especially after menopause. Risk gradually increases as women get older. Breast cancer is most frequently diagnosed among women age 55-64 with more than 2/3 of women diagnosed at 55 years or older. Discuss screening and risk reduction steps with your physician.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
-  :message => "Older women are at higher risk for breast cancer, but women at any age can get the disease. Talk with your physician to learn steps you can take to reduce your risk AT ANY AGE.",
-  :long_message => "Older women are at higher risk for breast cancer, but women at any age can get the disease. Talk with your physician to learn steps you can take to reduce your risk AT ANY AGE. Approximately 11% of women younger than 45 years old are diagnosed with breast cancer each year. The Centers for Disease Control and Prevention recognizes breast cancer for young women as a very overwhelming challenge, making it important for young women to discuss their breast health with their physicians.",
+  :message => "Younger women are at lower risk of breast cancer, but women AT ANY AGE can get the disease.",
+  :long_message => "Younger women are at lower risk of breast cancer, but women AT ANY AGE can get the disease. Approximately 11% of women younger than 45 years old are diagnosed with breast cancer each year. The Centers for Disease Control and Prevention recognizes breast cancer for young women as a very overwhelming challenge, making it important for young women to discuss their breast health with their physicians. Talk with your physician to learn steps you can take to reduce your risk at any age.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )

@@ -3,7 +3,9 @@
     <div class="large-12 columns">
       <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/stories">Stories</a> &rsaquo; Kenda Freeman</div>
       <h2>Advocating For Prevention</h2>
-      <iframe id="youtube-video" src="//www.youtube.com/embed/0GOglZB8bUI?rel=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <div class="video-container">
+        <iframe id="youtube-video" src="//www.youtube.com/embed/0GOglZB8bUI?rel=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -15,8 +17,7 @@
     <div class="large-3 columns large-text-right">
       Share this story: <%= erb :share_buttons_partial, :locals => {
         :share_subject => "One woman's breast cancer prevention story",
-        :share_body => "Kenda Freeman shares her story of living well to prevent breast cancer. ",
-        :share_url => url("/stories/kenda-freeman") } %>
+        :share_body => "Kenda Freeman shares her story of living well to prevent breast cancer. " } %>
     </div>
   </div>  
 </div>

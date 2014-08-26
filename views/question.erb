@@ -19,14 +19,14 @@
                 <p>
                     <img src="/images/icons/<%= @category_identifier %>-<%= risk_message.risk_level.risk_level_identifier %>.png" alt="" />
                     <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
-                    Congratulations! Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/risk-factors#group-<%= @group_id %>">More&nbsp;information&nbsp;&rsaquo;</a>
+                    Congratulations! Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/risk-factors/<%= @group_id %>">More&nbsp;information&nbsp;&rsaquo;</a>
                 </p>
               <% else %>            
                 <% risk_message = @risk_messages.first(:risk_level_id => HIGHER_RISK_LEVEL_ID) %>
                 <p>
                     <img src="/images/icons/<%= @category_identifier %>-<%= risk_message.risk_level.risk_level_identifier %>.png" alt="" />
                     <span class="<%= risk_message.risk_level.risk_level_identifier %>"><%= risk_message.risk_level.risk_level_name %>:</span>
-                    Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/risk-factors#group-<%= @group_id %>">More&nbsp;information&nbsp;&rsaquo;</a>
+                    Your BMI is <%= @session.bmi %>. <%= risk_message.message %> <a href="/resources/risk-factors/<%= @group_id %>">More&nbsp;information&nbsp;&rsaquo;</a>
                 </p>
               <% end %>
             <% end %>
@@ -60,7 +60,7 @@
     <% for risk_message in @risk_messages %>
       "<%= risk_message.risk_level.risk_level_identifier %>": "<p>\
         <% if @group_id != RACE_GROUP_ID %><img src=\"/images/icons/<%= @category_identifier %>-<%= risk_message.risk_level.risk_level_identifier %>.png\" alt=\"\" /> <span class=\"<%= risk_message.risk_level.risk_level_identifier %>\"><%= risk_message.risk_level.risk_level_name %>:</span><% end %>\
-        <%= risk_message.message %> <a href=\"/resources/risk-factors#group-<%= @group_id %>\">More&nbsp;information &rsaquo;</a></p> "<% if risk_message != @risk_messages.last %>,<% end %>      
+        <%= risk_message.message %> <a href=\"/resources/risk-factors/<%= @group_id %>\">More&nbsp;information &rsaquo;</a></p> "<% if risk_message != @risk_messages.last %>,<% end %>      
     <% end %>
   };
 </script>

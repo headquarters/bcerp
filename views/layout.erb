@@ -3,10 +3,17 @@
 	<head>
         <meta charset="utf-8" />
         
-        <title><%= SITE_TITLE %></title>
-        <meta name="description" content="" />
-		<meta name="keywords" content="" />
+        <title><%= @@page_title %></title>
+        <meta name="description" content="Find out your breast cancer risk with an easy questionnaire. Along the way, you'll learn ways to reduce your risk." />
+		<meta name="keywords" content="breast cancer risk questionnaire" />
         <meta name="viewport" content="width=device-width">
+		
+		<meta property="og:title" content="<%= @@page_title %>" /> 
+		<meta property="og:type" content="website" /> 
+		<meta property="og:url" content="<%= @@share_url %>" />
+		<meta property="og:image" content="http://mybcrisk.org/images/bcerp-logo.png" />
+		<meta property="og:description" content="Find out your breast cancer risk with an easy questionnaire. Along the way, you'll learn ways to reduce your risk." />
+		
 		<link rel="stylesheet" href="/css/normalize.css">
 		<link rel="stylesheet" href="/css/foundation.css">
 		<link rel="stylesheet" href="/css/bcerp.css">

@@ -445,10 +445,19 @@ fieldset legend {
 
 #risk-factors > li {
     margin-bottom:1em;
+    padding-bottom:1em;
+    border-bottom:1px dotted #999;
 }
 
 #risk-factors li h3 {
-    font-size:1.2em;
+    font-size:1.1em;
+    font-weight:bold;
+}
+
+#risk-factors > li {
+    margin-bottom:1em;
+    padding-bottom:1em;
+    border-bottom:1px dotted #999;
 }
 
 #risk-factors li h4 {
@@ -456,7 +465,20 @@ fieldset legend {
     font-weight:bold;
 }
 
-.video-container {
+#risk-factors li h4 img {
+    width:32px;
+    height:auto;
+}
+
+#risk-factors .columns.higher-risk {
+    border-right: 1px dotted #666;
+}
+
+#risk-factors .risk-factor-resources {
+    margin-top:0.5em;
+}
+
+/*.video-container {
     position:relative;
     left:0;
     top:0;
@@ -468,7 +490,7 @@ fieldset legend {
     left:0;
     top:0;
     z-index:2000;
-}
+}*/
 
 @media screen and (max-width: 30em) {
     #home iframe {

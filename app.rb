@@ -32,6 +32,8 @@ end
 DataMapper.finalize
 
 SITE_TITLE = "My Breast Cancer Risk"
+TITLE = "My BC Risk"
+@@page_title = ""
 
 # Height and weight count as 1 question (BMI).
 TOTAL_QUESTIONS = 17
@@ -56,14 +58,19 @@ LOWER_RISK_LEVEL_ID = 2
 before do
   # get the first session with this session_id or just create it and return that session row
   @session = Session.first_or_create(:session_id => session.id)
+  
+  # set default share URL; view can override it
+  @@share_url = "http://mybcrisk.org"
 end
 
 get '/' do
+  @@page_title = "Home | " + TITLE
   @active = "home"
   erb :home  
 end
 
 get '/questionnaire/intro' do
+  @@page_title = "Questionnaire | " + TITLE
   erb :intro
 end
 
@@ -77,10 +84,8 @@ get '/questionnaire' do
 end
 
 get '/results/dismiss' do
-  # While still developing...
-  # @session.has_viewed_results = true
-  # did_save = @session.save
-  did_save = true
+  @session.has_viewed_results = true
+  did_save = @session.save
   
   if request.xhr?
     content_type :json
@@ -98,7 +103,9 @@ end
 
 ["/results", "/questionnaire/results"].each do |path|
   get path do
-    @active = "questionnaire"
+    @@page_title = "Results | " + TITLE
+    
+    @active = "questionnaire"  
     
     @results = {}    
     
@@ -160,6 +167,8 @@ end
 
 get '/questionnaire/:group_id' do
   group_id = params[:group_id]
+  
+  @@page_title = "Question #{group_id} | " + TITLE
   
   @session.current_question = group_id
   @session.save
@@ -263,11 +272,19 @@ post '/questionnaire/:group_id' do
   end
 end
 
-get '/resources/risk-factors' do
+get '/resources/risk-factors/?:group_id?' do
+  
+  @@page_title = "Risk Factors | " + TITLE
   
   @risk_factors = {}
   
-  @questions = Question.all(:conditions => ['group_id != ?', HEIGHT_WEIGHT_GROUP_ID])
+  if !params[:group_id].nil?
+    @questions = Question.all(:conditions => ['group_id = ?', params[:group_id]])  
+  else
+    @questions = Question.all(:conditions => ['group_id != ?', HEIGHT_WEIGHT_GROUP_ID])  
+  end
+  
+  
   
   #@risk_messages = RiskMessage.all()
 
@@ -278,6 +295,7 @@ get '/resources/risk-factors' do
     
     @risk_factors[index] = {}
     @risk_factors[index]["question"] = question;
+    @risk_factors[index]["category_id"] = question.category.category_identifier
     
     if group_id != RACE_GROUP_ID
       @risk_factors[index]["lower_risk_message"] = RiskMessage.first(:group_id => group_id, :risk_level_id => LOWER_RISK_LEVEL_ID)    
@@ -294,28 +312,47 @@ get '/resources/risk-factors' do
 end
 
 get '/resources' do
+  @@page_title = "Resources | " + TITLE
   @active = "resources"
   erb "resources/index".to_sym
 end
 
 get '/resources/:view' do
+  @@page_title = convert_url_phrase_to_title(params[:view]) + " | " + TITLE
   @active = "resources"
   erb "resources/#{params[:view]}".to_sym
 end
 
 get '/stories' do
+  @@page_title = "Video Stories | " + TITLE
+  @@share_url = request.url
   @active = "stories"
   erb "stories/index".to_sym
 end
 
+get '/stories/bc-info-1' do
+  @@page_title = "Breast Cancer and Young African American Women | " + TITLE
+  @@share_url = request.url
+  @active = "stories"
+  erb "stories/bc-info-1".to_sym
+end
+
+get '/stories/bc-info-2' do
+  @@page_title = "Educate Yourself to Protect Yourself | " + TITLE
+  @@share_url = request.url
+  @active = "stories"
+  erb "stories/bc-info-2".to_sym
+end
+
 get '/stories/:view' do
+  @@page_title = convert_url_phrase_to_title(params[:view]) + " | " + TITLE
+  @@share_url = request.url
   @active = "stories"
   erb "stories/#{params[:view]}".to_sym
 end
 
 get '/reset' do
   # clear previous session, but leave the data in the database
-  
   session.destroy
   redirect "/"
 end
@@ -342,6 +379,10 @@ end
 def calculate_bmi(weight_in_pounds, height_in_inches)
   # coerce values to float to force float division, rather than integer division
   return ((weight_in_pounds.to_f/height_in_inches.to_f**2) * 703).round(2)
+end
+
+def convert_url_phrase_to_title(phrase)
+  return phrase.split("-").map{ |word| word.capitalize }.join(" ") 
 end
 
 helpers do

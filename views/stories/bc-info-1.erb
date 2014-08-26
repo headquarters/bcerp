@@ -3,7 +3,9 @@
     <div class="large-12 columns">
       <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/stories">Stories</a> &rsaquo; Young African American Women</div>
       <h2>Breast Cancer and Young African American Women</h2>
-      <iframe src="//player.vimeo.com/video/100447395?title=0&amp;byline=0&amp;portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <div class="video-container">
+        <iframe id="youtube-video" src="https://www.youtube.com/embed/-xpZ2KnZ_04?rel=0&playsinline=0&enablejsapi=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -15,8 +17,7 @@
     <div class="large-3 columns large-text-right">
       Share this story: <%= erb :share_buttons_partial, :locals => {
         :share_subject => "Breast cancer and young African American women",
-        :share_body => "This video explains the breast cancer risk young African American women face.",
-        :share_url => url("/stories/bc-info-1") } %>
+        :share_body => "This video explains the breast cancer risk young African American women face." } %>
     </div>
   </div>
 </div>

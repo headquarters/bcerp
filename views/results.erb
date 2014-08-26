@@ -7,7 +7,6 @@
     <div class="row">
         <% if !@session.has_viewed_results && @session.progress == 100.0 %>
             <div class="large-7 columns end">
-                <!--<div class="panel callout">-->
                 <div id="results-modal" class="reveal-modal medium" data-reveal data-css-top="50%">
                     <p>
                         Congratulations on completing the questionnaire!
@@ -63,8 +62,7 @@
             <a href="/questionnaire" class="button small radius">Back to Questionnaire</a>
             <%= erb :share_buttons_partial, :locals => {
                 :share_subject => "My breast cancer risk results",
-                :share_body => "Take this questionnaire to find out your breast cancer risk. Here are my results.",
-                :share_url => url("/results/shared?session_id=" + session.id.to_s) } %>
+                :share_body => "Take this questionnaire to find out your breast cancer risk. Here are my results." } %>
         </div>
     </div>
 </div>
