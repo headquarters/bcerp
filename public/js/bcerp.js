@@ -50,6 +50,9 @@ var BCERP = (function($, window){
     self.init = function(){
         self.bindQuestionAnswerEvents();
         self.bindCloseResultsModalEvent();
+        if (logQuestionnaireFinished) {
+            BCERP.ANALYTICS.logQuestionnaireIsFinished();
+        }
     };
     
     self.bindCloseResultsModalEvent = function(){
@@ -188,9 +191,24 @@ BCERP.UTILS = (function(){
     return self;    
 })();
 
+BCERP.ANALYTICS = (function(){
+    var self = {};
+    
+    self.logQuestionnaireIsFinished = function(){
+        _gaq.push(['_setCustomVar',
+            1, // required
+            'Questionnaire Complete', // name of custom variable; required
+            'True', // value of custom variable; required
+            1  // sets scope to visitor-level; optional
+         ]); 
+    };
+    
+    return self;    
+})();
+
 BCERP.init();
 
-var player;
+/*var player;
 function onYouTubeIframeAPIReady() {
   player = new YT.Player("youtube-video", {
         events: {
@@ -230,4 +248,4 @@ function onPlayerStateChange(event){
         //});
     }
     
-}
+}*/

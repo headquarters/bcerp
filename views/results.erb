@@ -30,6 +30,14 @@
             </div>
         <% end %>
     </div>
+    <script>
+        <%# only log this once, so check if they've viewed the results before %>
+        <% if !@session.has_viewed_results && @session.progress == 100.0 %>
+            var logQuestionnaireFinished = true;
+        <% else %>
+            var logQuestionnaireFinished = false;
+        <% end %>
+    </script>
     <div class="row">
         <div class="large-7 columns end">
             <p>

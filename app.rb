@@ -279,8 +279,11 @@ get '/resources/risk-factors/?:group_id?' do
   @risk_factors = {}
   
   if !params[:group_id].nil?
-    @questions = Question.all(:conditions => ['group_id = ?', params[:group_id]])  
+    # get the specific question's risk factors, or BMI for height/weight questions
+    group_id = (params[:group_id].to_i == HEIGHT_WEIGHT_GROUP_ID) ? BMI_GROUP_ID : params[:group_id]
+    @questions = Question.all(:conditions => ['group_id = ?', group_id])  
   else
+    # no group_id param, so just grab all the questions except the height/weight ones
     @questions = Question.all(:conditions => ['group_id != ?', HEIGHT_WEIGHT_GROUP_ID])  
   end
   
