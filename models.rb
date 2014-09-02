@@ -2,7 +2,7 @@ class Session
   include DataMapper::Resource
 
   property :id, Serial  
-  property :session_id, String, :length => 128
+  property :session_id, String, :length => 256
   property :bmi, Float
   property :progress, Float, :default => 0.0
   property :current_question, Integer
@@ -59,7 +59,7 @@ class OptionChoice
   include DataMapper::Resource
   
   property :id, Serial
-  property :option_choice_name, String
+  property :option_choice_name, String, :length => 128
   property :option_choice_value, Float, :required => false
   
   has n, :question_option

@@ -7,8 +7,6 @@ higher_risk_level = 1
 lower_risk_level = 2
 no_risk_level = 3
 
-#db.results_as_hash = true
-
 ### Age
 db.execute("
   UPDATE risk_messages

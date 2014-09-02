@@ -50,7 +50,7 @@ var BCERP = (function($, window){
     self.init = function(){
         self.bindQuestionAnswerEvents();
         self.bindCloseResultsModalEvent();
-        if (logQuestionnaireFinished) {
+        if (typeof logQuestionnaireFinished != "undefined" && logQuestionnaireFinished) {
             BCERP.ANALYTICS.logQuestionnaireIsFinished();
         }
     };

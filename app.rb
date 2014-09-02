@@ -24,6 +24,7 @@ if rebuild_tables
   # auto_migrate clears all the data from the database
   DataMapper.auto_migrate! 
   require './schema'
+  require './data_update_08_26_2014'
 else
   # auto_upgrade tries to reconcile existing database with schema changes
   DataMapper.auto_upgrade! 
@@ -49,8 +50,10 @@ RACE_GROUP_ID = 2
 
 # These IDs are set by the database engine, so they could theoretically change,
 # but we're assuming nothing runs before the schema.rb script to insert other data
+AGE_QUESTION_ID = 1
 HEIGHT_QUESTION_ID = 6
 WEIGHT_QUESTION_ID = 7
+MAMMOGRAM_QUESTION_ID = 17
 BMI_QUESTION_ID = 19
 HIGHER_RISK_LEVEL_ID = 1
 LOWER_RISK_LEVEL_ID = 2
@@ -193,11 +196,18 @@ get '/questionnaire/:group_id' do
   @question_options = {}
   
   @answers = {}
-  
+    
   @questions.each do |q|
     @question_options[q.id] = QuestionOption.all(:question_id => q.id)
-    # messes up after BMI questions because q.id would be 13, while group_id was one behind (12)
     @answers[q.id] = Answer.first(:session_id => @session.id, :question_id => q.id)
+  end
+  
+  if group_id.to_i == MAMMOGRAM_QUESTION_ID
+    age = Answer.first(:session_id => @session.id, :group_id => AGE_QUESTION_ID)
+    if !age.nil? && age.question_option.option_choice.option_choice_value < 40
+      # remove part of question regarding mammograms for users < 40
+      @questions[0].question_name.gsub!(" and/or mammograms", "")
+    end    
   end
   
   # keep the same nav item active the whole way through
@@ -212,9 +222,6 @@ post '/questionnaire/:group_id' do
   next_group_id = group_id.to_i + 1;
 
   answers = params[:answers]
-    
-  # TODO: if the first_child is answered as "No Children", skip the breast feeding question, but
-  # put the same high risk answer there???
 
   if !answers.nil?
     if group_id.to_i == HEIGHT_WEIGHT_GROUP_ID

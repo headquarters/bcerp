@@ -1,3 +1,4 @@
+<% if false %>
 <div class="share-buttons">
     <a href="http://facebook.com/sharer/sharer.php?text=<%=share_body%>&u=<%=@@share_url%>">
         <img src="/images/facebook.png" alt="Facebook" />
@@ -8,4 +9,11 @@
     <a href="mailto:?subject=<%=share_subject%>&body=<%=share_body%> <%=@@share_url%>">
         <img src="/images/email.png" alt="Email" />
     </a>
+</div>
+<% end %>
+<div class="share-buttons">
+    <span class='st_facebook_large' displayText='Facebook'></span>
+    <span class='st_fbsend_large' displayText='Facebook Send'></span>
+    <span class='st_twitter_large' displayText='Tweet'></span>
+    <span class='st_email_large' displayText='Email'></span>
 </div>

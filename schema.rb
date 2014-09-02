@@ -34,7 +34,7 @@ age_question = Question.create(
   :category => health_history_category
 )
 
-age_option_choice = OptionChoice.create(:option_choice_name => "Younger than 20")
+age_option_choice = OptionChoice.create(:option_choice_name => "Younger than 20", :option_choice_value => 19)
 
 QuestionOption.create(
   :question => age_question,
@@ -48,7 +48,7 @@ age = 20
 while age < 70
   age_range = "#{age}-#{age + 4}"
   
-  age_option_choice = OptionChoice.create(:option_choice_name => age_range)
+  age_option_choice = OptionChoice.create(:option_choice_name => age_range, :option_choice_value => age)
   
   if age < 45
     QuestionOption.create(
@@ -69,7 +69,7 @@ while age < 70
   age = age + 5
 end
 
-age_option_choice = OptionChoice.create(:option_choice_name => "70+")
+age_option_choice = OptionChoice.create(:option_choice_name => "70+", :option_choice_value => 71)
 
 QuestionOption.create(
   :question => age_question,
@@ -94,8 +94,8 @@ Resource.create(
 ### Race/Ethnicity
 group_id += 1
 higher_risk_message = RiskMessage.create(
-  :message => "African-American women under 50 are more commonly diagnosed with basal-like breast cancer (also known as triple negative breast cancer), a fast-growing cancer. Keep reading for information on this particular type of breast cancer and how it affects young African American women.",
-  :long_message => "African-American women under 50 are more commonly diagnosed with basal-like breast cancer (also known as triple negative breast cancer), a fast-growing cancer. Keep reading for information on this particular type of breast cancer and how it affects young African American women. Although more Caucasian women are diagnosed with breast cancer, the death rate is 41% higher among African American women in the US. Basal-like breast cancer is a fast-growing subtype of breast cancer. Most basal-like breast cancers are also triple negative breast cancer subtypes, meaning that these cancers make low levels of three proteins that are usually targeted in breast cancer treatment. Fewer treatment options are available for these cancers, so studies are needed to find better treatments for these cancers.",
+  :message => "Compared to white women of similar age, African-American women under 50 are more commonly diagnosed with basal-like breast cancer (also sometimes called triple negative breast cancer), a fast-growing cancer. Keep reading for information on when to start breast cancer screening, other steps to reduce risk, and how to discuss your risk with your doctor.",
+  :long_message => "Compared to white women of similar age, African-American women under 50 are more commonly diagnosed with basal-like breast cancer (also sometimes called triple negative breast cancer), a fast-growing cancer. Keep reading for information on when to start breast cancer screening, other steps to reduce risk, and how to discuss your risk with your doctor. The death rate is higher among African American women in the US. Basal-like breast cancer is a fast-growing subtype of breast cancer.  Most basal-like breast cancers are also triple negative breast cancer subtypes, meaning that these cancers make low levels of three proteins that are usually targeted in breast cancer treatment.  Fewer treatment options are available for these cancers, so studies are needed to find better treatments for these cancers.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
@@ -179,8 +179,8 @@ Resource.create(
 ### Children
 group_id += 1
 higher_risk_message = RiskMessage.create(
-  :message => "Having no children or having a first child after 35 increases breast cancer risk, because your lifetime exposure to estrogen is higher with no or later pregnancies. Most risks for breast cancer are associated with lifetime exposure to estrogen.",
-  :long_message => "Having no children or having a first child after 35 increases breast cancer risk, because your lifetime exposure to estrogen is higher with no or later pregnancies. Most known risks for breast cancer are associated with lifetime exposure to estrogen. Estrogen is a naturally occurring hormone important for sexual development and childbearing. A woman's exposure to estrogen varies over her lifetime. Estrogen exposure may change the state or number of cells that could become cancerous.",
+  :message => "Having no children or having a first child after 35 increases breast cancer risk. Reproductive behavior is often tied to estrogen exposure, and most known risks for breast cancer are associated with lifetime exposure to estrogen.",
+  :long_message => "Having no children or having a first child after 35 increases breast cancer risk. Reproductive behavior is often tied to estrogen exposure, and most known risks for breast cancer are associated with lifetime exposure to estrogen. Estrogen is a naturally occurring hormone important for sexual development and childbearing. A woman''s exposure to estrogen varies over her lifetime. Estrogen exposure may change the state or number of cells that could become cancerous.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
@@ -443,7 +443,7 @@ diet_habits_question = Question.create(
   :category => diet_category
 )
 
-diet_option_choice = OptionChoice.create(:option_choice_name => "You eat a well-balanced, low-fat diet.")
+diet_option_choice = OptionChoice.create(:option_choice_name => "You eat a well-balanced, low-fat diet with 5 servings of fruits and vegetables each day.")
 QuestionOption.create(
   :question => diet_habits_question,
   :option_choice => diet_option_choice,
@@ -451,7 +451,7 @@ QuestionOption.create(
   :risk_message => lower_risk_message
 )
 
-diet_option_choice = OptionChoice.create(:option_choice_name => "You eat some high-fat and junk food a few times a week.")
+diet_option_choice = OptionChoice.create(:option_choice_name => "You occasionally eat some high-fat and junk food.")
 QuestionOption.create(
   :question => diet_habits_question,
   :option_choice => diet_option_choice,
