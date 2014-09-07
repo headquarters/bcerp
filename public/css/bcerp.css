@@ -577,3 +577,17 @@ fieldset legend {
         font-size:0.9em;
     }
 }
+
+@media print {
+    #results .risk-infographic a[href]:after {
+        content: attr(title);
+    }
+    
+    #results .risk-infographic .risk-question {
+        line-height:3;
+        text-decoration: none;
+        display:block;
+        width:auto;
+        height:auto;
+    }
+}

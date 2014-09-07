@@ -6,7 +6,7 @@
       <% @risk_factors.each do |group_id, risk_factor| %>
         <li class="row" id="group-<%= group_id %>">
           <h3><%= prevent_widows(risk_factor["question"].question_topic_name) %></h3>
-            <div class="large-12 columns ">
+            <div class="large-12 columns">
               <%= risk_factor["question"].question_topic_message %>
             </div>
         

@@ -38,8 +38,17 @@
             var logQuestionnaireFinished = false;
         <% end %>
     </script>
+    <% if !request.query_string.empty? %>
     <div class="row">
-        <div class="large-7 columns end">
+        <div class="panel">
+            <p>
+                Your results have been saved. Use the following URL to share your results: <br /><%= request.url %>
+            </p>
+        </div>
+    </div>
+    <% end %>
+    <div class="row">
+        <div class="hide-on-print large-7 columns end">
             <p>
                 Each circle below represents your answer to a question. Click or tap a circle to return to that question.
             </p>
@@ -52,9 +61,9 @@
                     <h3 class="risk-name"><%= result["category_name"] %></h3>
                     <div class="risk-level">
                         <% result["answers"].each do |answer| %>
-                            <a href="/questionnaire/<%= answer["group_id"] %>" class="risk-question">
+                            <a href="/questionnaire/<%= answer["group_id"] %>" class="risk-question" title="<%= answer["question"] %>">
                                 <img src="/images/icons/<%= result["category_id"] %>-<%= answer["risk"] %>.png"
-                                    alt="<%= answer["question"] %>" />
+                                    alt="" />
                             </a>
                         <% end %>
                     </div>
@@ -66,13 +75,15 @@
                 <li><img src="/images/high-risk-key.png" alt="" /> Higher Risk</li>
                 <li><img src="/images/low-risk-key.png" alt="" /> Lower Risk</li>
                 <li><img src="/images/unanswered-key.png" alt="" /> Unanswered</li>
-            </ul>        
-            <a href="/questionnaire" class="button small radius">Back to Questionnaire</a>
-            <h4>Share this site:</h4>
-            <%= erb :share_buttons_partial, :locals => {
-                :share_subject => "MyBCRisk.org: Find your breast cancer risk",
-                :share_body => "Young women can be at risk for breast cancer just like older women; know your risk by taking this test!" } %>
-            <a href="/results/saved" class="button small radius">Save My Results</a>
+            </ul>
+            <div class="hide-on-print">
+                <a href="/questionnaire" class="button small radius">Back to Questionnaire</a>
+                <h4>Share this site:</h4>
+                <%= erb :share_buttons_partial, :locals => {
+                    :share_subject => "MyBCRisk.org: Find your breast cancer risk",
+                    :share_body => "Young women can be at risk for breast cancer just like older women; know your risk by taking this test!" } %>
+                <a href="/results/saved" class="button small radius">Save My Results</a>
+            </div>
         </div>
     </div>
 </div>

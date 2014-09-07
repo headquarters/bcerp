@@ -88,9 +88,19 @@ get '/results/dismiss' do
   end
 end
 
+# /results?q1=<option_choice_value>&q2=...
+
+# group_id, question_option_id, question_id
 get '/results/saved' do
- 
-  erb :results_saved
+  answers = Answer.all(:session_id => @session.id)
+  
+  query_string = "?"
+  
+  answers.each_with_index do |answer, index|
+    query_string += "a#{index}=#{answer.question_id},#{answer.question_option_id},#{answer.group_id}&"
+  end
+  
+  redirect "/results#{query_string}"
 end
 
 ["/results", "/questionnaire/results"].each do |path|
@@ -107,8 +117,8 @@ end
     @higher_risk_count = 0
     
     questions.each do |question|
-      # leave out race, height, and weight
       group_id = question.group_id
+      # leave out race, height, and weight
       if group_id == HEIGHT_WEIGHT_GROUP_ID || group_id == RACE_GROUP_ID
         next
       end
