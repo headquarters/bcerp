@@ -5,32 +5,10 @@
     <ul id="risk-factors">
       <% @risk_factors.each do |group_id, risk_factor| %>
         <li class="row" id="group-<%= group_id %>">
-          <h3><%= prevent_widows(risk_factor["question"].question_name) %></h3>
-          <% if group_id == RACE_GROUP_ID %>
-            <div class="medium-12 columns">
-              <%= risk_factor["risk_message"].long_message %>
+          <h3><%= prevent_widows(risk_factor["question"].question_topic_name) %></h3>
+            <div class="large-12 columns ">
+              <%= risk_factor["question"].question_topic_message %>
             </div>
-          <% else %>
-            <div class="higher-risk-column medium-5 columns">
-              <% if !risk_factor["higher_risk_message"].nil? %>
-                <h4 class="<%= risk_factor["higher_risk_message"].risk_level.risk_level_identifier %>">
-                  <img src="/images/icons/<%= risk_factor["category_id"] %>-<%= risk_factor["higher_risk_message"].risk_level.risk_level_identifier %>.png" alt="" />
-                  <%= risk_factor["higher_risk_message"].risk_level.risk_level_name %>
-                </h4>
-                <%= risk_factor["higher_risk_message"].long_message %>
-              <% end %>
-            </div>
-            <div class="lower-risk-column medium-5 medium-offset-2 columns ">
-              <% if !risk_factor["lower_risk_message"].nil? %>
-                <h4 class="<%= risk_factor["lower_risk_message"].risk_level.risk_level_identifier %>">
-                  <img src="/images/icons/<%= risk_factor["category_id"] %>-<%= risk_factor["lower_risk_message"].risk_level.risk_level_identifier %>.png" alt="" />
-                  <%= risk_factor["lower_risk_message"].risk_level.risk_level_name %>
-                </h4>
-                <%= risk_factor["lower_risk_message"].long_message %>
-              <% end %>
-            </div>
-            
-          <% end %>
         
           <div class="risk-factor-resources medium-12 columns">
             <ul>

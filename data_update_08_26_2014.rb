@@ -41,7 +41,7 @@ db.execute("
 db.execute("
   UPDATE risk_messages
   SET message = 'Having children before age 35 decreases breast cancer risk. Keep reading and talk with your doctor about steps you can take to reduce your risk.',
-      long_message = 'Having children before age 35 decreases breast cancer risk. Keep reading and talk with your doctor about steps you can take to reduce your risk. Reproductive behavior is often tied to estrogen exposure, and most known risks for breast cancer are associated with lifetime exposure to estrogen. Estrogen is a naturally occurring hormone important for sexual development and childbearing. A woman''s exposure to estrogen varies over her lifetime. Estrogen exposure may change the state or number of cells that could become cancerous. Breast cancer risk goes down for women with more children, but this may depend upon the type of breast cancer'
+      long_message = 'Having children before age 35 decreases breast cancer risk. Keep reading and talk with your doctor about steps you can take to reduce your risk. Reproductive behavior is often tied to estrogen exposure, and most known risks for breast cancer are associated with lifetime exposure to estrogen. Estrogen is a naturally occurring hormone important for sexual development and childbearing. A woman''s exposure to estrogen varies over her lifetime. Estrogen exposure may change the state or number of cells that could become cancerous. Breast cancer risk goes down for women with more children, but this may depend upon the type of breast cancer.'
   WHERE group_id = 3 AND risk_level_id = #{lower_risk_level}
 ")
 

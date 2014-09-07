@@ -18,17 +18,7 @@ DataMapper.setup(:default, 'sqlite:bcerp.db')
 
 require './models'
 
-rebuild_tables = false
-
-if rebuild_tables
-  # auto_migrate clears all the data from the database
-  DataMapper.auto_migrate! 
-  require './schema'
-  require './data_update_08_26_2014'
-else
-  # auto_upgrade tries to reconcile existing database with schema changes
-  DataMapper.auto_upgrade! 
-end
+DataMapper.auto_upgrade! 
 
 DataMapper.finalize
 
@@ -98,10 +88,9 @@ get '/results/dismiss' do
   end
 end
 
-get '/results/shared' do
-  shared_session_id = params[:session_id]
-  
-  "You are viewing " + shared_session_id
+get '/results/saved' do
+ 
+  erb :results_saved
 end
 
 ["/results", "/questionnaire/results"].each do |path|
@@ -307,16 +296,17 @@ get '/resources/risk-factors/?:group_id?' do
     @risk_factors[index]["question"] = question;
     @risk_factors[index]["category_id"] = question.category.category_identifier
     
-    if group_id != RACE_GROUP_ID
-      @risk_factors[index]["lower_risk_message"] = RiskMessage.first(:group_id => group_id, :risk_level_id => LOWER_RISK_LEVEL_ID)    
-      @risk_factors[index]["higher_risk_message"] = RiskMessage.first(:group_id => group_id, :risk_level_id => HIGHER_RISK_LEVEL_ID)
-    else
-      @risk_factors[index]["risk_message"] = RiskMessage.first(:group_id => group_id)
-    end    
+#    if group_id != RACE_GROUP_ID
+#      @risk_factors[index]["lower_risk_message"] = RiskMessage.first(:group_id => group_id, :risk_level_id => LOWER_RISK_LEVEL_ID)    
+#      @risk_factors[index]["higher_risk_message"] = RiskMessage.first(:group_id => group_id, :risk_level_id => HIGHER_RISK_LEVEL_ID)
+#    else
+#      @risk_factors[index]["risk_message"] = RiskMessage.first(:group_id => group_id)
+#    end    
     
     @risk_factors[index]["resources"] = Resource.all(:group_id => group_id)
     
   end
+
 
   erb "resources/risk-factors".to_sym
 end

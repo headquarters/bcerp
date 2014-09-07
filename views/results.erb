@@ -68,9 +68,11 @@
                 <li><img src="/images/unanswered-key.png" alt="" /> Unanswered</li>
             </ul>        
             <a href="/questionnaire" class="button small radius">Back to Questionnaire</a>
+            <h4>Share this site:</h4>
             <%= erb :share_buttons_partial, :locals => {
                 :share_subject => "MyBCRisk.org: Find your breast cancer risk",
                 :share_body => "Young women can be at risk for breast cancer just like older women; know your risk by taking this test!" } %>
+            <a href="/results/saved" class="button small radius">Save My Results</a>
         </div>
     </div>
 </div>

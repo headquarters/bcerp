@@ -409,6 +409,10 @@ fieldset legend {
     right:0.125rem;
 }
 
+#results .inset h4 {
+    font-size:0.9em;
+}
+
 
 /*
  * Resources

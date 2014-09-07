@@ -48,7 +48,6 @@ class RiskMessage
   
   property :id, Serial
   property :message, Text
-  property :long_message, Text
   property :group_id, Integer
   
   belongs_to :risk_level
@@ -82,6 +81,8 @@ class Question
   
   property :id, Serial
   property :question_name, String, :length => 128
+  property :question_topic_name, String, :length => 128
+  property :question_topic_message, Text
   property :group_id, Integer
 
   has n, :answer

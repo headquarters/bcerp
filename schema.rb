@@ -1,3 +1,15 @@
+require 'rubygems'
+require 'data_mapper'
+require 'json'
+
+DataMapper::Logger.new($stdout, :debug)
+
+DataMapper.setup(:default, 'sqlite:bcerp.db')
+
+require './models'
+
+DataMapper.auto_migrate!
+
 select = InputType.create(:input_type_name => "select")
 radio = InputType.create(:input_type_name => "radio")
 
@@ -15,14 +27,12 @@ no_risk_level = RiskLevel.create(:risk_level_name => "No Risk", :risk_level_iden
 group_id = 1
 higher_risk_message = RiskMessage.create(
   :message => "Older women are at higher risk for breast cancer, especially after menopause.",
-  :long_message => "Older women are at higher risk for breast cancer, especially after menopause. Risk gradually increases as women get older. Breast cancer is most frequently diagnosed among women age 55-64 with more than 2/3 of women diagnosed at 55 years or older. Discuss screening and risk reduction steps with your physician.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Younger women are at lower risk of breast cancer, but women AT ANY AGE can get the disease.",
-  :long_message => "Younger women are at lower risk of breast cancer, but women AT ANY AGE can get the disease. Approximately 11% of women younger than 45 years old are diagnosed with breast cancer each year. The Centers for Disease Control and Prevention recognizes breast cancer for young women as a very overwhelming challenge, making it important for young women to discuss their breast health with their physicians. Talk with your physician to learn steps you can take to reduce your risk at any age.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
@@ -30,6 +40,8 @@ lower_risk_message = RiskMessage.create(
 age_question = Question.create(
   :question_name => "How old are you?",
   :group_id => group_id,
+  :question_topic_name => "Age",
+  :question_topic_message => "Older women are at higher risk for breast cancer, especially after menopause. Risk gradually increases as women get older. Breast cancer is most frequently diagnosed among women age 55-64 with more than 2/3 of women diagnosed at 55 years or older. Discuss screening and risk reduction steps with your physician.",
   :input_type => select,
   :category => health_history_category
 )
@@ -78,9 +90,6 @@ QuestionOption.create(
   :risk_message => higher_risk_message
 )
 
-
-
-
 Resource.create(
   :text => '<a href="http://www.cdc.gov/cancer/breast/pdf/BreastCancer_YoungWomen_FactSheet.pdf">Breast Cancer in Young Women fact sheet (PDF)</a>',
   :group_id => group_id  
@@ -95,14 +104,15 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Compared to white women of similar age, African-American women under 50 are more commonly diagnosed with basal-like breast cancer (also sometimes called triple negative breast cancer), a fast-growing cancer. Keep reading for information on when to start breast cancer screening, other steps to reduce risk, and how to discuss your risk with your doctor.",
-  :long_message => "Compared to white women of similar age, African-American women under 50 are more commonly diagnosed with basal-like breast cancer (also sometimes called triple negative breast cancer), a fast-growing cancer. Keep reading for information on when to start breast cancer screening, other steps to reduce risk, and how to discuss your risk with your doctor. The death rate is higher among African American women in the US. Basal-like breast cancer is a fast-growing subtype of breast cancer.  Most basal-like breast cancers are also triple negative breast cancer subtypes, meaning that these cancers make low levels of three proteins that are usually targeted in breast cancer treatment.  Fewer treatment options are available for these cancers, so studies are needed to find better treatments for these cancers.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 race_question = Question.create(
   :question_name => "With which race/ethnicity do you identify?",
-  :group_id => group_id,
+  :question_topic_name => "Race/Ethnicity",
+  :question_topic_message => "Compared to white women of similar age, African-American women under 50 are more commonly diagnosed with basal-like breast cancer (also sometimes called triple negative breast cancer), a fast-growing cancer. Keep reading for information on when to start breast cancer screening, other steps to reduce risk, and how to discuss your risk with your doctor. The death rate is higher among African American women in the US. Basal-like breast cancer is a fast-growing subtype of breast cancer.  Most basal-like breast cancers are also triple negative breast cancer subtypes, meaning that these cancers make low levels of three proteins that are usually targeted in breast cancer treatment. Fewer treatment options are available for these cancers, so studies are needed to find better treatments for these cancers.",
+  :group_id => group_id,  
   :input_type => radio,
   :category => health_history_category
 )
@@ -180,20 +190,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Having no children or having a first child after 35 increases breast cancer risk. Reproductive behavior is often tied to estrogen exposure, and most known risks for breast cancer are associated with lifetime exposure to estrogen.",
-  :long_message => "Having no children or having a first child after 35 increases breast cancer risk. Reproductive behavior is often tied to estrogen exposure, and most known risks for breast cancer are associated with lifetime exposure to estrogen. Estrogen is a naturally occurring hormone important for sexual development and childbearing. A woman''s exposure to estrogen varies over her lifetime. Estrogen exposure may change the state or number of cells that could become cancerous.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Having children before age 35 decreases breast cancer risk. Keep reading and talk with your doctor about steps you can take to reduce your risk.",
-  :long_message => "Having children before age 35 decreases breast cancer risk. Keep reading and talk with your doctor about steps you can take to reduce your risk. Estrogen is a naturally occurring hormone important for sexual development and childbearing. A woman's exposure to estrogen varies over her lifetime. Estrogen exposure may change the state or number of cells that could become cancerous. Breast cancer risk declines with the number of children women bear.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 children_question = Question.create(
   :question_name => "How old were you when your first child was born?",
+  :question_topic_name => "Having Children",
+  :question_topic_message => "Having no children or having a first child after 35 increases breast cancer risk. Reproductive behavior is often tied to estrogen exposure, and most known risks for breast cancer are associated with lifetime exposure to estrogen. Estrogen is a naturally occurring hormone important for sexual development and childbearing. A woman''s exposure to estrogen varies over her lifetime. Estrogen exposure may change the state or number of cells that could become cancerous.",
   :group_id => group_id,
   :input_type => radio,
   :category => health_history_category
@@ -241,21 +251,21 @@ Resource.create(
 ### Breastfeeding
 group_id += 1
 higher_risk_message = RiskMessage.create(
-  :message => "Having no children or breastfeeding for less than 12 months across all children increases your exposure to estrogen. Most risks for breast cancer are associated with lifetime exposure to estrogen.",
-  :long_message => "Having no children or breastfeeding for less than 12 months across all children increases your exposure to estrogen. Most risks for breast cancer are associated with lifetime exposure to estrogen. Breastfeeding lowers a woman's estrogen levels. Research shows that women who breastfeed have lower breast cancer risk than women who have children but do not breastfeed. (NCI) In addition to protecting women's health, breastfeeding provides nutrients and antibodies to help infants fight disease.",
+  :message => "Having no children or breastfeeding for less than 12 months (across all children) may have hormonal or other effects on women''s breast tissue.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
-  :message => "Good! Breastfeeding for more than 12 months across all children decreases your risk, and it protects your child's health, too.",
-  :long_message => "Good! Breastfeeding for more than 12 months across all children decreases your risk, and it protects your child's health, too. Breastfeeding lowers a woman's estrogen levels. Research shows that women who breastfeed have lower breast cancer risk than women who have children but do not breastfeed. (NCI) In addition to protecting women's health, breastfeeding provides nutrients and antibodies to help infants fight disease.",
+  :message => "Good! Women who breastfeed have lower breast cancer risk than women who have children and do not breastfeed.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 breastfeeding_question = Question.create(
   :question_name => "How many months (total) did you breast feed across all your children?",
+  :question_topic_name => "Breastfeeding",
+  :question_topic_message => "Having no children or breastfeeding for less than 12 months (across all children) may have hormonal or other effects on women''s breast tissue. Women who breastfeed have lower breast cancer risk than women who have children and do not breastfeed.  In addition to health benefits for mom, breastfeeding provides biological and psychological benefits to babies.",
   :group_id => group_id,
   :input_type => radio,
   :category => health_history_category
@@ -294,24 +304,26 @@ Resource.create(
   :group_id => group_id  
 )
 
+### Stopped Here ###
+
 ### Relatives
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Women have higher breast cancer risk if first degree relatives (mom, dad, sister, brother, son, daughter) have a history of breast cancer.",
-  :long_message => "Women have higher breast cancer risk if first degree relatives (mom, dad, sister, brother, son, daughter) have a history of breast cancer. Other risk factors involving family history include having a first degree relative with breast or ovarian cancer before age 50 and having a first degree relative with cancer in both breasts.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
-  :message => "Having no first degree relatives with a history of breast cancer does lower your risk, but does not eliminate it.",
-  :long_message => "Having no first degree relatives with a history of breast cancer does lower your risk, but does not eliminate it. Other risk factors involving family history include having a first degree relative with breast or ovarian cancer before age 50 and having a first degree relative with cancer in both breasts.", 
+  :message => "Having no first degree relatives with a history of breast cancer does lower your risk, but does not eliminate it.", 
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 relatives_question = Question.create(
   :question_name => "Have any of your first-degree relatives (mother, sister, daughter, father, brother, or son) ever had breast or ovarian cancer?",
+  :question_topic_name => "Relatives",
+  :question_topic_message => "Women have higher breast cancer risk if first degree relatives (mom, dad, sister, brother, son, daughter) have a history of breast cancer. Other risk factors involving family history include having a first degree relative with breast or ovarian cancer before age 50 and having a first degree relative with cancer in both breasts.",
   :group_id => group_id,
   :input_type => radio,
   :category => health_history_category
@@ -424,20 +436,20 @@ QuestionOption.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Eating a diet with at least 5 servings of fruits and vegetables each day has been shown to be protective against developing breast cancer. Eat those fruits and veggies!",
-  :long_message => "Eating a diet with at least 5 servings of fruits and vegetables each day has been shown to be protective against developing breast cancer. Eat those fruits and veggies! The 2010 US Dietary Guidelines recommend controlling the amount of calories you take in each day and increasing your nutrient-dense foods and drinks, such as whole grains, fruits, vegetables, low fat dairy products and lean meats.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Wow! Your dietary habits are on target! Eating a diet with at least 5 servings of fruits and vegetables each day has been shown to be protective against developing breast cancer. Keep up the good work!",
-  :long_message => "Wow! Your dietary habits are on target! Eating a diet with at least 5 servings of fruits and vegetables each day has been shown to be protective against developing breast cancer. Keep up the good work! The 2010 US Dietary Guidelines recommend controlling the amount of calories you take in each day and increasing your nutrient-dense foods and drinks, such as whole grains, fruits, vegetables, low fat dairy products and lean meats.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 diet_habits_question = Question.create(
   :question_name => "How would you describe your dietary habits?",
+  :question_topic_name => "Dietary Habits",
+  :question_topic_message => "Eating a diet with at least 5 servings of fruits and vegetables each day has been shown to be protective against developing breast cancer. Eat those fruits and veggies! The 2010 US Dietary Guidelines recommend controlling the amount of calories you take in each day and increasing your nutrient-dense foods and drinks, such as whole grains, fruits, vegetables, low fat dairy products and lean meats.",
   :group_id => group_id,
   :input_type => radio,
   :category => diet_category
@@ -486,20 +498,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Fresh and frozen foods are healthier alternatives to canned foods.",
-  :long_message => "Fresh and frozen foods are healthier alternatives to canned foods. Bisphenol A (BPA) is a chemical in plastic containers and in the lining of some canned goods. Research supported by the National Institutes of Health is ongoing to explore whether these chemicals influence the development of girls' bodies and their risk for breast cancer. So serve your entire family meals made from frozen or fresh foods.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Good! Fresh and frozen foods are healthier alternatives to canned foods.",
-  :long_message => "Good! Fresh and frozen foods are healthier alternatives to canned foods. Bisphenol A (BPA) is a chemical in plastic containers and in the lining of some canned goods. Research supported by the National Institutes of Health is ongoing to explore whether these chemicals influence the development of girls' bodies and their risk for breast cancer. So keep serving the entire family meals made from frozen or fresh foods.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 fresh_or_frozen_question = Question.create(
   :question_name => "Do you most often eat fresh/frozen foods or canned?",
+  :question_topic_name => "Fresh/Frozen Foods vs. Canned",
+  :question_topic_message => "Fresh and frozen foods are healthier alternatives to canned foods. Bisphenol A (BPA) is a chemical in plastic containers and in the lining of some canned goods. Research supported by the National Institutes of Health is ongoing to explore whether these chemicals influence the development of girls' bodies and their risk for breast cancer. So serve your entire family meals made from frozen or fresh foods.",
   :group_id => group_id,
   :input_type => radio,
   :category => diet_category
@@ -540,20 +552,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Eating char grilled food exposes you to dangerous chemicals called PAHs (polycyclic aromatic hydrocarbons) that have been linked to increased risk for breast cancer. Avoid eating charred meat.",
-  :long_message => "Eating char grilled food exposes you to dangerous chemicals called PAHs (polycyclic aromatic hydrocarbons) that have been linked to increased risk for breast cancer. Avoid eating charred meat. PAHs are formed when the fat from meats are grilled at high temperatures over open flames. Increases in cooking temperature, the amount of fat in the meat, and the time that the meat is cooked increases the concentration of these chemicals. To reduce exposure to PAHs, lower the cooking temperature, grill leaner meat, avoid eating charred parts of the meat, and use a thermometer to know when the meat is done.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Great! Eating char grilled food exposes you to chemicals that have been linked to increased risk for breast cancer, so keep avoiding them when possible.",
-  :long_message => "Great! Eating char grilled food exposes you to chemicals that have been linked to increased risk for breast cancer, so keep avoiding them when possible. PAHs (polycyclic aromatic hydrocarbons) are formed when the fat from meats are grilled at high temperatures over open flames. Increases in cooking temperature, the amount of fat in the meat, and the time that the meat is cooked increases the concentration of these chemicals. To reduce exposure to PAHs, lower the cooking temperature, grill leaner meat, avoid eating charred parts of the meat, and use a thermometer to know when the meat is done.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 charred_meat_question = Question.create(
   :question_name => "Do you regularly eat charred meat?",
+  :question_topic_name => "Charred Meat",
+  :question_topic_message => "Eating char grilled food exposes you to dangerous chemicals called PAHs (polycyclic aromatic hydrocarbons) that have been linked to increased risk for breast cancer. Avoid eating charred meat. PAHs are formed when the fat from meats are grilled at high temperatures over open flames. Increases in cooking temperature, the amount of fat in the meat, and the time that the meat is cooked increases the concentration of these chemicals. To reduce exposure to PAHs, lower the cooking temperature, grill leaner meat, avoid eating charred parts of the meat, and use a thermometer to know when the meat is done.",
   :group_id => group_id,
   :input_type => radio, :category => diet_category
 )
@@ -592,20 +604,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Having one or more servings of alcoholic drinks per day increases risk for breast cancer. For women who drink more than one serving per day, their risk is 1.5 times higher than for nondrinkers.",
-  :long_message => "Having one or more servings of alcoholic drinks per day increases risk for breast cancer. For women who drink more than one serving per day, their risk is 1.5 times higher than for nondrinkers. A recent study published by the National Cancer Institute showed a 30-60% increase in risk for women who drink more than one drink each day.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Just getting a drink out with friends every now and then? Not to worry; but having one or more servings of alcoholic drinks per day increases women's risk for breast cancer.",
-  :long_message => "Just getting a drink out with friends every now and then? Not to worry; but having one or more servings of alcoholic drinks per day increases women's risk for breast cancer. A recent study published by the National Cancer Institute showed a 30-60% increase in risk for women who drink more than one drink each day.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 alcohol_question = Question.create(
   :question_name => "Do you frequently have more than 8 alcoholic drinks per week?",
+  :question_topic_name => "Alcoholic Drinks",
+  :question_topic_message => "Having one or more servings of alcoholic drinks per day increases risk for breast cancer. For women who drink more than one serving per day, their risk is 1.5 times higher than for nondrinkers. A recent study published by the National Cancer Institute showed a 30-60% increase in risk for women who drink more than one drink each day.",
   :group_id => group_id,
   :input_type => radio,
   :category => diet_category
@@ -645,20 +657,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Regardless of a woman's height and weight, regular exercise for 30 minutes or more, most days of the week, has been shown to reduce a woman's risk of breast cancer and results in numerous other health benefits. No more couch potato!",
-  :long_message => "Regardless of a woman's height and weight, regular exercise for 30 minutes or more, most days of the week, has been shown to reduce a woman's risk of breast cancer and results in numerous other health benefits. No more couch potato! Recent studies show that women reduce their risk by as much as 30% with regular exercise, with better results shown for women with increased exercise times and intensity. However, studies also show that women experience lower breast cancer risk and other health benefits, regardless of intensity. Use these resources for ideas to increase your physical activity.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Wow! Good job on the fitness! By exercising more than 30 minutes most days of the week, you're reducing your risk for breast cancer and getting so many other health benefits.",
-  :long_message => "Wow! Good job on the fitness! By exercising more than 30 minutes most days of the week, you're reducing your risk for breast cancer and getting so many other health benefits. Recent studies show that women reduce their risk by as much as 30% with regular exercise, with better results shown for women with increased exercise times and intensity. However, studies also show that women experience lower breast cancer risk and other health benefits, regardless of intensity. Use these resources for even more ideas to keep your physical activity on track.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 exercise_question = Question.create(
   :question_name => "How many days per week do you exercise 30 minutes or more?",
+  :question_topic_name => "Exercise",
+  :question_topic_message => "Regardless of a woman's height and weight, regular exercise for 30 minutes or more, most days of the week, has been shown to reduce a woman's risk of breast cancer and results in numerous other health benefits. No more couch potato! Recent studies show that women reduce their risk by as much as 30% with regular exercise, with better results shown for women with increased exercise times and intensity. However, studies also show that women experience lower breast cancer risk and other health benefits, regardless of intensity. Use these resources for ideas to increase your physical activity.",
   :group_id => group_id,
   :input_type => radio,
   :category => exercise_category
@@ -697,20 +709,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Phthalates (pronounced tha-lates) are chemicals found in some personal care products like fragrances, nail polish and hair care products. When possible, use fragrance-free products.",
-  :long_message => "Phthalates (pronounced tha-lates) are chemicals found in some personal care products like fragrances, nail polish and hair care products. When possible, use fragrance-free products. Research supported by the National Institutes of Health is ongoing to explore whether these chemicals influence the development of girls' bodies and their risk for breast cancer. Use the following resources for ideas to reduce exposure to these chemicals.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Great! Keep using fragrance-free products when possible.",
-  :long_message => "Great! Keep using fragrance-free products when possible. Phthalates (pronounced tha-lates) are chemicals found in some personal care products like fragrances, nail polish and hair care products. Research supported by the National Institutes of Health is ongoing to explore whether these chemicals influence the development of girls' bodies and their risk for breast cancer. Use the following resources for ideas on other ways to reduce exposure to these chemicals.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 fragrances_question = Question.create(
   :question_name => "Do you most often use personal care products like cosmetics with or without fragrances?",
+  :question_topic_name => "Fragrances",
+  :question_topic_message => "Phthalates (pronounced tha-lates) are chemicals found in some personal care products like fragrances, nail polish and hair care products. When possible, use fragrance-free products. Research supported by the National Institutes of Health is ongoing to explore whether these chemicals influence the development of girls' bodies and their risk for breast cancer. Use the following resources for ideas to reduce exposure to these chemicals.",
   :group_id => group_id,
   :input_type => radio,
   :category => environment_category
@@ -746,20 +758,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Bisphenol A (BPA) and phthalates (pronounced tha-lates) are chemicals in plastic containers and some food packaging. Researchers are investigating their potential links to breast cancer risk. When possible, microwave your food in glass dishes, reduce the use of canned goods and avoid plastic containers with recycle codes 3, 6 and 7.",
-  :long_message => "Bisphenol A (BPA) and phthalates (pronounced tha-lates) are chemicals in plastic containers and some food packaging. Researchers are investigating their potential links to breast cancer risk. When possible, microwave your food in glass dishes, reduce the use of canned goods and avoid plastic containers with recycle codes 3, 6 and 7. Follow these resources for additional ideas for avoiding these chemicals.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Good! Keep using glass containers for food whenever you can.",
-  :long_message => "Good! Keep using glass containers for food whenever you can. Bisphenol A (BPA) and phthalates (pronounced tha-lates) are chemicals in plastic containers and some food packaging. Researchers are investigating their potential links to breast cancer risk. In addition to microwaving your food in glass dishes, you should also reduce the use of canned goods and avoid plastic containers with recycle codes 3, 6 and 7.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 materials_question = Question.create(
   :question_name => "Do you store, serve or microwave food in plastic or glass dishes?",
+  :question_topic_name => "Plastic vs. Glass",
+  :question_topic_message => "Bisphenol A (BPA) and phthalates (pronounced tha-lates) are chemicals in plastic containers and some food packaging. Researchers are investigating their potential links to breast cancer risk. When possible, microwave your food in glass dishes, reduce the use of canned goods and avoid plastic containers with recycle codes 3, 6 and 7. Follow these resources for additional ideas for avoiding these chemicals.",
   :group_id => group_id,
   :input_type => radio,
   :category => environment_category
@@ -801,20 +813,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Oral contraceptives and hormone replacement therapy (HRT) increase a woman's lifetime exposure to estrogen, increasing her risk for breast cancer. Avoid prolonged use of menopausal HRT, unless recommended by your doctor.",
-  :long_message => "Oral contraceptives and menopausal hormone therapy (MHT) increase a woman's lifetime exposure to estrogen, increasing her risk for breast cancer. Avoid prolonged use of menopausal HRT, unless recommended by your doctor. MHT, which is typically taken to relieve women of symptoms associated with menopause, has also been found to increase a woman's risk for heart disease and other serious illnesses. If used, MHT should be used for a brief amount of time.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Great! Oral contraceptives and hormone replacement therapy (HRT) increase a woman's lifetime exposure to estrogen, so avoid prolonged exposure when possible.",
-  :long_message => "Great! Oral contraceptives and menopausal hormone therapy (MHT) increase a woman's lifetime exposure to estrogen, so avoid prolonged exposure when possible. MHT, which is typically taken to relieve women of symptoms associated with menopause, has also been found to increase a woman's risk for heart disease and other serious illnesses. If used, MHT should be used for a brief amount of time.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 hormones_question = Question.create(
   :question_name => "Have you used oral birth control for 10+ years or hormone replacement therapy for 5+ years?",
+  :question_topic_name => "Hormones",
+  :question_topic_message => "Oral contraceptives and menopausal hormone therapy (MHT) increase a woman's lifetime exposure to estrogen, increasing her risk for breast cancer. Avoid prolonged use of menopausal HRT, unless recommended by your doctor. MHT, which is typically taken to relieve women of symptoms associated with menopause, has also been found to increase a woman's risk for heart disease and other serious illnesses. If used, MHT should be used for a brief amount of time.",
   :group_id => group_id,
   :input_type => radio,
   :category => environment_category
@@ -843,20 +855,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Know the normal look and feel of your breasts so that it is easier to spot possible abnormalities.",
-  :long_message => "Know the normal look and feel of your breasts so that it is easier to spot possible abnormalities. Possible changes can occur in a woman's breasts, and women should ask their doctors about any noticed changes. Some specific changes that can occur include: a breast or underarm lump or firmness, an inverted or tender nipple, nipple discharge, or scaly, red or swollen skin on the breast, nipple or areola.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Excellent! Knowing the normal look and feel of your breasts makes it easier to spot possible abnormalities.",
-  :long_message => "Excellent! Knowing the normal look and feel of your breasts makes it easier to spot possible abnormalities. Women should be aware of possible changes in their breasts, and they should ask their doctors about any noticed changes. Some specific changes that can occur include: a breast or underarm lump or firmness, an inverted or tender nipple, nipple discharge, or scaly, red or swollen skin on the breast, nipple or areola.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 screening_question = Question.create(
   :question_name => "Do you know the normal look and feel of your breasts?",
+  :question_topic_name => "Know Your Breasts",
+  :question_topic_message => "Know the normal look and feel of your breasts so that it is easier to spot possible abnormalities. Possible changes can occur in a woman's breasts, and women should ask their doctors about any noticed changes. Some specific changes that can occur include: a breast or underarm lump or firmness, an inverted or tender nipple, nipple discharge, or scaly, red or swollen skin on the breast, nipple or areola.",
   :group_id => group_id,
   :input_type => radio,
   :category => screening_category
@@ -895,20 +907,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "With your physician, discuss your family history, annual exams and the age to start mammograms.",
-  :long_message => "With your physician, discuss your family history, annual exams and the age to start mammograms. Talking with your physician about getting annual exams and the age to start getting mammograms has proven to be proactive in addressing your breast health and breast cancer.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Fantastic! Be sure to discuss your family history, annual exams and the age to start mammograms.",
-  :long_message => "Fantastic! Be sure to discuss your family history, annual exams and the age to start mammograms. Talking with your physician about getting annual exams and the age to start getting mammograms has proven to be proactive in addressing your breast health and breast cancer. Encourage your friends and family to take steps to protect their health too!",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 screening_question = Question.create(
   :question_name => "Have you talked with your personal care physician about your breast health?",
+  :question_topic_name => "Talking to Your Physician",
+  :question_topic_message => "With your physician, discuss your family history, annual exams and the age to start mammograms. Talking with your physician about getting annual exams and the age to start getting mammograms has proven to be proactive in addressing your breast health and breast cancer.",
   :group_id => group_id,
   :input_type => radio,
   :category => screening_category
@@ -927,8 +939,6 @@ QuestionOption.create(
   :risk_level => higher_risk_level,
   :risk_message => higher_risk_message
 )
-
-
 
 Resource.create(
   :text => '<a href="http://cancercenters.cancer.gov/cancer_centers/index.html">National Cancer Institute&mdash;Cancer Centers</a>',
@@ -959,20 +969,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Annual breast exams by a physician and mammograms help detect breast cancer early, giving women a better chance for survival. US Preventive Services Task Force recommends that women ages 50-74 get mammograms every two years.",
-  :long_message => "Annual breast exams by a physician and mammograms help detect breast cancer early, giving women a better chance for survival. US Preventive Services Task Force recommends that women ages 50-74 get mammograms every two years. However, women of all ages should be aware of the feel and look of their breasts and their family history. To be proactive in addressing your breast health and breast cancer, talk with your physician about getting annual exams and the age to start getting mammograms.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "Great! Annual breast exams by a physician and mammograms help detect breast cancer early, giving women a better chance for survival.",
-  :long_message => "Great! Annual breast exams by a physician and mammograms help detect breast cancer early, giving women a better chance for survival. Use the following resources for information on breast cancer resources in your area, and encourage your family and friends to protect their health too!",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 screening_question = Question.create(
   :question_name => "Have you begun getting clinical breast exams and/or mammograms?",
+  :question_topic_name => "Breast Exams",
+  :question_topic_message => "Annual breast exams by a physician and mammograms help detect breast cancer early, giving women a better chance for survival. US Preventive Services Task Force recommends that women ages 50-74 get mammograms every two years. However, women of all ages should be aware of the feel and look of their breasts and their family history. To be proactive in addressing your breast health and breast cancer, talk with your physician about getting annual exams and the age to start getting mammograms.",
   :group_id => group_id,
   :input_type => radio,
   :category => screening_category
@@ -1021,20 +1031,20 @@ Resource.create(
 group_id += 1
 higher_risk_message = RiskMessage.create(
   :message => "Having a Body Mass Index (BMI) of 25 or higher increases your risk for breast cancer. Keep reading to learn about changes you can make to your diet and exercise routines to maintain a healthy weight and lower your risk.",
-  :long_message => "Having a Body Mass Index (BMI) of 25 or higher increases your risk for breast cancer. Keep reading to learn about changes you can make to your diet and exercise routines to maintain a healthy weight and lower your risk. Recent studies have shown that women who maintain a normal body weight, with a BMI between 18.5 and 24, decrease their risk for breast cancer by as much as 40%. Eating a well-balanced, healthy diet, with at least five servings of fruit and vegetables daily and moderate to vigorous exercise at least 30 minutes most days will contribute to getting a normal weight, improved health and reduced risk for breast cancer.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
   :message => "By maintaining your BMI between 18.5 and 24, you're reducing your risk for postmenopausal breast cancer. Keep reading for more ideas on steps in maintaining a healthy lifestyle and reducing breast cancer risk.",
-  :long_message => "By maintaining your BMI between 18.5 and 24, you're reducing your risk for postmenopausal breast cancer. Keep reading for more ideas on steps in maintaining a healthy lifestyle and reducing breast cancer risk. Eating a well-balanced, healthy diet, with at least five servings of fruit and vegetables daily and moderate to vigorous exercise at least 30 minutes most days will contribute to getting a normal weight, improved health and reduced risk for breast cancer.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
 
 bmi_question = Question.create(
   :question_name => "BMI (Body Mass Index)",
+  :question_topic_name => "Body Mass Index (BMI)",
+  :question_topic_message => "Having a Body Mass Index (BMI) of 25 or higher increases your risk for breast cancer. Keep reading to learn about changes you can make to your diet and exercise routines to maintain a healthy weight and lower your risk. Recent studies have shown that women who maintain a normal body weight, with a BMI between 18.5 and 24, decrease their risk for breast cancer by as much as 40%. Eating a well-balanced, healthy diet, with at least five servings of fruit and vegetables daily and moderate to vigorous exercise at least 30 minutes most days will contribute to getting a normal weight, improved health and reduced risk for breast cancer.",
   :group_id => group_id,
   :input_type => select,
   :category => health_history_category
@@ -1077,3 +1087,5 @@ Resource.create(
   :text => '<a href="http://www.cancer.gov/cancertopics/factsheet/Risk/obesity">National Cancer Institute&mdash;Obesity Fact Sheet</a>',
   :group_id => group_id  
 )
+
+DataMapper.finalize
