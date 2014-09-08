@@ -53,6 +53,10 @@ var BCERP = (function($, window){
         if (typeof logQuestionnaireFinished != "undefined" && logQuestionnaireFinished) {
             BCERP.ANALYTICS.logQuestionnaireIsFinished();
         }
+        
+        $('#shareable-url').on('focus, click', function(){
+            this.select();
+        });
     };
     
     self.bindCloseResultsModalEvent = function(){

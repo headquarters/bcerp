@@ -413,6 +413,12 @@ fieldset legend {
     font-size:0.9em;
 }
 
+#shareable-url {
+    overflow:hidden;
+    white-space: nowrap;
+    height:2em;
+}
+
 
 /*
  * Resources

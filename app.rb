@@ -107,7 +107,12 @@ end
   get path do
     @@page_title = "Results | " + TITLE
     
-    @active = "questionnaire"  
+    @active = "questionnaire"
+    
+    if !request.query_string.empty? && @session.progress == 0.0
+      #code
+    end
+    
     
     @results = {}    
     
@@ -373,6 +378,11 @@ end
 
 not_found do
   erb :'404'
+end
+
+def load_results
+  # try
+  # catch for loading results, in case query string is not valid
 end
 
 def get_progress
