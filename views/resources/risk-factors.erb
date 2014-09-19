@@ -7,6 +7,9 @@
         <li class="row" id="group-<%= group_id %>">
           <h3><%= prevent_widows(risk_factor["question"].question_topic_name) %></h3>
             <div class="large-12 columns">
+              <% if group_id == HEIGHT_WEIGHT_GROUP_ID && !@session.bmi.nil? %>
+                Your BMI is <%= @session.bmi %>.
+              <% end %>
               <%= risk_factor["question"].question_topic_message %>
             </div>
         
