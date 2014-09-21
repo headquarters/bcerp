@@ -88,19 +88,22 @@ get '/results/dismiss' do
   end
 end
 
-# /results?q1=<option_choice_value>&q2=...
-
-# group_id, question_option_id, question_id
 get '/results/saved' do
   answers = Answer.all(:session_id => @session.id)
   
   query_string = "?"
   
-  answers.each_with_index do |answer, index|
-    query_string += "a#{index}=#{answer.question_id},#{answer.question_option_id},#{answer.group_id}&"
+  if answers.empty?
+    query_string += "0"
+  else
+    answers.each_with_index do |answer, index|
+      # <index>=group_id, question_option_id, question_id
+      query_string += "a#{index}=#{answer.question_id},#{answer.question_option_id},#{answer.group_id}&"
+    end
   end
   
-  redirect "/results#{query_string}"
+  # chop off the last ampersand
+  redirect "/results#{query_string.chop}"
 end
 
 ["/results", "/questionnaire/results"].each do |path|
@@ -110,9 +113,9 @@ end
     @active = "questionnaire"
     
     if !request.query_string.empty? && @session.progress == 0.0
-      #code
+      # parse query string for
+      load_results(request.query_string)      
     end
-    
     
     @results = {}    
     
@@ -380,9 +383,50 @@ not_found do
   erb :'404'
 end
 
-def load_results
-  # try
-  # catch for loading results, in case query string is not valid
+def load_results(query_string)
+  # try/catch for loading results, in case query string is not valid
+  begin
+    height_in_inches = nil
+    weight_in_pounds = nil
+    
+    answer_array = query_string.split("&")
+    answer_array.each do |answer|
+      # splits into something like ["a0", "1,3,1"]
+      # [0] is index, [1] is question_id, question_option_id, and group_id
+      answer_ids_array = answer.split("=")
+      
+      ids = answer_ids_array[1]
+      ids_array = ids.split(",")    
+      
+      question_id = ids_array[0]
+      question_option_id = ids_array[1]
+      group_id = ids_array[2]
+      
+      if question_id.to_i == HEIGHT_QUESTION_ID
+        height_question_option = QuestionOption.get(question_option_id)
+        height_in_inches = height_question_option.option_choice.option_choice_value
+      end
+      
+      if question_id.to_i == WEIGHT_QUESTION_ID
+        weight_question_option = QuestionOption.get(question_option_id)
+        weight_in_pounds = weight_question_option.option_choice.option_choice_value
+      end
+      
+      # create an answer for this session using the data in the query string
+      Answer.create(:session_id => @session.id, :question_id => question_id, :question_option_id => question_option_id, :group_id => group_id)
+    end
+    
+    if !height_in_inches.nil? && !weight_in_pounds.nil?
+      @session.bmi = calculate_bmi(weight_in_pounds, height_in_inches)
+    end    
+  rescue StandardError => err
+    puts "There is a problem with the results string: #{err}"
+  end
+  progress = get_progress
+  
+  @session.progress = progress
+  @session.current_question = 1
+  @session.save  
 end
 
 def get_progress

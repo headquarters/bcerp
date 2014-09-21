@@ -39,14 +39,28 @@
         <% end %>
     </script>
     <% if !request.query_string.empty? %>
-    <div class="row">
-        <div class="panel">
-            <p>
-                Your results have been saved. Use the following URL to share your results: <br />
-                <textarea id="shareable-url"><%= request.url %></textarea>
-            </p>
-        </div>
-    </div>
+        <% if request.query_string == "0" %>
+            <div class="row">
+                <div data-alert class="alert-box info">
+                    <p>
+                        You must answer some of the questions in the questionnaire before your results can be saved. <br />
+                        Click or tap any of the circle icons below to go straight to a question or use the "Back to Questionnaire" button. 
+                    </p>
+                </div>
+            </div>            
+        <% else %>
+            <div class="row">
+                <div class="panel">
+                    <p>
+                        Your results have been saved. Use the following URL to share your results: <br />
+                        <textarea id="shareable-url"><%= request.url %></textarea>
+                    </p>
+                    <a href="mailto:?subject=MyBCRisk.org: My breast cancer risk results&body=I took a questionnaire at http://mybcrisk.org and here are my results: <%= request.url.gsub("&", "%26") %>. Young women can be at risk for breast cancer just like older women; know your risk by taking this test!">
+                        Email these results
+                    </a>
+                </div>
+            </div>
+        <% end %>
     <% end %>
     <div class="row">
         <div class="hide-on-print large-7 columns end">
@@ -71,19 +85,22 @@
                 </div>
             <% end %>
         </div>
-        <div class="inset small-12 medium-6 large-6 columns">
+        <div class="legend small-12 medium-6 large-6 columns">
+            <h5>What the colors mean:</h5>
             <ul id="key">
                 <li><img src="/images/high-risk-key.png" alt="" /> Higher Risk</li>
                 <li><img src="/images/low-risk-key.png" alt="" /> Lower Risk</li>
                 <li><img src="/images/unanswered-key.png" alt="" /> Unanswered</li>
             </ul>
-            <div class="hide-on-print">
+            <div class="hide-on-print clearfix">
                 <a href="/questionnaire" class="button small radius">Back to Questionnaire</a>
                 <h4>Share this site:</h4>
                 <%= erb :share_buttons_partial, :locals => {
                     :share_subject => "MyBCRisk.org: Find your breast cancer risk",
                     :share_body => "Young women can be at risk for breast cancer just like older women; know your risk by taking this test!" } %>
-                <a href="/results/saved" class="button small radius">Save My Results</a>
+                <div class="save left">
+                    <a href="/results/saved" class="button secondary tiny radius">Save My Results</a>
+                </div>
             </div>
         </div>
     </div>

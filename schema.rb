@@ -722,7 +722,7 @@ lower_risk_message = RiskMessage.create(
 fragrances_question = Question.create(
   :question_name => "Do you most often use personal care products like cosmetics with or without fragrances?",
   :question_topic_name => "Fragrances",
-  :question_topic_message => "Phthalates (pronounced tha-lates) are chemicals found in some personal care products like fragrances, nail polish and hair care products. When possible, use fragrance-free products. Research supported by the National Institutes of Health is ongoing to explore whether these chemicals influence the development of girls' bodies and their risk of breast cancer. Use the following resources for ideas to reduce exposure to these chemicals.",
+  :question_topic_message => "Phthalates (pronounced tha-lates) are chemicals found in some personal care products like fragrances, nail polish and hair care products. When possible, use fragrance-free products. Many fragrance carriers are already established as having potential effects on breast cancer, and even some products claiming to be fragrance free can have harmful chemicals. Avoiding fragrances is exercising precaution. Research supported by the National Institutes of Health is ongoing to explore the influence phthalates have on the development of girls' bodies and their risk of breast cancer. Use the following resources for ideas to reduce exposure to these chemicals.",
   :group_id => group_id,
   :input_type => radio,
   :category => environment_category
@@ -751,6 +751,11 @@ Resource.create(
 
 Resource.create(
   :text => '<a href="http://info.bcerp.org/">NIEHS BCERP&mdash;Fact Sheet: The Chemical Connection</a>',
+  :group_id => group_id
+)
+
+Resource.create(
+  :text => '<a href="http://www.fda.gov/cosmetics/productsingredients/ingredients/ucm388821.htm">US Food and Drug Administration</a>',
   :group_id => group_id
 )
 

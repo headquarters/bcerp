@@ -366,6 +366,12 @@ fieldset legend {
     margin:0;
 }
 
+#results .save {
+    border-top:1px solid #ddd;
+    padding-top:0.5em;
+    margin-top:0.5em;
+}
+
 #results .share-buttons a img {
     width:2.75em;
     margin-bottom:0.25em;
@@ -409,9 +415,15 @@ fieldset legend {
     right:0.125rem;
 }
 
-#results .inset h4 {
+#results .legend h5 {
+    font-size:0.9em;
+    margin-top:1em;
+}
+
+#results .legend h4 {
     font-size:0.9em;
 }
+
 
 #shareable-url {
     overflow:hidden;
@@ -534,13 +546,13 @@ fieldset legend {
 }
 
 @media only screen and (max-width:60em){
-    #results .inset {
+    /*#results .legend {
         position:relative;
         top:-220px;
         right:0;
         width:54%;
         float:right;
-    }
+    }*/
 }
 
 @media only screen and (max-width: 40em) {
