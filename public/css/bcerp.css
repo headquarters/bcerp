@@ -132,7 +132,7 @@ article {
 #progress-bar {
   background: #fff;
   line-height:1.2;
-  margin-top:0.25em;
+  margin-top:0.5em;
 }
 
 #progress-bar .progress {
@@ -472,6 +472,11 @@ fieldset legend {
     #home iframe {
        height:22em;
     }
+    
+    .actions,
+    #progress-bar {
+        margin-top:1em;
+    }
 }
 
 @media screen and (min-width: 60em) {
@@ -508,7 +513,7 @@ fieldset legend {
       margin-left:10%;
     }
 }
-
+/*
 @media only screen and (max-height: 30em) {
     article {
         padding-bottom:1em;
@@ -517,8 +522,8 @@ fieldset legend {
         position:static;
         left:auto;
         bottom:auto;
-    }    
-}
+    }   
+}*/
 
 @media only screen and (min-width: 60em) and (min-height: 30em) {
     article {
