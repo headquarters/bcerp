@@ -92,7 +92,7 @@ get '/results/saved' do
   answers = Answer.all(:session_id => @session.id)
   
   query_string = "?"
-  
+
   if answers.empty?
     query_string += "0"
   else
@@ -100,10 +100,12 @@ get '/results/saved' do
       # <index>=group_id, question_option_id, question_id
       query_string += "a#{index}=#{answer.question_id},#{answer.question_option_id},#{answer.group_id}&"
     end
+    
+    # chop off the last ampersand
+    query_string.chop!
   end
   
-  # chop off the last ampersand
-  redirect "/results#{query_string.chop}"
+  redirect "/results#{query_string}"
 end
 
 ["/results", "/questionnaire/results"].each do |path|
@@ -426,6 +428,7 @@ def load_results(query_string)
   
   @session.progress = progress
   @session.current_question = 1
+  @session.has_viewed_results = true
   @session.save  
 end
 

@@ -203,7 +203,7 @@ lower_risk_message = RiskMessage.create(
 children_question = Question.create(
   :question_name => "How old were you when your first child was born?",
   :question_topic_name => "Having Children",
-  :question_topic_message => "Having no children or having a first child after 35 increases breast cancer risk. Reproductive behavior is often tied to estrogen exposure, and most known risks for breast cancer are associated with lifetime exposure to estrogen. Estrogen is a naturally occurring hormone important for sexual development and childbearing. A woman's exposure to estrogen varies over her lifetime. Estrogen exposure may change the state or number of cells that could become cancerous. Breast cancer risk goes down for women with more children, but this may depend upon the type of breast cancer.",
+  :question_topic_message => "Having no children or having a first child after 35 increases breast cancer risk. Reproductive behavior is often tied to estrogen exposure, and most known risks for breast cancer are associated with lifetime exposure to estrogen. Estrogen is a naturally occurring hormone important for sexual development and childbearing. A woman's exposure to estrogen varies over her lifetime. Estrogen exposure may change the state or number of cells that could become cancerous. Breast cancer risk goes down for women with more children, but this may depend upon the type of breast cancer. Furthermore, the younger a woman is at the time of a first full-term pregnancy, the stronger the protective benefit. Of course, this is just one of many important decisions in planning a family.",
   :group_id => group_id,
   :input_type => radio,
   :category => health_history_category
@@ -609,7 +609,7 @@ higher_risk_message = RiskMessage.create(
 )
 
 lower_risk_message = RiskMessage.create(
-  :message => "Just getting a drink out with friends every now and then? Not to worry; but having one or more servings of alcoholic drinks per day increases women's risk for breast cancer.",
+  :message => "Alcohol consumption may have some health benefits or reduce risk of some diseases, but not true with breast cancer. Having one or more servings of alcoholic drinks per day increases women's risk for breast cancer.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
@@ -750,12 +750,12 @@ Resource.create(
 )
 
 Resource.create(
-  :text => '<a href="http://info.bcerp.org/">NIEHS BCERP&mdash;Fact Sheet: The Chemical Connection</a>',
+  :text => '<a href="http://www.info.bcerp.org/Outreach/BCERP_Outreach_Talking%20Points_Chemicals_changes%20accepted.doc">NIEHS BCERP&mdash;Fact Sheet: The Chemical Connection (DOC)</a>',
   :group_id => group_id
 )
 
 Resource.create(
-  :text => '<a href="http://www.fda.gov/cosmetics/productsingredients/ingredients/ucm388821.htm">US Food and Drug Administration</a>',
+  :text => '<a href="http://www.fda.gov/cosmetics/productsingredients/ingredients/ucm388821.htm">US Food and Drug Administration&mdash;Fragrances in Cosmetics</a>',
   :group_id => group_id
 )
 
@@ -817,13 +817,13 @@ Resource.create(
 ### Hormones
 group_id += 1
 higher_risk_message = RiskMessage.create(
-  :message => "Oral contraceptives and hormone replacement therapy (HRT) increase a woman's lifetime exposure to estrogen, increasing her risk for breast cancer. Avoid prolonged use of menopausal HRT, unless recommended by your doctor.",
+  :message => "Oral contraceptives and menopausal hormone therapy (MHT) increase a woman's lifetime exposure to estrogen, increasing her risk for breast cancer. Avoid prolonged use of menopausal MHT, unless recommended by your doctor.",
   :group_id => group_id,
   :risk_level => higher_risk_level
 )
 
 lower_risk_message = RiskMessage.create(
-  :message => "Great! Oral contraceptives and hormone replacement therapy (HRT) increase a woman's lifetime exposure to estrogen, so avoid prolonged exposure when possible.",
+  :message => "Great! Oral contraceptives and menopausal hormone therapy (MHT) increase a woman's lifetime exposure to estrogen, so avoid prolonged exposure when possible.",
   :group_id => group_id,
   :risk_level => lower_risk_level
 )
@@ -831,7 +831,7 @@ lower_risk_message = RiskMessage.create(
 hormones_question = Question.create(
   :question_name => "Have you used oral birth control for 10+ years or hormone replacement therapy for 5+ years?",
   :question_topic_name => "Hormones",
-  :question_topic_message => "Oral contraceptives and menopausal hormone therapy (MHT) increase a woman's lifetime exposure to estrogen, so avoid prolonged exposure when possible. MHT, which is typically taken to relieve women of symptoms associated with menopause, has also been found to increase a woman's risk of heart disease and other serious illnesses. Avoid prolonged use of menopausal HRT, unless recommended by your doctor. If used, MHT should be used for a brief amount of time. The breast cancer risk associated with oral contraceptives should also be weighed against other risks and benefits with your doctor.",
+  :question_topic_message => "Oral contraceptives and menopausal hormone therapy (MHT) increase a woman's lifetime exposure to estrogen, so avoid prolonged exposure when possible. MHT, which is typically taken to relieve women of symptoms associated with menopause, has also been found to increase a woman's risk of heart disease and other serious illnesses. Avoid prolonged use of menopausal MHT, unless recommended by your doctor. If used, MHT should be used for a brief amount of time. The breast cancer risk associated with oral contraceptives should also be weighed against other risks and benefits with your doctor.",
   :group_id => group_id,
   :input_type => radio,
   :category => environment_category
