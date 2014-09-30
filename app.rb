@@ -3,12 +3,10 @@ require 'sinatra'
 require 'data_mapper'
 require 'json'
 
+# Require the session file that contains the session secret and expiry time
+require './session'
+
 set :bind, '0.0.0.0'
-
-enable :sessions
-
-set :session_secret, "alsdkjf!#$alkd@#$sfj29734))98)"
-set :sessions, :expire_after => 2592000
 
 configure :development do
   DataMapper::Logger.new($stdout, :debug)
@@ -49,10 +47,10 @@ HIGHER_RISK_LEVEL_ID = 1
 LOWER_RISK_LEVEL_ID = 2
 
 before do
-  # get the first session with this session_id or just create it and return that session row
+  # Get the first session with this session_id or just create it and return that session row
   @session = Session.first_or_create(:session_id => session.id)
   
-  # set default share URL; view can override it
+  # Set default share URL; a view can override it
   @@share_url = "http://mybcrisk.org"
 end
 
