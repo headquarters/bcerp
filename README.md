@@ -25,5 +25,6 @@ question_id and each value in the array is a question_option_id. The naming sche
 represents the ID column of the QuestionOption model (or "question_options" table).
 
 #### First Run
-ruby schema.rb
-rerun app.rb
+`ruby schema.rb`
+
+`rerun app.rb`
