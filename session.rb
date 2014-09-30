@@ -1,4 +1,4 @@
 enable :sessions
 
-set :session_secret, "alsdkjf!#$alkd@#$sfj29734))98)"
+set :session_secret, "<insert your session key here>"
 set :sessions, :expire_after => 2592000
