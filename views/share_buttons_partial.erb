@@ -1,0 +1,11 @@
+<div class="share-buttons">
+    <a href="http://facebook.com/sharer/sharer.php?text=<%=share_body%>&u=<%=@@share_url%>">
+        <img src="/images/facebook.png" alt="Facebook" />
+    </a>
+    <a href="http://twitter.com/share?text=<%=shorten_text_for_tweet(share_body, @@share_url)%>&url=<%=@@share_url%>">
+        <img src="/images/twitter.png" alt="Twitter" />
+    </a>
+    <a href="mailto:?subject=<%=share_subject%>&body=<%=share_body%> <%=@@share_url%>">
+        <img src="/images/email.png" alt="Email" />
+    </a>
+</div>

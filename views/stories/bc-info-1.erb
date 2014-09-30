@@ -1,0 +1,23 @@
+<div class="story">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/stories">Stories</a> &rsaquo; Young African American Women</div>
+      <h2>Breast Cancer and Young African American Women</h2>
+      <div class="video-container">
+        <iframe id="youtube-video" src="https://www.youtube.com/embed/-xpZ2KnZ_04?rel=0&playsinline=0&enablejsapi=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-10 medium-10 large-9 columns">
+      <p>
+        <!--&ldquo;You just never think it will be you.&rdquo; Christie Lee shares her story of surviving breast cancer in her 40s while caring for her daughter.-->
+      </p>
+    </div>
+    <div class="large-3 columns large-text-right">
+      Share this story: <%= erb :share_buttons_partial, :locals => {
+        :share_subject => "Breast cancer and young African American women",
+        :share_body => "This video explains the breast cancer risk young African American women face." } %>
+    </div>
+  </div>
+</div>

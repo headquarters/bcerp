@@ -1,96 +1,21 @@
 <div id="home">
     <div class="row">
         <div class="text-center large-6 large-push-3 medium-6 medium-push-3 columns">
-            <h1>Do you know <em>your</em> breast health?</h1>
+            <h2>Do you know <em>your</em> breast&nbsp;health?</h2>
             <p>
-                Breast cancer: It doesn't have to run in your family. And though you probably think it will never happen to you,
-                you're still at risk.
+                Breast cancer can affect ALL women&mdash;young and old&mdash;black, white, and brown. Learn how
+                your actions influence your risk.
             </p>
             <div>
                 <% if @session.progress > 0 %>
-                    <a href="/questionnaire" class="button">Continue Questionnaire</a>    
+                    <a href="/questionnaire" class="button radius">Continue Questionnaire</a>    
                 <% else %>
-                    <a href="/questionnaire" class="button">Find Our Your Risk</a>    
+                    <a href="/questionnaire/intro" class="button radius">Find Out Your Risk</a>    
                 <% end %>                
             </div>            
         </div>
-        <div class="large-8 large-pull-2 medium-8 medium-pull-2 columns">
-
-            <div class="video-placeholder">            
-                <img src="/images/teaser-video-still.jpg" alt="Teaser video">
-            </div>
+        <div id="teaser-video" class="large-8 large-pull-2 medium-8 medium-pull-2 columns">
+            <iframe src="//www.youtube.com/embed/kizYm7SVpwQ?rel=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </div>
     </div>
 </div>
-<!--
-<div class="row">
-    <div class="large-6 columns">	
-		<dl class="accordion" data-accordion>
-            <dd>
-                <a href="#panel1">Diagnosed and Pregnant</a>
-                <div id="panel1" class="content active">
-                    <div class="video-placeholder">
-                      <img src="/images/renee-adams-video-still.jpg" alt="">
-                    </div>
-                    <p>
-                      <em>"It doesn't have to run in your family for it to happen to you."</em>
-                       Renee Adams shares her story of surviving breast cancer while pregnant.
-                    </p>
-                </div>
-            </dd>
-            <dd>
-                <a href="#panel2">Surviving With an Infant</a>
-                <div id="panel2" class="content">
-                    <div class="video-placeholder">
-                      <img src="/images/christie-lee-video-still.jpg" alt="">
-                    </div>
-                    <p>
-                      <em>"You just never think it will be you."</em>
-                      Christie Lee shares her story of surviving breast cancer in her 40s while caring for her daughter.
-                    </p>
-                </div>
-            </dd>
-            <dd>
-                <a href="#panel3">Advocating For Prevention</a>
-                <div id="panel3" class="content">
-                    <div class="video-placeholder">
-                      <img src="/images/kenda-freeman-video-still.jpg" alt="">
-                    </div>
-                    <p>
-                      <em>"It effected so many people in my family, it could happen to me."</em>
-                      Kenda Freeman shares her story of living well to prevent breast cancer. 
-                    </p>
-                </div>
-            </dd>
-		</dl>
-	</div>    
-</div>
-<div class="row">
-    <div class="large-4 columns">
-        <div class="callout">
-            <h3>Find Out Your Risk</h3>
-            <p>
-              Answer a few questions to find out your risk level. You'll get helpful advice along the way.
-            </p>
-            <a href="/assessment" class="small button">Find Out Your Risk</a>
-        </div>
-    </div>
-    <div class="large-4 columns">
-        <div class="callout">
-            <h3>Resources</h3>
-            <p>
-              Find links to more information about breast cancer risks and ways to lower your risk.
-            </p>
-            <a href="/resources" class="small button">Resources</a>
-        </div>
-    </div>
-    <div class="large-4 columns">
-        <div class="callout">
-            <h3>About</h3>
-            <p>
-              Read about the people and institutions behind the Breast Health Awareness site. (Hint: Go Tarheels!)
-            </p>
-            <a href="/about" class="small button">About The Site</a>
-        </div>
-    </div>
-</div>-->

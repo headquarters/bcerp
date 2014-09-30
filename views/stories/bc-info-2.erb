@@ -1,0 +1,23 @@
+<div class="story">
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/stories">Stories</a> &rsaquo; Education</div>
+      <h2>Educate Yourself to Protect Yourself</h2>
+      <div class="video-container">
+        <iframe id="youtube-video" src="https://www.youtube.com/embed/7_80TpfVFo8?rel=0&playsinline=0&enablejsapi=1" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-10 medium-10 large-9 columns">
+      <p>
+        <!--&ldquo;You just never think it will be you.&rdquo; Christie Lee shares her story of surviving breast cancer in her 40s while caring for her daughter.-->
+      </p>
+    </div>
+    <div class="large-3 columns large-text-right">
+      Share this story: <%= erb :share_buttons_partial, :locals => {
+        :share_subject => "Breast Cancer: Educate yourself to protect yourself",
+        :share_body => "This video explains some ways women can help protect themselves from the risk of breast cancer." } %>
+    </div>
+  </div>
+</div>

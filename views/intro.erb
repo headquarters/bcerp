@@ -3,10 +3,13 @@
         <h2>Starting the Questionnaire</h2>
         <div class="callout panel">
             <p>
-                We're going to ask you a few questions to determine your level of risk. For each question, you can answer it, skip it, or go back to the previous question. <br />
-                View your results any time by clicking or tapping the "Results" button.
+                We're going to ask you a few questions to determine your level of risk. It should take less than 10 minutes,
+                but you don't have to finish it all at one time.  
+                For each question, you can answer it, skip it, or go back to the previous question. <br />
+                View your results any time by clicking or tapping the <strong>&ldquo;Results&rdquo;</strong> button. <br />
+                We'll provide you feedback to help you know how to reduce your risk of breast cancer.
             </p>
-            <a href="/questionnaire/1" class="button">
+            <a href="/questionnaire/1" class="button radius">
                 <% if @session.progress > 0 %>
                     Continue Questionnaire
                 <% else %>

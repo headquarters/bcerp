@@ -2,7 +2,7 @@ class Session
   include DataMapper::Resource
 
   property :id, Serial  
-  property :session_id, String, :length => 128
+  property :session_id, String, :length => 256
   property :bmi, Float
   property :progress, Float, :default => 0.0
   property :current_question, Integer
@@ -27,6 +27,7 @@ class Category
   
   property :id, Serial
   property :category_name, String
+  property :category_identifier, String
   
   has n, :question
 end
@@ -57,7 +58,7 @@ class OptionChoice
   include DataMapper::Resource
   
   property :id, Serial
-  property :option_choice_name, String
+  property :option_choice_name, String, :length => 128
   property :option_choice_value, Float, :required => false
   
   has n, :question_option
@@ -80,6 +81,8 @@ class Question
   
   property :id, Serial
   property :question_name, String, :length => 128
+  property :question_topic_name, String, :length => 128
+  property :question_topic_message, Text
   property :group_id, Integer
 
   has n, :answer
@@ -98,4 +101,12 @@ class Answer
   belongs_to :question
   
   property :created_at, DateTime
+end
+
+class Resource
+  include DataMapper::Resource
+  
+  property :id, Serial
+  property :text, Text
+  property :group_id, Integer
 end
