@@ -17,11 +17,11 @@ DataMapper.setup(:default, 'sqlite:bcerp.db')
 require './models'
 
 DataMapper.auto_upgrade! 
-
 DataMapper.finalize
 
-SITE_TITLE = "My Breast Cancer Risk"
+# Part of the <title> that will not change, gets appended to other strings in views
 TITLE = "My BC Risk"
+# Full <title> passed to a view by being global
 @@page_title = ""
 
 # Height and weight count as 1 question (BMI).
@@ -30,14 +30,14 @@ TOTAL_QUESTIONS = 17
 # Use round() when displaying.
 INCREMENT = 100.0/TOTAL_QUESTIONS
 
-# Group ID is set manually in the schema.rb
+# Group ID is set manually in the schema.rb.
 HEIGHT_WEIGHT_GROUP_ID = 6
 LAST_GROUP_ID = 17
 BMI_GROUP_ID = 18
 RACE_GROUP_ID = 2
 
 # These IDs are set by the database engine, so they could theoretically change,
-# but we're assuming nothing runs before the schema.rb script to insert other data
+# but we're assuming nothing runs before the schema.rb script to insert other data. 
 AGE_QUESTION_ID = 1
 HEIGHT_QUESTION_ID = 6
 WEIGHT_QUESTION_ID = 7
@@ -54,17 +54,20 @@ before do
   @@share_url = "http://mybcrisk.org"
 end
 
+# Home page
 get '/' do
   @@page_title = "Home | " + TITLE
   @active = "home"
   erb :home  
 end
 
+# Intro to the questionnaire page
 get '/questionnaire/intro' do
   @@page_title = "Questionnaire | " + TITLE
   erb :intro
 end
 
+# Go to the current question or question 1.
 get '/questionnaire' do
   @active = "questionnaire"
   if !@session.current_question.nil?
@@ -74,6 +77,7 @@ get '/questionnaire' do
   end
 end
 
+# Dismiss the results modal.
 get '/results/dismiss' do
   @session.has_viewed_results = true
   did_save = @session.save
@@ -86,6 +90,7 @@ get '/results/dismiss' do
   end
 end
 
+# Show the saved results URL to the user.
 get '/results/saved' do
   answers = Answer.all(:session_id => @session.id)
   
@@ -106,6 +111,7 @@ get '/results/saved' do
   redirect "/results#{query_string}"
 end
 
+# Show the results page.
 ["/results", "/questionnaire/results"].each do |path|
   get path do
     @@page_title = "Results | " + TITLE
@@ -113,7 +119,7 @@ end
     @active = "questionnaire"
     
     if !request.query_string.empty? && @session.progress == 0.0
-      # parse query string for
+      # parse query string for results
       load_results(request.query_string)      
     end
     
@@ -126,7 +132,8 @@ end
     
     questions.each do |question|
       group_id = question.group_id
-      # leave out race, height, and weight
+      # Leave out race, because it is not shown as a risk indicator, it's only there for information.
+      # Leave out height and weight answers because they're aggregated into BMI.
       if group_id == HEIGHT_WEIGHT_GROUP_ID || group_id == RACE_GROUP_ID
         next
       end
@@ -134,7 +141,7 @@ end
       category = question.category
       
       if @results[category.id].nil?
-        # new category ID for the data structure, set it up to contain answers
+        # Category ID for the key for this data structure, set it up to contain answers
         @results[category.id] = {}
   
         @results[category.id]["category_name"] = category.category_name
@@ -169,41 +176,48 @@ end
       @results[category.id]["answers"].push(answer_hash)
         
     end
-    
-    #"#{@results.inspect}"
+  
     erb :results
   end
 end
 
+# Show the question for that Group ID. To users, this may appear as a number of the question
+# itself, though, i.e. /questionnaire/3.
 get '/questionnaire/:group_id' do
   group_id = params[:group_id]
   
   @@page_title = "Question #{group_id} | " + TITLE
   
+  # This is now the current question.
   @session.current_question = group_id
   @session.save
   
   @progress = @session.progress.round()
   
+  # Get all questions for this group_id. Normally this is just one question, but
+  # height and weight are grouped together by group_id.
   @questions = Question.all(:group_id => group_id)
   
   @group_id = group_id.to_i
   
-  # assumes all questions in a group share the same category
+  # Assumes all questions in a group share the same category.
   @category_name = @questions.first.category.category_name
   @category_identifier = @questions.first.category.category_identifier
   
   if group_id != HEIGHT_WEIGHT_GROUP_ID.to_s
     @risk_messages = RiskMessage.all(:group_id => group_id)
   else
-    # risk messages for height and weight must come from BMI
+    # Risk messages for height and weight must come from BMI, they don't
+    # have their own risk messages.
     @risk_messages = RiskMessage.all(:group_id => BMI_GROUP_ID)
   end
   
   @question_options = {}
   
   @answers = {}
-    
+  
+  # Looping over all the questions to get their answers and question options, 
+  # though this normally would not have more than one question, except for height and weight. 
   @questions.each do |q|
     @question_options[q.id] = QuestionOption.all(:question_id => q.id)
     @answers[q.id] = Answer.first(:session_id => @session.id, :question_id => q.id)
@@ -212,17 +226,19 @@ get '/questionnaire/:group_id' do
   if group_id.to_i == MAMMOGRAM_QUESTION_ID
     age = Answer.first(:session_id => @session.id, :group_id => AGE_QUESTION_ID)
     if !age.nil? && age.question_option.option_choice.option_choice_value < 40
-      # remove part of question regarding mammograms for users < 40
+      # Remove part of question regarding mammograms for users < 40.
       @questions[0].question_name.gsub!(" and/or mammograms", "")
     end    
   end
   
-  # keep the same nav item active the whole way through
+  # Keep the same nav item active the whole way through
   @active = "questionnaire"
   
   erb :question
 end
 
+# When the user answers the question, or clicks "Next" when JavaScript is off,
+# the question data is POSTed here.
 post '/questionnaire/:group_id' do
   group_id = params[:group_id]
   
@@ -231,6 +247,7 @@ post '/questionnaire/:group_id' do
   answers = params[:answers]
 
   if !answers.nil?
+    # Height and weight are separate answers that have to be aggregated into BMI.
     if group_id.to_i == HEIGHT_WEIGHT_GROUP_ID
       height_question_option_id = answers[HEIGHT_QUESTION_ID.to_s]
       weight_question_option_id = answers[WEIGHT_QUESTION_ID.to_s]
@@ -245,21 +262,19 @@ post '/questionnaire/:group_id' do
       bmi_question_options = QuestionOption.all(:question_id => BMI_QUESTION_ID) 
       bmi_option_choice = bmi_question_options.option_choices.first(:conditions => ['option_choice_value > ?', bmi])
       
-      #puts ">>>> #{bmi_question_options}, #{bmi_option_choice}"
-      
-      # save the BMI "question" answer, which isn't visible to the user
-      # height and weight answers are saved independently below where the other answers are saved
+      # Save the BMI "question" answer, which isn't visible to the user.
+      # Height and weight answers are saved independently below where the other answers are saved.
       answer = Answer.first_or_new(:session_id => @session.id, :question_id => BMI_QUESTION_ID)
       answer.group_id = BMI_GROUP_ID
       answer.question_option = QuestionOption.first(:option_choice_id => bmi_option_choice.id, :question_id => BMI_QUESTION_ID)
       answer.save
       
-      # save the BMI value to the session for easier retrieval later
+      # Save the BMI value to the session for easier retrieval later.
       @session.bmi = bmi
       @session.save
     end
     
-    
+    # All answers, even height and weight, get saved here.
     answers.each do |question_id, question_option_id|
       answer = Answer.first_or_new(:session_id => @session.id, :question_id => question_id)
       answer.group_id = group_id
@@ -286,6 +301,9 @@ post '/questionnaire/:group_id' do
   end
 end
 
+# Shows all risk factor information or individual risk factor information
+# if a group_id is present. Individual risk factor information is linked to from the
+# "more information" links in each question of the questionnaire.
 get '/resources/risk-factors/?:group_id?' do
   
   @@page_title = "Risk Factors | " + TITLE
@@ -293,54 +311,46 @@ get '/resources/risk-factors/?:group_id?' do
   @risk_factors = {}
   
   if !params[:group_id].nil?
-    # get the specific question's risk factors, or BMI for height/weight questions
+    # Get the specific question's risk factors, or BMI for height/weight questions.
     group_id = (params[:group_id].to_i == HEIGHT_WEIGHT_GROUP_ID) ? BMI_GROUP_ID : params[:group_id]
     @questions = Question.all(:conditions => ['group_id = ?', group_id])  
   else
-    # no group_id param, so just grab all the questions except the height/weight ones
+    # No group_id param, so just grab all the questions except the height/weight ones.
     @questions = Question.all(:conditions => ['group_id != ?', HEIGHT_WEIGHT_GROUP_ID])  
   end
-  
-  
-  
-  #@risk_messages = RiskMessage.all()
+
 
   @questions.each do |question|
     group_id = question.group_id
-    # index by group_id that should appear in URL for questions and linking to risk factors
+    # Index by group_id that should appear in URL for questions and linking to risk factors.
     index = (question.group_id == BMI_GROUP_ID) ? HEIGHT_WEIGHT_GROUP_ID : question.group_id;
     
     @risk_factors[index] = {}
     @risk_factors[index]["question"] = question;
     @risk_factors[index]["category_id"] = question.category.category_identifier
     
-#    if group_id != RACE_GROUP_ID
-#      @risk_factors[index]["lower_risk_message"] = RiskMessage.first(:group_id => group_id, :risk_level_id => LOWER_RISK_LEVEL_ID)    
-#      @risk_factors[index]["higher_risk_message"] = RiskMessage.first(:group_id => group_id, :risk_level_id => HIGHER_RISK_LEVEL_ID)
-#    else
-#      @risk_factors[index]["risk_message"] = RiskMessage.first(:group_id => group_id)
-#    end    
-    
     @risk_factors[index]["resources"] = Resource.all(:group_id => group_id)
     
   end
 
-
   erb "resources/risk-factors".to_sym
 end
 
+# Resources landing page.
 get '/resources' do
   @@page_title = "Resources | " + TITLE
   @active = "resources"
   erb "resources/index".to_sym
 end
 
+# Resources pages.
 get '/resources/:view' do
   @@page_title = convert_url_phrase_to_title(params[:view]) + " | " + TITLE
   @active = "resources"
   erb "resources/#{params[:view]}".to_sym
 end
 
+# Stories landing page.
 get '/stories' do
   @@page_title = "Video Stories | " + TITLE
   @@share_url = request.url
@@ -348,6 +358,7 @@ get '/stories' do
   erb "stories/index".to_sym
 end
 
+# This story page has a different URL from its view name.
 get '/stories/bc-info-1' do
   @@page_title = "Breast Cancer and Young African American Women | " + TITLE
   @@share_url = request.url
@@ -355,6 +366,7 @@ get '/stories/bc-info-1' do
   erb "stories/bc-info-1".to_sym
 end
 
+# Same as above, this story page has a different URL from its view name.
 get '/stories/bc-info-2' do
   @@page_title = "Educate Yourself to Protect Yourself | " + TITLE
   @@share_url = request.url
@@ -362,6 +374,7 @@ get '/stories/bc-info-2' do
   erb "stories/bc-info-2".to_sym
 end
 
+# All other story pages.
 get '/stories/:view' do
   @@page_title = convert_url_phrase_to_title(params[:view]) + " | " + TITLE
   @@share_url = request.url
@@ -369,8 +382,9 @@ get '/stories/:view' do
   erb "stories/#{params[:view]}".to_sym
 end
 
+# Clears previous session, but leaves the data in the database.
+# Mostly just for testing purposes.
 get '/reset' do
-  # clear previous session, but leave the data in the database
   session.destroy
   redirect "/"
 end
