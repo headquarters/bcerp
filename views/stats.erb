@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="large-12 columns">
+      <h2>Stats</h2>
+      Sessions since Oct. 1st: <%= @sessions.size %><br />
+      Sessions completed: <%= @completed_count %><br />
+      Sessions with some progress: <%= @sessions.size - @no_progress_count - @completed_count %> <br />
+      Sessions with 0% progress on questionnaire: <%= @no_progress_count %>
+    </div>
+</div>

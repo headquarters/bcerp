@@ -19,6 +19,9 @@ require './models'
 DataMapper.auto_upgrade! 
 DataMapper.finalize
 
+# Used in the <h1> tag
+SITE_TITLE = "My Breast Cancer Risk"
+
 # Part of the <title> that will not change, gets appended to other strings in views
 TITLE = "My BC Risk"
 # Full <title> passed to a view by being global
@@ -387,6 +390,17 @@ end
 get '/reset' do
   session.destroy
   redirect "/"
+end
+
+get '/stats' do
+  # Get all sessions after October 1st, official launch date
+  @sessions = Session.all(:created_at.gt => "2014-09-30")
+  
+  @completed_count = @sessions.count(:progress => 100)
+  
+  @no_progress_count = @sessions.count(:progress => 0)
+  
+  erb :stats
 end
 
 error do
