@@ -285,16 +285,19 @@ fieldset legend {
 }
 
 #stories .story {
-    margin-bottom:0.5em;
-    border-bottom:1px solid #ccc;
     padding-bottom:0.5em;
+    padding-left:0.25em;
+}
+#stories hr {
+    margin:1rem auto;
+    width:97%;
 }
 #stories .story:last-child {
     border-bottom:0;
 }
 
 #stories .story .video-frame {
-    padding:0.25em 0 0 0.25em;
+    padding:0.25em 0 0 0;
    /* line-height: 10; /* for vertical aligning image */
 }
 
@@ -484,28 +487,7 @@ fieldset legend {
     #home iframe {
        height:28em;
     }
-    
-/*    #resources ul {
-        margin:0 0 1em 0;
-    }
-    
-    #resources ul li {
-        border-right:1px solid #ccc;
-        border-left:1px solid #ccc;
-    }*/
 }
-
-/*
-@media only screen and (max-width:60em){
-    #results .legend {
-        position:relative;
-        top:-220px;
-        right:0;
-        width:54%;
-        float:right;
-    }
-}
-*/
 
 @media only screen and (max-width: 40em) {
     dialog, .reveal-modal {
@@ -513,17 +495,6 @@ fieldset legend {
       margin-left:10%;
     }
 }
-/*
-@media only screen and (max-height: 30em) {
-    article {
-        padding-bottom:1em;
-    }
-    #sticky-nav {
-        position:static;
-        left:auto;
-        bottom:auto;
-    }   
-}*/
 
 @media only screen and (min-width: 60em) and (min-height: 30em) {
     article {
