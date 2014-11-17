@@ -33,14 +33,14 @@ TOTAL_QUESTIONS = 17
 # Use round() when displaying.
 INCREMENT = 100.0/TOTAL_QUESTIONS
 
-# Group ID is set manually in the schema.rb.
+# Group ID is set manually in the db_content.rb.
 HEIGHT_WEIGHT_GROUP_ID = 6
 LAST_GROUP_ID = 17
 BMI_GROUP_ID = 18
 RACE_GROUP_ID = 2
 
 # These IDs are set by the database engine, so they could theoretically change,
-# but we're assuming nothing runs before the schema.rb script to insert other data. 
+# but we're assuming nothing runs before the db_content.rb script to insert other data. 
 AGE_QUESTION_ID = 1
 HEIGHT_QUESTION_ID = 6
 WEIGHT_QUESTION_ID = 7
