@@ -40,7 +40,7 @@ question_id and each value in the array is a question_option_id. The naming sche
 represents the ID column of the QuestionOption model (or "question_options" table).
 
 #### First Run
-Created the bcerp.db database file:
+Create the bcerp.db database file:
 `ruby schema.rb`
 
 Run the app:
