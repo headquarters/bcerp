@@ -33,14 +33,14 @@ TOTAL_QUESTIONS = 17
 # Use round() when displaying.
 INCREMENT = 100.0/TOTAL_QUESTIONS
 
-# Group ID is set manually in the schema.rb.
+# Group ID is set manually in the db_content.rb.
 HEIGHT_WEIGHT_GROUP_ID = 6
 LAST_GROUP_ID = 17
 BMI_GROUP_ID = 18
 RACE_GROUP_ID = 2
 
 # These IDs are set by the database engine, so they could theoretically change,
-# but we're assuming nothing runs before the schema.rb script to insert other data. 
+# but we're assuming nothing runs before the db_content.rb script to insert other data. 
 AGE_QUESTION_ID = 1
 HEIGHT_QUESTION_ID = 6
 WEIGHT_QUESTION_ID = 7
@@ -393,12 +393,45 @@ get '/reset' do
 end
 
 get '/stats' do
+  @@page_title = "Stats | " + TITLE
   # Get all sessions after October 1st, official launch date
   @sessions = Session.all(:created_at.gt => "2014-09-30")
   
+  # Get all completed questionnaires
   @completed_count = @sessions.count(:progress => 100)
   
+  # Get all with no progress
   @no_progress_count = @sessions.count(:progress => 0)
+
+  
+  # Among the completed questionnaires, what's the average good to bad behavior ratio?
+  @lower_risk_answer_count = Answer.count(:created_at.gt => "2014-09-30", Answer.session.progress => 100.0, Answer.question_option.risk_level_id => LOWER_RISK_LEVEL_ID)
+  @higher_risk_answer_count = Answer.count(:created_at.gt => "2014-09-30", Answer.session.progress => 100.0, Answer.question_option.risk_level_id => HIGHER_RISK_LEVEL_ID)
+  @total_answer_count = @lower_risk_answer_count + @higher_risk_answer_count
+  @lower_risk_average = @lower_risk_answer_count.to_f / @total_answer_count
+  @higher_risk_average = @higher_risk_answer_count.to_f / @total_answer_count
+  # Questions 2, 6, and 7 have no risk level (race/ethnicity, height, and weight)
+  # @no_risk_answer_count = Answer.count(:created_at.gt => "2014-09-30", Answer.session.progress => 100.0, Answer.question_option.risk_level_id => 3)
+
+  
+  # Which 3-4 risk factors need the most improving by users (bad behaviors that show up the most)
+  # Get the count of each risk factor answer that is a HIGHER_RISK_LEVEL_ID
+  #Friend.aggregate(:city, :all.count) # returns the city names and the number of friends living in each city
+  # e.g. [['Hamburg', 3], ['New York', 4], ['Rome', 0], ... ]
+  #higher_risk_answers = Answer.all(:fields => [Answer.question_option.question.question_name], :unique => true, :created_at.gt => "2014-09-30", Answer.question_option.risk_level_id => HIGHER_RISK_LEVEL_ID)
+  
+  #puts all_higher_risk_answers.inspect
+  #@high_risk_answers = all_higher_risk_answers.aggregate(Answer.question_option.question.question_name)
+  #puts @high_risk_answers.inspect
+  
+  @higher_risk_answers = repository(:default).adapter.select("
+  SELECT questions.question_name, COUNT(questions.id)
+  FROM questions, answers, question_options
+  WHERE questions.id = question_options.question_id
+    AND question_options.id = answers.question_option_id
+    AND question_options.risk_level_id = #{HIGHER_RISK_LEVEL_ID}
+  GROUP BY questions.question_name
+  ORDER BY COUNT(questions.id) DESC")
   
   erb :stats
 end
