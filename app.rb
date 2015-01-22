@@ -410,19 +410,7 @@ get '/stats' do
   @total_answer_count = @lower_risk_answer_count + @higher_risk_answer_count
   @lower_risk_average = @lower_risk_answer_count.to_f / @total_answer_count
   @higher_risk_average = @higher_risk_answer_count.to_f / @total_answer_count
-  # Questions 2, 6, and 7 have no risk level (race/ethnicity, height, and weight)
-  # @no_risk_answer_count = Answer.count(:created_at.gt => "2014-09-30", Answer.session.progress => 100.0, Answer.question_option.risk_level_id => 3)
 
-  
-  # Which 3-4 risk factors need the most improving by users (bad behaviors that show up the most)
-  # Get the count of each risk factor answer that is a HIGHER_RISK_LEVEL_ID
-  #Friend.aggregate(:city, :all.count) # returns the city names and the number of friends living in each city
-  # e.g. [['Hamburg', 3], ['New York', 4], ['Rome', 0], ... ]
-  #higher_risk_answers = Answer.all(:fields => [Answer.question_option.question.question_name], :unique => true, :created_at.gt => "2014-09-30", Answer.question_option.risk_level_id => HIGHER_RISK_LEVEL_ID)
-  
-  #puts all_higher_risk_answers.inspect
-  #@high_risk_answers = all_higher_risk_answers.aggregate(Answer.question_option.question.question_name)
-  #puts @high_risk_answers.inspect
   
   @higher_risk_answers = repository(:default).adapter.select("
   SELECT questions.question_name, COUNT(questions.id)
@@ -430,8 +418,31 @@ get '/stats' do
   WHERE questions.id = question_options.question_id
     AND question_options.id = answers.question_option_id
     AND question_options.risk_level_id = #{HIGHER_RISK_LEVEL_ID}
+    AND answers.created_at > '2014-09-30'
   GROUP BY questions.question_name
-  ORDER BY COUNT(questions.id) DESC")
+  ORDER BY questions.id ASC")
+  
+  # Get all the age answers (questions.id 1)
+  @age_answers = repository(:default).adapter.select("
+SELECT option_choice_name, COUNT(option_choice_id) AS answer_choice_count
+FROM questions, answers, question_options, option_choices
+WHERE questions.id = question_options.question_id
+    AND question_options.id = answers.question_option_id
+	AND option_choices.id = question_options.option_choice_id
+	AND answers.created_at > '2014-09-30'
+	AND (questions.id = 1)
+GROUP BY option_choice_id")
+  
+  # Get all the race answers (questions.id 2)
+  @race_answers = repository(:default).adapter.select("
+SELECT option_choice_name, COUNT(option_choice_id) AS answer_choice_count
+FROM questions, answers, question_options, option_choices
+WHERE questions.id = question_options.question_id
+    AND question_options.id = answers.question_option_id
+	AND option_choices.id = question_options.option_choice_id
+	AND answers.created_at > '2014-09-30'
+	AND (questions.id = 2)
+GROUP BY option_choice_id")
   
   erb :stats
 end

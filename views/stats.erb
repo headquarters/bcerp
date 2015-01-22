@@ -2,19 +2,37 @@
     <div class="large-12 columns">
       <h2>Stats</h2>
       <p>
-        Visits since Oct. 1st: <%= @sessions.size %><br />
+        Unique visits since Oct. 1st, 2014: <%= @sessions.size %><br />
         <!--Sessions with 0% progress on questionnaire: <%= @no_progress_count %>-->
         Questionnaires completed: <%= @completed_count %><br />
-        Questionnaires started: <%= @sessions.size - @no_progress_count - @completed_count %> <br />
+        Incomplete questionnaires with at least one question answered: <%= @sessions.size - @no_progress_count - @completed_count %> <br />
         Low risk answers: <%= sprintf("%.2f%%", 100 * @lower_risk_average) %><br />
         High risk answers: <%= sprintf("%.2f%%", 100 * @higher_risk_average) %>
       </p>
       <p>
-        The following are the number of higher risk answers per question in descending order: <br />
-        <% @higher_risk_answers.each do |higher_risk_answer| %>
-          <%= higher_risk_answer[0] %>: <%= higher_risk_answer[1] %><br />
-          
-        <% end %>
+        The following are the number of <em>higher risk answers per question</em>: <br />
+        <ul>
+            <% @higher_risk_answers.each_with_index do |higher_risk_answer, index| %>
+              <li>
+                <%= higher_risk_answer[0] %>: <%= higher_risk_answer[1] %> <br />
+                <% if index == 0 %>
+                    Break down for all ages:
+                    <ul>
+                    <% @age_answers.each do |age_answer| %>
+                        <li><%= age_answer[0] %>: <%= age_answer[1] %></li>
+                    <% end %>
+                    </ul>
+                <% elsif index == 1 %>
+                    Break down for all races:
+                    <ul>
+                    <% @race_answers.each do |race_answer| %>
+                        <li><%= race_answer[0] %>: <%= race_answer[1] %></li>
+                    <% end %>
+                    </ul>                
+                <% end %>
+              </li>
+            <% end %>
+        </ul>
       </p>
     </div>
 </div>
