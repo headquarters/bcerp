@@ -6,3 +6,4 @@ session.rb
 backups
 *.komodoproject
 *.sass-cache*
+*-min.*
