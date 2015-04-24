@@ -2,9 +2,13 @@ require 'rubygems'
 require 'data_mapper'
 require 'json'
 
-DataMapper::Logger.new($stdout, :debug)
-
-DataMapper.setup(:default, 'sqlite:bcerp.db')
+if ARGV[0] === "production"
+  # OpenShift requires storing data outside the git repo
+  DataMapper.setup(:default, 'sqlite:../data/bcerp.db')
+else
+  DataMapper::Logger.new($stdout, :debug)
+  DataMapper.setup(:default, 'sqlite:bcerp.db')
+end
 
 require './models'
 
