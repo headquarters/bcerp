@@ -3,16 +3,21 @@ require 'sinatra'
 require 'data_mapper'
 require 'json'
 
-# Require the session file that contains the session secret and expiry time
-require './session'
+enable :sessions
 
+set :session_secret, ENV["MYBCRISK_SESSION_SECRET"]
+set :sessions, :expire_after => 2592000
 set :bind, '0.0.0.0'
 
 configure :development do
   DataMapper::Logger.new($stdout, :debug)
+  DataMapper.setup(:default, 'sqlite:bcerp.db')
 end
 
-DataMapper.setup(:default, 'sqlite:bcerp.db')
+configure :production do
+  DataMapper.setup(:default, 'sqlite:bcerp.db')
+end
+
 
 require './models'
 
