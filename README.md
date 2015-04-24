@@ -18,16 +18,9 @@ It's currently hosted at http://mybcrisk.org.
 * Zurb Foundation
 
 ### Technical Details
-This is a straightforward Sinatra app contained in app.rb. You will have to create a session.rb file if you fork the project.
-
-    enable :sessions
-
-    set :session_secret, "<create a session secret>"
-    set :sessions, :expire_after => 2592000
+This is a straightforward Sinatra app contained in app.rb. You will have to create a MYBCRISK_SESSION_SECRET environment variable to run the app.
     
-This file isn't in the repositority in order to preserve the session secret.
-
-
+This session secret isn't in the repositority for security reasons.
 
 The schema for the SQLite database is in schema.rb. The DataMapper models are stored in models.rb.
 
@@ -43,5 +36,5 @@ represents the ID column of the QuestionOption model (or "question_options" tabl
 Create the bcerp.db database file:
 `ruby schema.rb`
 
-Run the app:
+Run the app locally:
 `rerun app.rb`
