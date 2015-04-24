@@ -6,6 +6,5 @@ session.rb
 backups
 *.komodoproject
 *.sass-cache*
-*-min.*
 
 push_to_openshift.sh
