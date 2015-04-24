@@ -15,7 +15,8 @@ configure :development do
 end
 
 configure :production do
-  DataMapper.setup(:default, 'sqlite:bcerp.db')
+  # OpenShift requires storing data outside the git repo
+  DataMapper.setup(:default, 'sqlite:../data/bcerp.db')
 end
 
 
