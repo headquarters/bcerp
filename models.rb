@@ -51,7 +51,6 @@ class RiskMessage
   property :group_id, Integer
   
   belongs_to :risk_level
-  #has n, :question_option
 end
 
 class OptionChoice

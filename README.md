@@ -22,9 +22,9 @@ This is a straightforward Sinatra app contained in app.rb. You will have to crea
     
 This session secret isn't in the repositority for security reasons.
 
-The schema for the SQLite database is in schema.rb. The DataMapper models are stored in models.rb.
+The schema for the SQLite database is in db_content.rb (it's the schema + question content). The DataMapper models are stored in models.rb.
 
-If content in the database has to change, update schema.rb with the content changes and run `ruby schema.rb`. 
+If content in the database has to change, update db_content.rb with the content changes and run `ruby db_content.rb`. 
 
 Questions are referenced with a group_id column, rather than their primary key. The reason for this is so that several questions can be fetched for displaying on a single page (URL),
 such as asking users for height and weight. Each question POSTs its answer to the same URL used for the GET request.
@@ -34,7 +34,7 @@ represents the ID column of the QuestionOption model (or "question_options" tabl
 
 #### First Run
 Create the bcerp.db database file:
-`ruby schema.rb`
+`ruby db_content.rb`
 
 Run the app locally:
 `rerun app.rb`

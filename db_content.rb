@@ -308,8 +308,6 @@ Resource.create(
   :group_id => group_id  
 )
 
-### Stopped Here ###
-
 ### Relatives
 group_id += 1
 higher_risk_message = RiskMessage.create(
